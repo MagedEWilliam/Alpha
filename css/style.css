@@ -1,0 +1,85 @@
+#topnav{
+	height: 75px;
+	width: 100%;
+	background-color: #f4f4f4;
+}
+
+body.pushable>.pusher{
+	background-color: #f4f4f4;
+	border-collapse: collapse;
+}
+
+.nopad{
+	padding: 0 !important;
+}
+.rpad{
+	padding-right: 0 !important;	
+}
+
+.slpad{
+	padding-left: 4px !important;	
+}
+.nomarg{
+	margin: 0 !important;
+}
+
+.nobox{
+	box-shadow: none !important;
+}
+
+.heigh{
+	height: 100%;
+	width: 100%;
+}
+
+.fillitup{
+	background-image: url(../assets/shadow.png);
+	width: 100%;
+	height: 15px;
+	
+}
+
+.gentleH{
+	height: 5px;
+	width: 1px;
+}
+
+.fastdetails{
+	position: absolute;
+	bottom: 0;
+}
+
+.rtl{
+	text-align: right !important;
+}
+
+.longy{
+	height: 310px !important;
+}
+
+.longproduct{
+	height: 410px !important;
+	width: 315px !important;
+}
+
+@font-face {
+  font-family: 'goodtime';
+  src: url(../assets/good_times_rg.ttf);
+}
+
+.goodtimes{
+	font-family: goodtime !important;
+}
+
+.breakit{
+	width:100px;
+	content: "\A" !important;
+  white-space: pre !important;
+}
+
+@media only screen and (min-width: 1200px){
+	.ui.container {
+		width: 92%;
+	}
+	
+}
