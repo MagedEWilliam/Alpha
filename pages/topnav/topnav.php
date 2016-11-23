@@ -6,11 +6,11 @@
 			<div class="four wide column nopad nobox">
 				ALPHA
 			</div>
-			<div class="ten wide column nopad nobox">
-				<center>nav goes here</center>
+			<div class="eight wide column nopad nobox">
+				<center>Home   Products   Media   Why US</center>
 			</div>
-			<div class="two wide column nopad nobox">
-				tel and lang goes here
+			<div class="four wide column nopad nobox">
+				tel: +20 22 39 03 110
 			</div>
 		</div>
 	</div>

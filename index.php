@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="libs/jquery.min3.js"></script>
+	<script type="text/javascript" src="libs/jquery.flip.min.js"></script>
 	<script type="text/javascript" src="libs/semantic/semantic.min.js"></script>
 	<script type="text/javascript" src="js/components.js"></script>
 </head>
@@ -18,7 +19,7 @@
 					<div class="ui internally celled grid ui segment">
 						<div class="row  nopad">
 							<div class="three wide column goodtimes"  id="sideNav">
-								<p>side menu goes here</p>
+								<p>Categories:</p>
 							</div>
 							<div class="thirteen wide column " id="product">
 								<div class="ui grid">
@@ -32,7 +33,7 @@
 
 										</div>
 									</div>
-									<div class="six wide column"><p class="rtl">search result</p></div>
+									<div class="six wide column rtl searchresultcount"><p class="rtl">search result</p></div>
 								</div>
 								<div class="ui divider"></div>
 								<div id="products" class="ui cards">
