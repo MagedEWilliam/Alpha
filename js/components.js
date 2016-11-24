@@ -16,7 +16,7 @@ function card(target, ItemProp){
 											<img src="'+ItemProp.image+'"  width="50">\
 										</td>\
 										<td  class="slpad content">\
-											<b>'+ItemProp.Name+'</b>\
+											<b>'+ItemProp[locale('Name')]+'</b>\
 											<br>\
 											<p>'+ItemProp.code+'</p>\
 										</td>\
@@ -29,7 +29,7 @@ function card(target, ItemProp){
 			</div>\
 				<div class="content parento">\
 					<div class=" getdown">\
-						<div class="ui header">'+ItemProp.Name+'</div>\
+						<div class="ui header">'+ItemProp[locale('Name')]+'</div>\
 						<div class="meta">'+ItemProp.code+'</div>\
 					</div>\
 					<br>\
@@ -47,6 +47,20 @@ function card(target, ItemProp){
 \
 	');
 }
+
+function locale(source){
+	var local = getUrlParameter('lang');
+	var ret   = "";
+	if(local  == 'en'){
+		ret   = source;
+	}else if(local == 'ar'){
+		ret   = source + "Ar";
+	}else if(local == 'ch'){
+		ret   = source + "Ch";		
+	}
+	return ret;
+}
+
 function tinylabel(val){
 	return '<div class="ui tiny label">'+val+'</div>';
 }
@@ -62,10 +76,9 @@ function rtlSlpadrPad(cls, val){
 function trtd(prop){
 	var temp = "";
 	for (var i = 0; i <= prop.length-1; i++) {
-	console.log(prop[i].Name);
 		temp += '<tr>'
-					+rtlSlpadrPad('rtl slpad rpad', prop[i].Name)
-					+rtlSlpadrPad('slpad', prop[i].value)+
+					+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop[i][locale('Name')])
+					+rtlSlpadrPad('slpad', prop[i][locale('value')])+
 				'</tr>';
 	}
 return temp;
@@ -86,7 +99,32 @@ $(document).ready(function(){
 			trigger: 'hover',
 			speed: 300
 		});
-		console.log(data);
 	});
 
+	$('.lang').dropdown({
+		on: 'hover',
+		action: function(text, value) {
+			console.log(value);
+      		var newurl = window.location.href;
+			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
+			window.location.href = gotothis;
+	  }
+	});
+
+	$('.lang').dropdown('set selected', getUrlParameter('lang'));
 });
+
+var getUrlParameter = function getUrlParameter(sParam) {
+  var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+  sURLVariables = sPageURL.split('&'),
+  sParameterName,
+  i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+
+    if (sParameterName[0] === sParam) {
+      return sParameterName[1] === undefined ? true : sParameterName[1];
+    }
+  }
+};

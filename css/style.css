@@ -98,6 +98,23 @@ body.pushable>.pusher{
 	white-space: pre !important;
 }
 
+.Fixedtd{
+	width: 105px !important;
+}
+
+.smallfont{
+	font-size: 12px;
+}
+
+.hundredinwidth{
+	width: 105px !important;
+	float: right;
+}
+
+.ui.dropdown .menu>.item{
+	font-size: 12px;	
+}
+
 @media only screen and (min-width: 1200px){
 	.ui.container {
 		width: 92%;
