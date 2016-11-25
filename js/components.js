@@ -112,6 +112,11 @@ $(document).ready(function(){
 	});
 
 	$('.lang').dropdown('set selected', getUrlParameter('lang'));
+
+	$('#Home-nav')    .prop('href', "index.php?lang=ar");
+	$('#Products-nav').prop('href', "products.php?lang=" + getUrlParameter('lang'));
+	$('#Media-nav')   .prop('href', "index.php?lang=ar");
+	$('#Why-nav')     .prop('href', "index.php?lang=ar");
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {

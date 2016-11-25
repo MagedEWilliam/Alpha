@@ -111,8 +111,48 @@ body.pushable>.pusher{
 	float: right;
 }
 
-.ui.dropdown .menu>.item{
+.ui.dropdown .menu>.item {
 	font-size: 12px;	
+}
+
+.top-nav-group {
+	text-align: center !important;
+}
+
+.top-nav-group a {
+	margin: 0px 10px 0px 10px;
+
+}
+
+.top-nav-sub-group{
+	margin-top: 25px;
+}
+
+.top-tel-sub-group{
+	margin-top: 17px;
+}
+
+.tel-space{
+	float: left;
+	width: 200px;
+	padding-top: 5px;
+}
+
+.some-margin{
+	margin-top:25px;
+}
+
+.logo{
+	background-image: url(../assets/alpha2.png);
+	background-repeat: no-repeat;
+	background-size: 200px;
+}
+
+.alpha{
+	margin-top: 20px;
+	margin-left:60px;
+	font-size: 25px;
+	color: #0061a5;
 }
 
 @media only screen and (min-width: 1200px){
