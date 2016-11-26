@@ -2,13 +2,17 @@
 <html>
 <head>
 	<title>ALPHA - LIGHT UP YOUR LIFE</title>
+	<meta name="viewport" content="width=device-width">
 	<link rel="icon" href="assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="libs/amazonmenu/amazonmenu.css">
+	<script src="libs/amazonmenu/amazonmenu.min.js"></script>
 	<script type="text/javascript" src="libs/jquery.min.js"></script>
 	<script type="text/javascript" src="libs/jquery.flip.min.js"></script>
 	<script type="text/javascript" src="libs/semantic/semantic.min.js"></script>
 	<script type="text/javascript" src="js/components.js"></script>
+	
 </head>
 <body id="example" class="layouts pushable">
 	<?php include_once('pages/topnav/topnav.php'); ?>
@@ -22,8 +26,10 @@
 							<div class="three wide column goodtimes"  id="sideNav">
 								<p>Categories:</p>
 
-								<div class="ui relaxed divided list cat-list">
-
+								<div id="mysidebarmenu" class="amazonmenu">
+									<ul id="sidebarmenu">
+										
+									</ul>
 								</div>
 							</div>
 							<div class="thirteen wide column " id="product">
@@ -42,7 +48,7 @@
 								</div>
 								<div class="ui divider"></div>
 								<div id="products" class="ui cards">
-									
+
 								</div>
 								<br>
 								<div class="ui divider"></div>
@@ -60,5 +66,6 @@
 		</div>
 	</div>
 </div>
+
 </body>
 </html>

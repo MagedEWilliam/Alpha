@@ -46,6 +46,10 @@
 	border-left-color: #0061a5;
 }
 
+.noshadows{
+	box-shadow: none !important;
+	background: rgba(0,0,0,0) !important;
+}
 .amazonmenu ul li a:hover, .amazonmenu ul li.hassub.selected > a{ 
 	background: #eee;
 	color: #0061a5;

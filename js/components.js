@@ -102,9 +102,9 @@ function categorylist(text, url, i){
 	return ret;
 }
 
-function folders(target, text, link, i){
+function folders(target, text, link, i, cls){
 	$(target).append( '<li id="sub_'+i+'">\
-		<a href="'+link+'">'+text+'</a>\
+		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
 		</li>');
 
 	return '#sub_' + i;
@@ -139,7 +139,7 @@ $(document).ready(function(){
 
 		for (var i = 0; i <= data.length-1; i++) {
 			var link = '?lang=' + getUrlParameter('lang') + '&cat=' + data[i]['ID'];
-			var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i);
+			var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
 			
 			var subsub = data[i]['subcategory'][0];
 			var subsubcount = subsub.length;
@@ -149,7 +149,7 @@ $(document).ready(function(){
 				for (var k = 0; k < subsubcount; k++) {
 					if( subsub[k]['Name'] == "Subcategory"){
 						var sublink = link + "&subcat=" + k;
-						folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k);
+						folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
 					}
 				}
 			}
