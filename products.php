@@ -2,9 +2,10 @@
 <html>
 <head>
 	<title>ALPHA - LIGHT UP YOUR LIFE</title>
+	<link rel="icon" href="assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="libs/jquery.min3.js"></script>
+	<script type="text/javascript" src="libs/jquery.min.js"></script>
 	<script type="text/javascript" src="libs/jquery.flip.min.js"></script>
 	<script type="text/javascript" src="libs/semantic/semantic.min.js"></script>
 	<script type="text/javascript" src="js/components.js"></script>
@@ -20,12 +21,16 @@
 						<div class="row  nopad">
 							<div class="three wide column goodtimes"  id="sideNav">
 								<p>Categories:</p>
+
+								<div class="ui relaxed divided list cat-list">
+
+								</div>
 							</div>
 							<div class="thirteen wide column " id="product">
 								<div class="ui grid">
 									<div class="ten wide column">
 										<div class="ui breadcrumb">
-											<a class="section">
+											<a class="section" id="Home-crumb">
 												<i class="ui home icon"></i>
 											</a>
 											<span class="divider">/</span>

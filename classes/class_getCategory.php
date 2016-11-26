@@ -37,9 +37,13 @@ class Category
 		$mysqli = $db->getConnection();
 
 		$res = [];
-		$sqlQuery = "SELECT * FROM `catproperty`
-
-		 WHERE `categoryID`=" . $subcat;
+		$sqlQuery = "SELECT `catproperty`.`categoryID`, `catproperty`.`catID`, `catproperty`.`filterbyme`, 
+		`property`.`ID`, `property`.`Name`, `property`.`NameAr`, `property`.`NameCh`,
+		`value`.`ID`, `value`.`value`, `value`.`valueAr`, `value`.`valueCh`
+		FROM `catproperty`
+		INNER JOIN `property` ON `catproperty`.`propertyID` = `property`.`ID`
+		INNER JOIN `value` ON `catproperty`.`valueID` = `value`.`ID`
+		WHERE `catID`=" . $subcat;
 
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {

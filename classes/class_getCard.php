@@ -20,7 +20,7 @@ class Card
 		`subcategory`.`catID`,
 		`subcategory`.`code`,
 
-		`category`.`image`,
+		`subcategory`.`image`,
 		`category`.`Name`,
 		`category`.`NameAr`,
 		`category`.`NameCh`,

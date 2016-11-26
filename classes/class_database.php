@@ -24,6 +24,7 @@ class Database {
    */
   public function __construct() {
    $this->_connection = new mysqli('localhost', 'root', '', 'cms');
+   // $this->_connection = new mysqli('i-alfa.info', 'ialpha', 'Alfa@1234', 'alpha_cms');
 
     mysqli_set_charset($this->_connection,"utf8");
 

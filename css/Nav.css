@@ -2,13 +2,6 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
-.tail{
-	position: fixed;
-    right: 0;
-    top: 0;
-}
-
-.ui.list .list>.item a.header, .ui.list>.item a.header:hover{color: #ffffff;}
 
 #topnav{
 	height: 75px;
@@ -20,75 +13,11 @@ body.pushable>.pusher{
 .nopad{
 	padding: 0 !important;
 }
-.rpad{
-	padding-right: 0 !important;	
-}
-
-.slpad{
-	padding-left: 4px !important;	
-	text-overflow:ellipsis;
-}
-
-.ui.move.reveal {
-	white-space: normal;
-}
-
-.nomarg{
-	margin: 0 !important;
-}
 
 .nobox{
 	box-shadow: none !important;
 }
 
-.heigh{
-	height: 100%;
-	width: 100%;
-}
-
-.parento{
-	position: relative;
-	height: 150px;
-}
-
-.getdown{
-	position: absolute;
-	display:inline-block
-	height: 100%;
-}
-
-.detailtable{
-	margin-bottom:0;
-	width:100%;
-}
-
-.fillitup{
-	width: 100%;
-}
-
-.gentleH{
-	height: 5px;
-	width: 1px;
-}
-
-.fastdetails{
-	position: absolute;
-	bottom: 0;
-	width:100%;
-}
-
-.rtl{
-	text-align: right !important;
-}
-
-.longy{
-	height: 310px !important;
-}
-
-.longproduct{
-	/*height: 410px !important;*/
-	width: 315px !important;
-}
 
 @font-face {
 	font-family: 'goodtime';
@@ -105,9 +34,6 @@ body.pushable>.pusher{
 	white-space: pre !important;
 }
 
-.Fixedtd{
-	width: 105px !important;
-}
 
 .smallfont{
 	font-size: 12px;
@@ -133,9 +59,6 @@ body.pushable>.pusher{
 
 .top-nav-sub-group{
 	margin-top: 25px;
-}
-.top-nav-sub-group a{
-	color: #0061a5;
 }
 
 .top-tel-sub-group{

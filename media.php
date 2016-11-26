@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ALPHA - LIGHT UP YOUR LIFE</title>
+	<title>Contact Us</title>
 	<link rel="icon" href="assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -12,12 +12,30 @@
 </head>
 <body id="example" class="layouts pushable">
 	<?php include_once('pages/topnav/topnav.php'); ?>
-	<center><h2>under construction</h2></center>
-	<script type="text/javascript">
-		setTimeout(function(){
-		 window.location.href = "products.php?lang=ar";
-		}, 3000);
-	</script>
+	<div class="pusher">
+		<div class="full height">
+			<div class="article">
+				<div class="ui container large">
+					<div class="ui internally celled grid ui segment">
+						<div class="row  ">
+							<div class="three wide column goodtimes"></div>
+
+							<div class="ten wide column goodtimes">
+								<div class="ui tall stacked segment ">
+									<h2>Media:</h2>
+									<p class="smallfont">
+
+									</p>
+								</div>
+							</div>
+							<div class="three wide column goodtimes"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>
 </body>
 </html>

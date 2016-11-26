@@ -84,7 +84,28 @@ function trtd(prop){
 return temp;
 }
 
+function categorylist(text, url, i){
+	var ret = 
+	'<div class="item">\
+				<div class="content">\
+					<a class="header popupmeup_'+i+'" href="'+url+'">'+text+'</a>\
+					<div class="ui fluid popup right center transition hidden tailcover">\
+					  <div class="ui grid" style="width: 400px;height:100px;z-index:800">\
+					    <div class="column">1</div>\
+					  </div>\
+					  <img class="tail" src="assets/tip.png"/>\
+					</div>\
+				</div>\
+			</div>';
+	return ret;
+}
+
 $(document).ready(function(){
+	var local = getUrlParameter('lang');
+
+	if(locale == 'ar'){
+		// $('body').css({'direction':'rtl'});
+	}
 
 	$.ajax({
 		url: "classes/class_getCard.php"
@@ -101,6 +122,24 @@ $(document).ready(function(){
 		});
 	});
 
+	$.ajax({
+		url: "classes/class_getCategory.php"
+	}).done(function(data) {
+		data = jQuery.parseJSON(data);
+		for (var k = 0; k <= 6; k++) {
+		for (var i = 0; i <= data.length-1; i++) {
+			$('.cat-list').append( categorylist(data[i][locale('Name')], '?lang=' + getUrlParameter('lang') + '&cat=' + data[i]['ID'], i) );
+			console.log($('.popupmeup_' + i), '.popupmeup_' + i);
+			$('.popupmeup_' + i).popup({
+			    inline     : true,
+			    hoverable  : true,
+			    position   : 'left center'
+			  });
+			$('.popupmeup_' + i + ' .popup').css({'top':'0px'});
+		}
+		}
+	});
+
 	$('.lang').dropdown({
 		on: 'hover',
 		action: function(text, value) {
@@ -113,10 +152,12 @@ $(document).ready(function(){
 
 	$('.lang').dropdown('set selected', getUrlParameter('lang'));
 
-	$('#Home-nav')    .prop('href', "index.php?lang=ar");
-	$('#Products-nav').prop('href', "products.php?lang=" + getUrlParameter('lang'));
-	$('#Media-nav')   .prop('href', "index.php?lang=ar");
-	$('#Why-nav')     .prop('href', "index.php?lang=ar");
+	$('#Home-crumb')    .prop('href', "index.php?lang=ar");
+	$('#Home-nav')      .prop('href', "index.php?lang=ar");
+	$('#Products-nav')  .prop('href', "products.php?lang=" + getUrlParameter('lang'));
+	$('#Media-nav')     .prop('href', "media.php?lang=ar");
+	$('#About-nav')     .prop('href', "about.php?lang=ar");
+	$('#Why-nav')       .prop('href', "contact.php?lang=ar");
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {
