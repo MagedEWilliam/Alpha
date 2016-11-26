@@ -76,10 +76,12 @@ function rtlSlpadrPad(cls, val){
 function trtd(prop){
 	var temp = "";
 	for (var i = 0; i <= prop.length-1; i++) {
-		temp += '<tr>'
-		+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop[i][locale('Name')])
-		+rtlSlpadrPad('slpad', prop[i][locale('value')])+
-		'</tr>';
+		if(prop[i]['Name'] != 'Subcategory'){
+			temp += '<tr>'
+			+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop[i][locale('Name')])
+			+rtlSlpadrPad('slpad', prop[i][locale('value')])+
+			'</tr>';
+		}
 	}
 	return temp;
 }

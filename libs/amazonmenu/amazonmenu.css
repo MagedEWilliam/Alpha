@@ -49,6 +49,7 @@
 .amazonmenu ul li a:hover, .amazonmenu ul li.hassub.selected > a{ 
 	background: #eee;
 	color: #0061a5;
+	box-shadow: 2px 2px 2px gray;
 }
 
 .amazonmenu ul li > div, .amazonmenu ul li > ul{ 
@@ -56,8 +57,8 @@
 	box-shadow: 2px 2px 2px gray;
 	display: none;
 	font-weight: normal;
-	width: 300px;
-	height: 400px; 
+	width: 450px;
+	height: 370px; 
 	left: 100%;
 	padding: 10px;
 	position: absolute;
@@ -66,6 +67,9 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	z-index: 1000;
+	background-image: url(../../assets/tip.png);
+	background-position: top right;
+	background-repeat: no-repeat;
 }
 
 

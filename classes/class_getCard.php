@@ -60,10 +60,10 @@ class Card
 					FROM `catproperty` 
 
 					INNER JOIN property 
-					ON catproperty.propertyID = property.ID
+					ON catproperty.propertyID = `property`.ID
 
 					INNER JOIN `value` 
-					ON catproperty.propertyID = `value`.ID
+					ON catproperty.valueID = `value`.ID
 
 					WHERE catproperty.categoryID = " . $subcat;
 
