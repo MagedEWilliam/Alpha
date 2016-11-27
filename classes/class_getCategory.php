@@ -14,9 +14,8 @@ class Category
 		$mysqli = $db->getConnection();
 
 		$res = [];
-		$sqlQuery = "
-		SELECT * FROM `category`
-		";
+
+		$sqlQuery = "SELECT * FROM `category`";
 
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {
@@ -43,7 +42,8 @@ class Category
 		FROM `catproperty`
 		INNER JOIN `property` ON `catproperty`.`propertyID` = `property`.`ID`
 		INNER JOIN `value` ON `catproperty`.`valueID` = `value`.`ID`
-		WHERE `catID`=" . $subcat;
+		
+		WHERE   `catproperty`.`catID`=" . $subcat;
 
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {

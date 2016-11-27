@@ -53,7 +53,7 @@
 								<br>
 								<div class="ui divider"></div>
 								<div id="productfooter">
-									<p>Products footer goes here</p>
+									<!-- <p>Products footer goes here</p> -->
 								</div>
 							</div>
 						</div>

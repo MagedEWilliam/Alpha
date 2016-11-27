@@ -127,8 +127,7 @@ body.pushable>.pusher{
 }
 
 .top-nav-group a {
-	margin: 0px 10px 0px 10px;
-
+	margin: 0px 2% 0px 0px;
 }
 
 .top-nav-sub-group{
@@ -139,14 +138,14 @@ body.pushable>.pusher{
 }
 
 .top-tel-sub-group{
-	margin-top: 17px;
+	/*margin-top: 17px;*/
 }
 
 .tel-space{
 	float: left;
 	text-align: left;
 	width: 160px;
-	padding-top: 5px;
+	padding-top: 22px;
 }
 
 .some-margin{
@@ -187,7 +186,7 @@ body.pushable>.pusher{
 	background-color: #0061a5;
 }
 
-@media only screen and (min-width: 1200px){
+@media only screen and (min-width: 1280px){
 	.ui.container {
 		width: 92%;
 	}
@@ -198,4 +197,27 @@ body.pushable>.pusher{
 	.ui.selection.dropdown.lang .farright{
 		right:0;
 	}
+	.ui.selection.dropdown.lang {
+		margin-top: 17px;
+	}
+}
+
+@media only screen and (max-width: 1279px){
+	.top-nav-group a {
+		font-size: 10px;
+	}
+	.tel-space{
+		float: left;
+		text-align: right;
+		width: 160px;
+		padding-top: 0px;
+		margin-bottom: 9px;
+	}
+	.lang {
+		margin-top: 0px;
+	}
+	.smallfont{
+		font-size: 10px;
+	}
+
 }
