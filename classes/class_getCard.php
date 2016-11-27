@@ -37,7 +37,10 @@ class Card
 		if(isset($_GET['subcat'])){
 			$sqlQuery .= " AND `catproperty`.categoryID = ". $_GET['subcat'];
 		}
-		$sqlQuery .= ')' ;
+
+		if(isset($_GET['cat'])){
+			$sqlQuery .= ')' ;
+		}
 
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {

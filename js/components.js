@@ -158,7 +158,10 @@ $(document).ready(function(){
 	
 
 
-	var getcardurl = "classes/class_getCard.php?cat=" + cat;
+	var getcardurl = "classes/class_getCard.php";
+	if(cat != undefined){
+		getcardurl += '?cat=' + cat;
+	}
 	if(subcat != undefined){
 		getcardurl += '&subcat=' + subcat;
 	}
