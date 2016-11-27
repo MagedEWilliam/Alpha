@@ -14,10 +14,8 @@
 }
 
 .amazonmenu > ul{
-	background: white;
-	border-radius: 5px;
-	width: 200px; 
-	height: 400px; 
+	background: #fff;
+	min-height: 400px;
 	position: relative;
 }
 

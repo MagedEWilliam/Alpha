@@ -30,6 +30,11 @@
 									<ul id="sidebarmenu">
 										
 									</ul>
+									<div class="shadowmore"></div>
+									<div class="showmore">Show more</div>
+								</div>
+								<div class="filterArea" style="width: 100%;">
+									
 								</div>
 							</div>
 							<div class="thirteen wide column " id="product">
@@ -44,7 +49,9 @@
 
 										</div>
 									</div>
-									<div class="six wide column rtl searchresultcount"><p class="rtl">search result</p></div>
+									<div class="six wide column rtl searchresultcount">
+									<p class="rtl">search result</p>
+									</div>
 								</div>
 								<div class="ui divider"></div>
 								<div id="products" class="ui cards">

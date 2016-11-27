@@ -76,14 +76,11 @@ function rtlSlpadrPad(cls, val){
 
 function trtd(prop){
 	var temp = "";
-	console.log(prop.Subcategory);
 	for (var i = 0; i <= prop.Subcategory.length-1; i++) {
-		// if(prop.Subcategory[i]['Name'] != 'Subcategory'){
-			temp += '<tr>'
-			+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop.Subcategory[i][locale('Name')])
-			+rtlSlpadrPad('slpad', prop.Subcategory[i][locale('value')])
-			+'</tr>';
-		// }
+		temp += '<tr>'
+		+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop.Subcategory[i][locale('Name')])
+		+rtlSlpadrPad('slpad', prop.Subcategory[i][locale('value')])
+		+'</tr>';
 	}
 	return temp;
 }
@@ -146,7 +143,12 @@ function populateSubmenu(data){
 			}
 		}
 	}
+	
+	var heighty = i * 30;
+	$('#sidebarmenu').css({'height': heighty + 'px'});
+	
 }
+
 $(document).ready(function(){
 	var local  =  getUrlParameter('lang');
 	var cat    =  getUrlParameter('cat');
@@ -170,7 +172,6 @@ $(document).ready(function(){
 		url: getcardurl
 	}).done(function(data) {
 		data = jQuery.parseJSON(data);
-		console.log(data);
 		for (var i = 0; i <= data.length-1; i++) {
 			card( $('#products'), data[i]);
 		}
@@ -188,15 +189,16 @@ $(document).ready(function(){
 		url: "classes/class_getCategory.php"
 	}).done(function(data) {
 		data = jQuery.parseJSON(data);
-
-		populateSubmenu(data);
+		 // for (var x = 0; x <= 5; x++) {
+			populateSubmenu(data);
+		 // }
 		amazonmenu.init({menuid: 'mysidebarmenu'});
 	});
 
 	$('.lang').dropdown({
 		on: 'hover',
+		duration: 100,
 		action: function(text, value) {
-			console.log(value);
 			var newurl = window.location.href;
 			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
 			window.location.href = gotothis;
@@ -211,6 +213,9 @@ $(document).ready(function(){
 	$('#Media-nav')     .prop('href', "media.php?lang=ar");
 	$('#About-nav')     .prop('href', "about.php?lang=ar");
 	$('#Why-nav')       .prop('href', "contact.php?lang=ar");
+
+activeNav('#Products-nav');
+	sideplay();
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -227,3 +232,20 @@ var getUrlParameter = function getUrlParameter(sParam) {
 		}
 	}
 };
+
+function activeNav(taget){
+	$(taget).append('<div id="activeNav"></div>');
+}
+
+function sideplay(){
+	$('#mysidebarmenu').on({
+	    'mouseenter':function(){
+	        setTimeout(function(){
+				$('#mysidebarmenu').css({'overflow':  'visible'});
+		}, 50);
+	    },'mouseleave':function(){
+	       		$('#mysidebarmenu').css({'overflow':  'hidden'});
+	    }
+	});
+
+}

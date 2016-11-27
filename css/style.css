@@ -2,14 +2,57 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
+
+#activeNav{
+	position: absolute;
+    background-color: #f7da00;
+    height: 10px;
+    left: -5px;
+    right: -5px;
+
+    bottom: -25px
+}
+#mysidebarmenu{
+	position: relative;
+	overflow: hidden;
+	height: 150px;
+	padding-bottom: 30px;
+	-webkit-transition: height .1s ease;
+	transition: height .1s ease;
+}
+#mysidebarmenu:hover{
+	-webkit-transition: height .2s ease;
+	transition: height .2s ease;
+}
+
+#mysidebarmenu:hover > .shadowmore, #mysidebarmenu:hover > .showmore{
+	display: none;
+}
+
 .tail{
 	position: fixed;
     right: 0;
     top: 0;
 }
 
-.ui.list .list>.item a.header, .ui.list>.item a.header:hover{color: #ffffff;}
+.shadowmore{
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	bottom: 30px;
+	background-image: url(../assets/shadowup.png);
+	background-repeat: no-repeat;
+}
+.showmore{
+	width: 100%;
+	height: 30px;
+	background-color: #fff;
+	text-align: center;
+	position: absolute;
+	bottom: 0px;
+}
 
+.ui.list .list>.item a.header, .ui.list>.item a.header:hover{color: #ffffff;}
 #topnav{
 	height: 75px;
 	width: 100%;
@@ -128,6 +171,7 @@ body.pushable>.pusher{
 
 .top-nav-group a {
 	margin: 0px 2% 0px 0px;
+	    position: relative;
 }
 
 .top-nav-sub-group{
@@ -178,6 +222,12 @@ body.pushable>.pusher{
 	height: 10px;
 	background-color: #0061a5;
 }
+#line0 p{
+	font-size: 8px;
+	color: #f7da00;
+	padding-left: 17px;
+	letter-spacing: 1px;
+}
 #line0{
 	float: right;
 	width:85%;
@@ -219,5 +269,10 @@ body.pushable>.pusher{
 	.smallfont{
 		font-size: 10px;
 	}
-
+	#activeNav{
+	    bottom: -26px
+	}
+	#line0 p{
+		padding-left: 35px;
+	}
 }
