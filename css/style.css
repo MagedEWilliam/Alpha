@@ -5,15 +5,14 @@ body.pushable>.pusher{
 
 #activeNav{
 	position: absolute;
-    background-color: #f7da00;
-    height: 10px;
-    left: -5px;
-    right: -5px;
+	background-color: #f7da00;
+	height: 10px;
+	left: -5px;
+	right: -5px;
 
-    bottom: -25px
+	bottom: -25px
 }
 #mysidebarmenu{
-	position: relative;
 	overflow: hidden;
 	height: 150px;
 	padding-bottom: 30px;
@@ -31,8 +30,8 @@ body.pushable>.pusher{
 
 .tail{
 	position: fixed;
-    right: 0;
-    top: 0;
+	right: 0;
+	top: 0;
 }
 
 .shadowmore{
@@ -90,12 +89,11 @@ body.pushable>.pusher{
 }
 
 .parento{
-	position: relative;
 	height: 150px;
 }
 
 .getdown{
-	position: absolute;
+	padding-top: 5px;
 	display:inline-block
 	height: 100%;
 }
@@ -171,7 +169,7 @@ body.pushable>.pusher{
 
 .top-nav-group a {
 	margin: 0px 2% 0px 0px;
-	    position: relative;
+	position: relative;
 }
 
 .top-nav-sub-group{
@@ -199,7 +197,7 @@ body.pushable>.pusher{
 .logo img{
 	position: absolute;
 	top:0px;
-	background-size: 65px;
+	width: 65px;
 }
 
 .alpha{
@@ -270,9 +268,69 @@ body.pushable>.pusher{
 		font-size: 10px;
 	}
 	#activeNav{
-	    bottom: -26px
+		bottom: -26px
 	}
 	#line0 p{
 		padding-left: 35px;
+	}
+}
+
+@media only screen and (max-width: 565px){
+	.logo img{
+		padding-top: 2px;
+		width: 45px;
+	}
+	#Home-nav{
+		font-size: 10px;
+	}
+	.smallfont{
+		font-size: 7px;
+	}
+	.alpha{
+		margin-top : 10px;
+		margin-bottom: 5px;
+		margin-left: 45px;
+	}
+	.top-nav-group{
+		overflow-y: scroll;
+		width: 100%;
+	}
+	.top-nav-sub-group{
+		width: 350px;
+		padding-left: 26px;
+		margin-top: 20px;
+		margin-bottom: 6px;
+		text-align:left !important;
+	}
+	#line0{
+		margin-top: 0px;
+		 width: 50px;
+	}
+	#line0 p{
+		color: #0061a5;
+		font-size: 1px;
+		padding-left: 1px;
+	}
+	#line1{
+		width: 400px;
+		margin-top: 1px;
+	}
+	#line2{
+		margin-top: 2px;
+	}
+	p.tel-space{
+		float: right !important;
+	}
+	.hundredinwidth{
+		width: auto !important;
+	}
+	#activeNav{	
+		top: 18px;
+	}
+	#topnav{
+		height: 55px;
+	}
+	.searchresultcount{
+		font-size: 10px;
 	}
 }

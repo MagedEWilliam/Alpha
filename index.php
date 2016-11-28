@@ -16,7 +16,7 @@
 	<script type="text/javascript">
 		setTimeout(function(){
 		 window.location.href = "products.php?lang=ar";
-		}, 3000);
+		}, 2000);
 	</script>
 </div>
 </body>

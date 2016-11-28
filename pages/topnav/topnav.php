@@ -8,7 +8,7 @@
 					<a href="#" id="Home-nav">ALPHA</a>
 				</div>
 				<div id="line0"><p>Light up your life</p></div>
-				<img src="assets/alpha2.png" width="65">
+				<img src="assets/alpha2.png">
 			</div>
 			<div class="eight wide column nopad nobox top-nav-group">
 				<div class="top-nav-sub-group">

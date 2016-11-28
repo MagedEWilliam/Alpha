@@ -35,7 +35,7 @@ function card(target, ItemProp){
 			</div>\
 			<br>\
 			\
-			<div class=" getdown" style="bottom:14px;width: 287px;">\
+			<div class=" getdown">\
 				<div class="ui tiny buttons detailtable">\
 					<button class="ui blue  small button"><p class="goodtimes">Details</p></button >\
 					<div class="or"></div>\
@@ -110,24 +110,46 @@ function folders(target, text, link, i, cls){
 }
 
 function resizeClasses(){
-	if (window.matchMedia('(min-width: 1200px)').matches) {
+	if (window.screen.width > 1200) {
         $('#sideNav').removeClass('six wide column goodtimes');
-		$('#sideNav').addClass('three wide column goodtimes');
-
         $('#product').removeClass('ten wide column ');
-        $('#product').addClass('thirteen wide column ');
-	}else if (window.matchMedia('(max-width: 1000px)').matches) {
-        $('#sideNav').removeClass('three wide column goodtimes');
-        $('#sideNav').addClass('six wide column goodtimes');
 
+		$('#sideNav').addClass('three wide column goodtimes');
+        $('#product').addClass('thirteen wide column ');
+        
+        $('#sideNav').show();
+	}
+	if ( window.screen.width < 1000) {
+        $('#sideNav').removeClass('three wide column goodtimes');
         $('#product').removeClass('thirteen wide column ');
+
+        $('#sideNav').removeClass('six');
+        $('#product').removeClass('ten');
+        $('#product').removeClass('sixteen');
+
+        $('#sideNav').addClass('six wide column goodtimes');
         $('#product').addClass('ten wide column ');
+		
+		$('#sideNav').show();
     }
+    if ( window.screen.width < 565) {
+
+    	$('head [name=viewport]').remove();
+    	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
+
+    	$('#product').removeClass('ten');
+    	$('#product').removeClass('ten wide column');
+
+        $('#product').addClass('sixteen wide column ');
+        $('#sideNav').hide();
+	}
+    
 }
 
 function populateSubmenu(data){
+	var local = getUrlParameter('lang');
 	for (var i = 0; i <= data.length-1; i++) {
-		var link = '?lang=' + getUrlParameter('lang') + '&cat=' + data[i]['ID'];
+		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
 		var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
 
 		var subsub = data[i]['subcategory'][0];
@@ -146,7 +168,7 @@ function populateSubmenu(data){
 	
 	var heighty = i * 30;
 	$('#sidebarmenu').css({'height': heighty + 'px'});
-	
+	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
 }
 
 $(document).ready(function(){
@@ -157,7 +179,7 @@ $(document).ready(function(){
 	resizeClasses();
 
 	$(window).on('resize', resizeClasses);
-	
+
 
 
 	var getcardurl = "classes/class_getCard.php";
@@ -214,8 +236,9 @@ $(document).ready(function(){
 	$('#About-nav')     .prop('href', "about.php?lang=ar");
 	$('#Why-nav')       .prop('href', "contact.php?lang=ar");
 
-activeNav('#Products-nav');
+	activeNav('#Products-nav');
 	sideplay();
+
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -235,6 +258,8 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 function activeNav(taget){
 	$(taget).append('<div id="activeNav"></div>');
+	var actNav = document.getElementById('activeNav');
+	actNav.scrollIntoViewIfNeeded();
 }
 
 function sideplay(){

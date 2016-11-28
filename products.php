@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>ALPHA - LIGHT UP YOUR LIFE</title>
-	<meta name="viewport" content="width=device-width">
+	<!-- <meta name="viewport" content="width=device-width"> -->
 	<link rel="icon" href="assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
