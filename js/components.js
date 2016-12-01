@@ -13,7 +13,7 @@ function card(target, ItemProp){
 								\
 								<tr>\
 									<td class="rtl slpad rpad">\
-										<img src="'+ItemProp.item.image+'"  width="50">\
+										<img src="'+ItemProp.item.image+'"  class="thumpimg">\
 									</td>\
 									<td  class="slpad content">\
 										<b>'+ItemProp.item[locale('Name')]+'</b>\
@@ -39,7 +39,7 @@ function card(target, ItemProp){
 				<div class="ui tiny buttons detailtable">\
 					<button class="ui blue  small button"><p class="goodtimes">Details</p></button >\
 					<div class="or"></div>\
-					<button class="ui yellow small button"><p class="goodtimes">Buy Now</p></button >\
+					<button class="ui yellow small button"><p class="goodtimes">To Cart</p></button >\
 				</div>\
 			</div>\
 			</div>\
@@ -109,41 +109,119 @@ function folders(target, text, link, i, cls){
 	return '#sub_' + i;
 }
 
+function mfolders(target, text, link, i, cls){
+	$(target).append( '<option id="sub_m'+i+'" value="'+link+'">'+text+'</option>');
+
+	return '#sub_m' + i;
+}
+
+function nativeSelect(cls, id){
+	var ret = '\
+		<select class="'+cls+'" id="'+id+'">\
+		    <option value="ar">Arabic</option>\
+		    <option value="en">English</option>\
+		    <option value="ch">Chinese</option>\
+		</select>\
+	';
+	return ret;
+}
+
 function resizeClasses(){
 	if (window.screen.width > 1200) {
-        $('#sideNav').removeClass('six wide column goodtimes');
-        $('#product').removeClass('ten wide column ');
-
-		$('#sideNav').addClass('three wide column goodtimes');
-        $('#product').addClass('thirteen wide column ');
-        
-        $('#sideNav').show();
+		the3dcard(true);
+        subcatmobalt(false);
+		langalt(false);
 	}
 	if ( window.screen.width < 1000) {
-        $('#sideNav').removeClass('three wide column goodtimes');
-        $('#product').removeClass('thirteen wide column ');
-
-        $('#sideNav').removeClass('six');
-        $('#product').removeClass('ten');
-        $('#product').removeClass('sixteen');
-
-        $('#sideNav').addClass('six wide column goodtimes');
-        $('#product').addClass('ten wide column ');
-		
-		$('#sideNav').show();
+		the3dcard(true);
+        productalt(true);
+        sideNavalt(true);
+		subcatmobalt(false);
+		langalt(false);
     }
     if ( window.screen.width < 565) {
-
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
-
-    	$('#product').removeClass('ten');
-    	$('#product').removeClass('ten wide column');
-
-        $('#product').addClass('sixteen wide column ');
-        $('#sideNav').hide();
+    	subcatmobalt(true);
+    	sideNavalt(false);
+    	langalt(true);
+    	productalt(false);
+		the3dcard(false);
 	}
-    
+
+}
+
+function the3dcard(i){
+	if(i){
+		$('#sideNav').show();
+	    $('.card3d').flip({
+			trigger: 'hover',
+			speed: 300
+		});
+	    $('.card3d').flip(false);
+    }else{
+    	$('#sideNav').hide();
+        $('.card3d').flip(true);
+    }
+}
+
+function productalt(i){
+	if(i){
+		$('#product').removeClass('thirteen wide column ');
+        $('#product').removeClass('ten');
+        $('#product').removeClass('sixteen');
+        $('#product').addClass('ten wide column ');
+	}else{
+		$('#product').removeClass('ten');
+    	$('#product').removeClass('ten wide column');
+        $('#product').addClass('sixteen wide column ');
+	}
+}
+
+
+function sideNavalt(i){
+	if(i){
+		$('#sideNav').removeClass('three wide column');
+		$('#sideNav').addClass('six wide column');
+	}else{
+		$('#sideNav').removeClass('six wide column');
+		$('#sideNav').addClass('three wide column');
+	}
+}
+
+function subcatmobalt(i){
+	if(i){
+		$('#subcatmob').removeClass('ten wide column');
+		$('#subcatmob').addClass('sixteen wide column');
+	}else{
+		$('#subcatmob').removeClass('sixteen wide column');
+		$('#subcatmob').addClass('ten wide column ');
+	}
+}
+
+function langalt(i){
+	if(i){
+		$('#lang').hide();
+		$('#mlang').show();
+		var local  =  getUrlParameter('lang');
+		$('#mlang').val(local);
+		$('#mlang').on('change', function (value){
+			var newurl = window.location.href;
+			var val = $('#mlang').val();
+			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+  val);
+			window.location.href = gotothis;
+		});
+	}else{
+		$('#mlang').hide();
+		$('#lang').show();
+	}
+}
+
+function minisubmenu(){
+
+	$('#mobilesubmenu').on('change', function(){
+		window.location.href = $('#mobilesubmenu').val();
+	});
 }
 
 function populateSubmenu(data){
@@ -151,21 +229,29 @@ function populateSubmenu(data){
 	for (var i = 0; i <= data.length-1; i++) {
 		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
 		var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
-
+		
 		var subsub = data[i]['subcategory'][0];
 		var subsubcount = subsub.length;
 
-		if(subsubcount > 0){
+		$('#mobilesubmenu').append('<optgroup id="sub_m_'+i+'" label='+data[i][locale('Name')]+' ">');
+		
 			$(nowfolder).append('<ul id="sub__'+i+'">');
+		folders ('#' + 'sub__' +  i, "All " + data[i][locale('Name')], link, "sub_-1", 'noshadows');
+		mfolders('#' + 'sub_m_' + i, "All " + data[i][locale('Name')], link, "sub_m-1", '');
+
+		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
 				if( subsub[k]['Name'] == "Subcategory"){
 					var sublink = link + "&subcat=" + subsub[k]['categoryID'];
 					folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
+					mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
 				}
 			}
 		}
+
 	}
-	
+
+	minisubmenu();
 	var heighty = i * 30;
 	$('#sidebarmenu').css({'height': heighty + 'px'});
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
@@ -176,13 +262,8 @@ $(document).ready(function(){
 	var cat    =  getUrlParameter('cat');
 	var subcat =  getUrlParameter('subcat');
 
-	resizeClasses();
 
-	$(window).on('resize', resizeClasses);
-
-
-
-	var getcardurl = "classes/class_getCard.php";
+	var getcardurl = "../classes/class_getCard.php";
 	if(cat != undefined){
 		getcardurl += '?cat=' + cat;
 	}
@@ -198,17 +279,14 @@ $(document).ready(function(){
 			card( $('#products'), data[i]);
 		}
 		$('.searchresultcount').text('Showing ' + i + ' results');
-		$('.card3d').flip({
-			trigger: 'hover',
-			speed: 300
-		});
+		resizeClasses();
 	});
-
+	$(window).on('resize', resizeClasses);
 
 
 
 	$.ajax({
-		url: "classes/class_getCategory.php"
+		url: "../classes/class_getCategory.php"
 	}).done(function(data) {
 		data = jQuery.parseJSON(data);
 		 // for (var x = 0; x <= 5; x++) {
@@ -217,7 +295,7 @@ $(document).ready(function(){
 		amazonmenu.init({menuid: 'mysidebarmenu'});
 	});
 
-	$('.lang').dropdown({
+	$('#lang').dropdown({
 		on: 'hover',
 		duration: 100,
 		action: function(text, value) {
@@ -227,14 +305,14 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.lang').dropdown('set selected', getUrlParameter('lang'));
+	$('#lang').dropdown('set selected', getUrlParameter('lang'));
 
-	$('#Home-crumb')    .prop('href', "index.php?lang=ar");
-	$('#Home-nav')      .prop('href', "index.php?lang=ar");
-	$('#Products-nav')  .prop('href', "products.php?lang=" + getUrlParameter('lang'));
-	$('#Media-nav')     .prop('href', "media.php?lang=ar");
-	$('#About-nav')     .prop('href', "about.php?lang=ar");
-	$('#Why-nav')       .prop('href', "contact.php?lang=ar");
+	$('#Home-crumb')    .prop('href', "index?lang=ar");
+	$('#Home-nav')      .prop('href', "index?lang=ar");
+	$('#Products-nav')  .prop('href', "products?lang=" + getUrlParameter('lang'));
+	$('#Media-nav')     .prop('href', "media?lang=ar");
+	$('#About-nav')     .prop('href', "about?lang=ar");
+	$('#Why-nav')       .prop('href', "contact?lang=ar");
 
 	activeNav('#Products-nav');
 	sideplay();
@@ -258,8 +336,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 function activeNav(taget){
 	$(taget).append('<div id="activeNav"></div>');
-	var actNav = document.getElementById('activeNav');
-	actNav.scrollIntoViewIfNeeded();
+	//document.getElementById('activeNav').scrollIntoView();
 }
 
 function sideplay(){

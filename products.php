@@ -4,6 +4,7 @@
 	<title>ALPHA - LIGHT UP YOUR LIFE</title>
 	<!-- <meta name="viewport" content="width=device-width"> -->
 	<link rel="icon" href="assets/alpha2.png">
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="libs/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="libs/amazonmenu/amazonmenu.css">
@@ -39,7 +40,15 @@
 							</div>
 							<div class="thirteen wide column " id="product">
 								<div class="ui grid">
-									<div class="ten wide column">
+
+									<div class="ten wide column" id="subcatmob">
+										<div class="mobilefil">
+											<a href="#" class="ui tiny button submenumob floatleft">≡Filter</a>
+											<select class="floatright shideme topspace" id="mobilesubmenu">
+												<option id="defuloptsub">Categories</option>
+											</select>
+										</div>
+
 										<div class="ui breadcrumb">
 											<a class="section" id="Home-crumb">
 												<i class="ui home icon"></i>
@@ -49,8 +58,8 @@
 
 										</div>
 									</div>
-									<div class="six wide column rtl searchresultcount">
-									<p class="rtl">search result</p>
+									<div class="six wide column rtl searchresultcount" id="srchres">
+										<p class="rtl">search result</p>
 									</div>
 								</div>
 								<div class="ui divider"></div>
