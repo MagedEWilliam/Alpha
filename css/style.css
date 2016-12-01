@@ -26,9 +26,9 @@ body.pushable>.pusher{
 .amazonmenu{
 	position: relative;
 }
-#mysidebarmenu:hover > .shadowmore, #mysidebarmenu:hover > .showmore{
+/*#mysidebarmenu:hover > .shadowmore, #mysidebarmenu:hover > .showmore{
 	display: none;
-}
+}*/
 .floatright{
 	float: right !important;
 }

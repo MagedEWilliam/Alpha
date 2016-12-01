@@ -306,16 +306,17 @@ $(document).ready(function(){
 	});
 
 	$('#lang').dropdown('set selected', getUrlParameter('lang'));
+	$('#Home-nav')      .prop('href', "Home?lang="+ getUrlParameter('lang'));
 
-	$('#Home-crumb')    .prop('href', "index?lang=ar");
-	$('#Home-nav')      .prop('href', "index?lang=ar");
-	$('#Products-nav')  .prop('href', "products?lang=" + getUrlParameter('lang'));
-	$('#Media-nav')     .prop('href', "media?lang=ar");
-	$('#About-nav')     .prop('href', "about?lang=ar");
-	$('#Why-nav')       .prop('href', "contact?lang=ar");
-
-	activeNav('#Products-nav');
 	sideplay();
+
+	$('#sidebarmenu').hover(function(){
+		$('.shadowmore').animate({opacity: 'toggle'}, 200);
+		$('.showmore').animate({opacity: 'toggle', 'bottom': -60}, 200);
+	}, function(){
+		$('.shadowmore').animate({opacity: 'toggle'}, 200);
+		$('.showmore').animate({opacity: 'toggle', 'bottom': 0}, 200);
+	});
 
 });
 
@@ -333,11 +334,6 @@ var getUrlParameter = function getUrlParameter(sParam) {
 		}
 	}
 };
-
-function activeNav(taget){
-	$(taget).append('<div id="activeNav"></div>');
-	//document.getElementById('activeNav').scrollIntoView();
-}
 
 function sideplay(){
 	$('#mysidebarmenu').on({

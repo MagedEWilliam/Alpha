@@ -1,10 +1,30 @@
 <?php
-function current_route(){
-	$query = $_SERVER['PHP_SELF'];
-	$path = pathinfo( $query );
-	$what_you_want = $path['basename'];
-	return $what_you_want;
-}
+	function getNavItems($active_nav_name){
+		$db        = Database::getInstance();
+		$mysqli    = $db->getConnection();
+		$sqlQuery  = "SELECT * FROM `pages` WHERE Available = 0 Order by OrderID desc";
+		$res = "";
+		if ($result = $mysqli->query($sqlQuery)) {
+			while ($row = $result->fetch_assoc()) {
+				$res .= '<a href="'.$row['url'].'?lang='.$_GET['lang'].'" id="nav_'.$row['url'].'">';
+				if( $_GET['lang'] == 'en' ){
+					$res .= $row['Name'];
+				}else if( $_GET['lang'] == 'ar' ){
+					$res .= $row['NameAr'];
+				}else if( $_GET['lang'] == 'ch' ){
+					$res .= $row['NameCh'];
+				}
+				
+				if(strtolower($active_nav_name) == strtolower($row['Name'])){
+					$res .=  '<div id="activeNav"></div></a>';
+				}else{
+					$res .=  '</a>';
+				}
+			}
+		}
+		echo mysqli_error($mysqli);
+		return $res;
+	}
 ?>
 <div class="ui container large nopad" >
 	
@@ -12,17 +32,15 @@ function current_route(){
 		<div class="row nopad">
 			<div class="four wide column nopad nobox logo">
 				<div class="alpha">
-					<a href="#" id="Home-nav">ALPHA</a>
+					<a href="Home-nav" id="Home-nav">ALPHA</a>
 				</div>
 				<div id="line0"><p>Light up your life</p></div>
 				<img src="../assets/alpha2.png">
 			</div>
 			<div class="eight wide column nopad nobox top-nav-group">
 				<div class="top-nav-sub-group">
-					<a href="#" id="Products-nav">Products</a>
-					<a href="#" id="Media-nav">Media</a>
-					<a href="#" id="About-nav">About</a>
-					<a href="#" id="Why-nav">Contact Us</a>
+					<?php echo getNavItems($active_nav_name); ?>
+					
 				</div>
 				<div id="line1"></div>
 			</div>
