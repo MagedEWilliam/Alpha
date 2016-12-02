@@ -1,6 +1,6 @@
 <?php 
-echo '<meta http-equiv="Location" content="page/home?lang=ar">';
-echo '<script>window.location.replace("page/home?lang=ar");</script>';
-header("Location: page/home?lang=ar");
+echo '<meta http-equiv="Location" content="page/products?lang=ar">';
+echo '<script>window.location.replace("page/products?lang=ar");</script>';
+header("Location: page/products?lang=ar");
 die();
 ?>

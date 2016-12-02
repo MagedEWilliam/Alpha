@@ -311,11 +311,11 @@ $(document).ready(function(){
 	sideplay();
 
 	$('#sidebarmenu').hover(function(){
-		$('.shadowmore').animate({opacity: 'toggle'}, 200);
-		$('.showmore').animate({opacity: 'toggle', 'bottom': -60}, 200);
+		$('.showmore').animate({opacity: '0', 'bottom': -60}, 100);
+		$('.shadowmore').animate({opacity: '0'}, 100);
 	}, function(){
-		$('.shadowmore').animate({opacity: 'toggle'}, 200);
-		$('.showmore').animate({opacity: 'toggle', 'bottom': 0}, 200);
+		$('.showmore').animate({opacity: '1', 'bottom': 0}, 200);
+		$('.shadowmore').animate({opacity: '1'}, 200);
 	});
 
 });
