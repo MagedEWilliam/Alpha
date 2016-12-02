@@ -2,7 +2,7 @@
 	function getNavItems($active_nav_name){
 		$db        = Database::getInstance();
 		$mysqli    = $db->getConnection();
-		$sqlQuery  = "SELECT * FROM `pages` WHERE Available = 0 AND hascontent > 0.00 Order by OrderID desc";
+		$sqlQuery  = "SELECT * FROM `pages` WHERE Available = 1 AND hascontent > 0.00 Order by OrderID Asc";
 		$res = "";
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {

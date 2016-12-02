@@ -36,7 +36,7 @@ class Category
 		$mysqli = $db->getConnection();
 
 		$res = [];
-		$sqlQuery = "SELECT `catproperty`.`categoryID`, `catproperty`.`catID`, `catproperty`.`filterbyme`, 
+		$sqlQuery = "SELECT `catproperty`.`categoryID`, `catproperty`.`catID`, `catproperty`.`showquick`, 
 		`property`.`ID`, `property`.`Name`, `property`.`NameAr`, `property`.`NameCh`,
 		`value`.`ID`, `value`.`value`, `value`.`valueAr`, `value`.`valueCh`
 		FROM `catproperty`

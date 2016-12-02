@@ -84,7 +84,7 @@ class Card
 		INNER JOIN `value` 
 		ON `catproperty`.valueID = `value`.ID
 
-		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub.") ";
+		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub." AND `catproperty`.showquick = 1) ";
 		
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {
