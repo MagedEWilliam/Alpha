@@ -35,9 +35,11 @@ class Card
 			$sqlQuery .= " WHERE (`catproperty`.catID = " . $_GET['cat'];
 		}
 		if(isset($_GET['subcat'])){
-			$sqlQuery .= " AND `catproperty`.categoryID = ". $_GET['subcat'];
+			if(isset($_GET['cat'])){
+				$sqlQuery .= " AND ";
+			}
+			$sqlQuery .= " `catproperty`.categoryID = ". $_GET['subcat'];
 		}
-
 		if(isset($_GET['cat'])){
 			$sqlQuery .= ')' ;
 		}

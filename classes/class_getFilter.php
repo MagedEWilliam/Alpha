@@ -16,14 +16,11 @@ class Card
 		$sqlQuery = "SELECT DISTINCT
 		`catproperty`.catID ,
 		`catproperty`.categoryID,
+		`catproperty`.propertyID,
 
 		`subcategory`.`ID`     ,
 		`subcategory`.`catID`  ,
-		`subcategory`.`code`   ,
-		`subcategory`.`Name`   ,
-		`subcategory`.`NameAr` ,
-		`subcategory`.`NameCh` ,
-		`subcategory`.`image`  
+		`subcategory`.`code`   
 
 		FROM `catproperty` 
 
@@ -35,7 +32,10 @@ class Card
 			$sqlQuery .= " WHERE (`catproperty`.catID = " . $_GET['cat'];
 		}
 		if(isset($_GET['subcat'])){
-			$sqlQuery .= " AND `catproperty`.categoryID = ". $_GET['subcat'];
+			if(isset($_GET['cat'])){
+				$sqlQuery .= " AND ";
+			}
+			$sqlQuery .= " `catproperty`.categoryID = ". $_GET['subcat'];
 		}
 
 		if(isset($_GET['cat'])){
@@ -45,46 +45,48 @@ class Card
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {
-				$temp = [];
-				$sub = self::getProperty( $row['catID'], $row['categoryID'] );
 				
-				$temp['item'] = $row;
-				$temp['Subcategory'] = $sub;
-
-				array_push($res, $temp);
+				$prop = self::getProperty( $row['propertyID'] );
+				if(count($prop) > 0){
+					
+					array_push($res, $prop);
+				}
 			}
 		}
 		echo mysqli_error($mysqli);
 		return  json_encode($res);
 	}
 
-
-	static public function getProperty($id, $sub)
+	static public function getProperty($id)
 	{
 		$db  = Database::getInstance();
 		$mysqli = $db->getConnection();
 
-		$sqlQuery = "SELECT 
-		`property`.ID, 
-		`property`.Name, 
-		`property`.NameAr, 
-		`property`.NameCh,
+		$sqlQuery = "SELECT * FROM `property` WHERE filterable = 0 AND ID =" .$id;
 
-		`value`.ID, 
-		`value`.propertyID, 
-		`value`.value, 
-		`value`.valueAr, 
-		`value`.valueCh
+		$res = [];
+		if ($result = $mysqli->query($sqlQuery)) {
+			while ($row = $result->fetch_assoc()) {
+				$temp = [];
+				$sub = self::getValue( $id );
+				
+				$temp['Property'] = $row;
+				$temp['Value'] = $sub;
 
-		FROM `catproperty` 
+				array_push($res, $temp);
+			}
+		}
+		echo mysqli_error($mysqli);
+		return  $res;
+	}
 
-		INNER JOIN property 
-		ON `catproperty`.propertyID = `property`.ID
 
-		INNER JOIN `value` 
-		ON `catproperty`.valueID = `value`.ID
+	static public function getValue($id)
+	{
+		$db  = Database::getInstance();
+		$mysqli = $db->getConnection();
 
-		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub.") ";
+		$sqlQuery = "SELECT * FROM `value` WHERE propertyID = ". $id;
 		
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {

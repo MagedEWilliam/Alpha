@@ -46,6 +46,7 @@ $active_nav_name = $res['Name'];
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script type="text/javascript" src="../libs/jquery.min.js"></script>
 	<script type="text/javascript" src="../libs/jquery.flip.min.js"></script>
+	<script type="text/javascript" src="../libs/jquery.query-object.min.js"></script>
 	<script type="text/javascript" src="../libs/semantic/semantic.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../libs/amazonmenu/amazonmenu.css">
 	<script src="../libs/amazonmenu/amazonmenu.min.js"></script>

@@ -20,20 +20,17 @@ body.pushable>.pusher{
 	transition: height .1s ease;
 }
 #mysidebarmenu:hover{
-	-webkit-transition: height .2s ease;
-	transition: height .2s ease;
+	overflow: visible;
 }
 .amazonmenu{
 	position: relative;
 }
-/*#mysidebarmenu:hover > .shadowmore, #mysidebarmenu:hover > .showmore{
-	display: none;
-}*/
+
 .floatright{
 	float: right !important;
 }
 .floatleft{
-	float: left; !important;
+	float: left !important;
 }
 .tail{
 	position: fixed;
@@ -56,6 +53,10 @@ body.pushable>.pusher{
 	text-align: center;
 	position: absolute;
 	bottom: 0px;
+	color: #777;
+}
+.filtr{
+	margin-top: 10px  !important;
 }
 
 .ui.list .list>.item a.header, .ui.list>.item a.header:hover{color: #ffffff;}
@@ -93,6 +94,16 @@ body.pushable>.pusher{
 .heigh{
 	height: 100%;
 	width: 100%;
+}
+
+.widt{
+	width: 100%;
+}
+.notopmarg{
+	margin-top: 5px !important;
+}
+.norm{
+	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
 
 .parento{
@@ -255,6 +266,9 @@ body.pushable>.pusher{
 
 div.ui.image.longy{
     overflow: visible;
+}
+#mysidebarmenu{
+	z-index: 999;
 }
 
 @media only screen and (min-width: 1280px){

@@ -50,7 +50,7 @@ function card(target, ItemProp){
 }
 
 function locale(source){
-	var local = getUrlParameter('lang');
+	var local = $.query.get('lang');
 	var ret   = "";
 	if(local  == 'en'){
 		ret   = source;
@@ -203,7 +203,7 @@ function langalt(i){
 	if(i){
 		$('#lang').hide();
 		$('#mlang').show();
-		var local  =  getUrlParameter('lang');
+		var local  =  $.query.get('lang');
 		$('#mlang').val(local);
 		$('#mlang').on('change', function (value){
 			var newurl = window.location.href;
@@ -225,7 +225,7 @@ function minisubmenu(){
 }
 
 function populateSubmenu(data){
-	var local = getUrlParameter('lang');
+	var local = $.query.get('lang');
 	for (var i = 0; i <= data.length-1; i++) {
 		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
 		var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
@@ -251,23 +251,23 @@ function populateSubmenu(data){
 
 	}
 
-	minisubmenu();
+	// minisubmenu();
 	var heighty = i * 30;
 	$('#sidebarmenu').css({'height': heighty + 'px'});
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
 }
 
 $(document).ready(function(){
-	var local  =  getUrlParameter('lang');
-	var cat    =  getUrlParameter('cat');
-	var subcat =  getUrlParameter('subcat');
-
+	var local  =  $.query.get('lang');
+	var cat    =  $.query.get('cat');
+	var subcat =  $.query.get('subcat');
+console.log(subcat);
 
 	var getcardurl = "../classes/class_getCard.php";
-	if(cat != undefined){
+	if(cat != ''){
 		getcardurl += '?cat=' + cat;
 	}
-	if(subcat != undefined){
+	if(subcat != ''){
 		getcardurl += '&subcat=' + subcat;
 	}
 
@@ -282,6 +282,50 @@ $(document).ready(function(){
 		resizeClasses();
 	});
 	$(window).on('resize', resizeClasses);
+
+
+	var getpropsurl = "../classes/class_getFilter.php";
+	if(cat != ''){
+		getpropsurl += '?cat=' + cat;
+	}
+	if(subcat != ''){
+		getpropsurl += '&subcat=' + subcat;
+	}
+	
+	$.ajax({
+		url: getpropsurl
+	}).done(function(data) {
+		data = jQuery.parseJSON(data);
+		$('.filterArea').append('<p class="filtr"><i class="ui icon filter"></i> Filters:</p>');
+		for (var i = 0; i <= data.length-1; i++) {
+			var propname = data[i][0].Property[locale('Name')];
+			var propID = 'filt_'+data[i][0].Property.ID;
+			var stri = '\
+				<div class="ui sub header norm notopmarg">'+propname+'</div>\
+					<div class="ui fluid normal dropdown selection multiple norm ">\
+						<input type="hidden" name="'+propID+'" value="">\
+						<i class="dropdown icon"></i>\
+						<div class="default text">Filter by '+propname+'</div>\
+						<div class="menu">\
+			';
+
+			for (var x = 0; x <= data[i][0].Value.length -1; x++) {
+				stri += '<div class="item" data-value="'+data[i][0].Value[x].ID+'">'+data[i][0].Value[x][locale('value')]+'</div>';
+			}
+
+			stri += '</div>\
+				</div>\
+			</div>';
+			$('.filterArea').append(stri);
+
+			$('[name="'+propID+'"]').parent().dropdown({
+				onChange: function(value){
+					goto( 'products' + $.query.set(propID, value).toString() );
+				}
+			});
+		}
+	});
+
 
 
 
@@ -305,45 +349,25 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#lang').dropdown('set selected', getUrlParameter('lang'));
-	$('#Home-nav')      .prop('href', "Home?lang="+ getUrlParameter('lang'));
+	$('#lang').dropdown('set selected', $.query.get('lang'));
+	$('#Home-nav')      .prop('href', "Home?lang="+ $.query.get('lang'));
 
-	sideplay();
+	
 
-	$('#sidebarmenu').hover(function(){
-		$('.showmore').animate({opacity: '0', 'bottom': -60}, 100);
-		$('.shadowmore').animate({opacity: '0'}, 100);
+	$('#mysidebarmenu').hover(function(){
+		$('.showmore')     .animate({opacity: '0.0', 'bottom': -60}, 100);
+		$('.shadowmore')   .animate({opacity: '0.0'}, 100);
+		$('#mysidebarmenu').animate({ height: '400px' }, 100);
+
 	}, function(){
-		$('.showmore').animate({opacity: '1', 'bottom': 0}, 200);
-		$('.shadowmore').animate({opacity: '1'}, 200);
+		$('.showmore')     .animate({opacity: '1.0', 'bottom': 0}, 200);
+		$('.shadowmore')   .animate({opacity: '1.0'}, 200);
+		$('#mysidebarmenu').animate({ height: '150px' }, 100);
+
 	});
 
 });
 
-var getUrlParameter = function getUrlParameter(sParam) {
-	var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-	sURLVariables = sPageURL.split('&'),
-	sParameterName,
-	i;
-
-	for (i = 0; i < sURLVariables.length; i++) {
-		sParameterName = sURLVariables[i].split('=');
-
-		if (sParameterName[0] === sParam) {
-			return sParameterName[1] === undefined ? true : sParameterName[1];
-		}
-	}
+var goto = function goto(url){
+	window.location.href = url;
 };
-
-function sideplay(){
-	$('#mysidebarmenu').on({
-	    'mouseenter':function(){
-	        setTimeout(function(){
-				$('#mysidebarmenu').css({'overflow':  'visible'});
-		}, 50);
-	    },'mouseleave':function(){
-	       		$('#mysidebarmenu').css({'overflow':  'hidden'});
-	    }
-	});
-
-}
