@@ -261,7 +261,6 @@ $(document).ready(function(){
 	var local  =  $.query.get('lang');
 	var cat    =  $.query.get('cat');
 	var subcat =  $.query.get('subcat');
-console.log(subcat);
 
 	var getcardurl = "../classes/class_getCard.php";
 	if(cat != ''){
@@ -318,12 +317,9 @@ console.log(subcat);
 			</div>';
 			$('.filterArea').append(stri);
 
-			$('[name="'+propID+'"]').parent().dropdown({
-				onChange: function(value){
-					goto( 'products' + $.query.set(propID, value).toString() );
-				}
-			});
+
 		}
+		populateFliterFromUrl();
 	});
 
 
@@ -367,6 +363,33 @@ console.log(subcat);
 	});
 
 });
+
+function isthere(cont, pram){
+	if(cont == pram){
+		return true;
+	}
+	return false;
+}
+
+function populateFliterFromUrl(){
+	var filtlenght = $('.filterArea input').length;
+	var cont = $('.filterArea input');
+	for (var i = 0; i <= filtlenght -1; i++) {
+		var filtname  = $(cont[i]).prop('name');
+		var filtvalue  = $(cont[i]).val();
+		var pramvalue = $.query.get(filtname);
+		if(pramvalue != ''){
+			if( filtvalue != pramvalue ){
+				$(cont[i]).parent().dropdown('set selected', pramvalue.toString().split(','));
+			}
+		}
+		$(cont[i]).parent().dropdown({
+			'onChange': function(value, text, name){
+				goto( 'products' + $.query.set($($(this)[0]).find('input').first().prop('name'), value).toString() );
+			}
+		});
+	}
+}
 
 var goto = function goto(url){
 	window.location.href = url;
