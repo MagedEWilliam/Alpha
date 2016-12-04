@@ -264,12 +264,14 @@ $(document).ready(function(){
 
 	var getcardurl = "../classes/class_getCard.php";
 	if(cat != ''){
-		getcardurl += '?cat=' + cat;
+		getcardurl += $.query.toString();
 	}
-	if(subcat != ''){
-		getcardurl += '&subcat=' + subcat;
-	}
-
+	getcardurl = getcardurl.replace("lang=ar", "");
+	getcardurl = getcardurl.replace("lang=en", "");
+	getcardurl = getcardurl.replace("lang=ch", "");
+	
+	console.log(getcardurl);
+	
 	$.ajax({
 		url: getcardurl
 	}).done(function(data) {

@@ -13,9 +13,12 @@ class Card
 		$db  = Database::getInstance();
 		$mysqli = $db->getConnection();
 
-		$sqlQuery = "SELECT DISTINCT
+		$sqlQuery = "
+		SELECT DISTINCT
 		`catproperty`.catID ,
 		`catproperty`.categoryID,
+		`catproperty`.propertyID,
+		`catproperty`.valueID,
 
 		`subcategory`.`ID`     ,
 		`subcategory`.`catID`  ,
@@ -31,18 +34,44 @@ class Card
 		ON `catproperty`.`categoryID` = `subcategory`.`ID`
 		";
 
-		if(isset($_GET['cat'])){
-			$sqlQuery .= " WHERE (`catproperty`.catID = " . $_GET['cat'];
+		if(count($_GET) > 0){
+			$sqlQuery .= 'WHERE ';
 		}
-		if(isset($_GET['subcat'])){
-			if(isset($_GET['cat'])){
-				$sqlQuery .= " AND ";
+
+		foreach ($_GET as $key => $value) {
+			$getcurval = explode('_', $key);
+
+			if($getcurval[0] == 'filt' &&  $value != ''){
+				$explodevalu = explode(',', $value);
+				
+				$sqlQuery .= " AND (`catproperty`.propertyID = " . $getcurval[1];
+				for ($i=0; $i < count($explodevalu) ; $i++) {
+					if($i > 0){
+						$sqlQuery .= " OR `catproperty`.valueID = " . $explodevalu[$i];
+					}else{
+						$sqlQuery .= " AND `catproperty`.valueID = " . $explodevalu[$i];
+					}
+				}
+				$sqlQuery .= ')';
+				
+			}else{
+				if($key == 'cat'){
+					$sqlQuery .= " (`catproperty`.catID = " . $_GET['cat'];
+				}
+				if($key == 'subcat'){
+					$sqlQuery .= " AND (`catproperty`.categoryID = ". $_GET['subcat'];
+					$sqlQuery .= ')';
+				}
+				if($key == 'cat'){
+					$sqlQuery .= ')';
+				}
 			}
-			$sqlQuery .= " `catproperty`.categoryID = ". $_GET['subcat'];
+
 		}
-		if(isset($_GET['cat'])){
-			$sqlQuery .= ')' ;
-		}
+
+// echo '<pre>';
+// print_r($sqlQuery);
+// echo '</pre>';
 
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {
@@ -52,14 +81,24 @@ class Card
 				
 				$temp['item'] = $row;
 				$temp['Subcategory'] = $sub;
-
-				array_push($res, $temp);
+				if(self::isDistinct($res, $temp)){
+					array_push($res, $temp);
+				}
 			}
 		}
+
 		echo mysqli_error($mysqli);
 		return  json_encode($res);
 	}
 
+	static public function isDistinct($sub, $orgin){
+		foreach ($sub as $key => $value) {
+			if( $value['item']['categoryID']  == $orgin['item']['categoryID'] ){
+				return false;
+			}
+		}
+		return true;
+	}
 
 	static public function getProperty($id, $sub)
 	{
@@ -86,7 +125,7 @@ class Card
 		INNER JOIN `value` 
 		ON `catproperty`.valueID = `value`.ID
 
-		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub." AND `catproperty`.showquick = 1) ";
+		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub.") ";
 		
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {
