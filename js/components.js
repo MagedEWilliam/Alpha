@@ -37,9 +37,9 @@ function card(target, ItemProp){
 			\
 			<div class=" getdown">\
 				<div class="ui tiny buttons detailtable">\
-					<button class="ui blue  small button"><p class="goodtimes">Details</p></button >\
+					<button class="ui yellow  small button"><p class="goodtimes">'+getFromLocale('details')+'</p></button >\
 					<div class="or"></div>\
-					<button class="ui yellow small button"><p class="goodtimes">To Cart</p></button >\
+					<button class="ui blue   small button"><p class="goodtimes">'+getFromLocale('toCart')+'</p></button >\
 				</div>\
 			</div>\
 			</div>\
@@ -47,6 +47,14 @@ function card(target, ItemProp){
 		</div>\
 		\
 		');
+}
+
+function getFromLocale(word){
+	for (var i = 0; i <= Glocale.length; i++) {
+		if( Glocale[i].key == word ){
+			return Glocale[i][locale('value')];
+		}
+	}
 }
 
 function locale(source){
@@ -130,21 +138,22 @@ function resizeClasses(){
 	if (window.screen.width > 1200) {
 		the3dcard(true);
         subcatmobalt(false);
-		langalt(false);
 	}
 	if ( window.screen.width < 1000) {
 		the3dcard(true);
         productalt(true);
         sideNavalt(true);
 		subcatmobalt(false);
-		langalt(false);
+    }
+    if ( window.screen.width > 1000) {
+        productalt(3);
+        sideNavalt(true);
     }
     if ( window.screen.width < 565) {
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
     	subcatmobalt(true);
     	sideNavalt(false);
-    	langalt(true);
     	productalt(false);
 		the3dcard(false);
 	}
@@ -166,28 +175,31 @@ function the3dcard(i){
 }
 
 function productalt(i){
-	if(i){
+	if(i == true){
 		$('#product').removeClass('thirteen wide column ');
         $('#product').removeClass('ten');
         $('#product').removeClass('sixteen');
-        $('#product').addClass('ten wide column ');
-	}else{
+        $('#product').addClass('ten wide column');
+	}else if(i == false){
 		$('#product').removeClass('ten');
     	$('#product').removeClass('ten wide column');
-        $('#product').addClass('sixteen wide column ');
+        $('#product').addClass('sixteen wide column');
+	}else if(i == 3){
+    	$('#product').removeClass('ten wide column');
+        $('#product').addClass('thirteen wide column');
 	}
 }
-
 
 function sideNavalt(i){
 	if(i){
-		$('#sideNav').removeClass('three wide column');
-		$('#sideNav').addClass('six wide column');
+		$('#sideNav').removeClass('.three .wide .column');
+		$('#sideNav').addClass('.six .wide .column');
 	}else{
-		$('#sideNav').removeClass('six wide column');
-		$('#sideNav').addClass('three wide column');
+		$('#sideNav').removeClass('.six .wide .column');
+		$('#sideNav').addClass('.three .wide .column');
 	}
 }
+
 
 function subcatmobalt(i){
 	if(i){
@@ -235,9 +247,11 @@ function populateSubmenu(data){
 
 		$('#mobilesubmenu').append('<optgroup id="sub_m_'+i+'" label='+data[i][locale('Name')]+' ">');
 		
-			$(nowfolder).append('<ul id="sub__'+i+'">');
-		folders ('#' + 'sub__' +  i, "All " + data[i][locale('Name')], link, "sub_-1", 'noshadows');
-		mfolders('#' + 'sub_m_' + i, "All " + data[i][locale('Name')], link, "sub_m-1", '');
+		$(nowfolder).append('<ul id="sub__'+i+'">');
+		
+			
+		folders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
+		mfolders('#' + 'sub_m_' + i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_m-1", '');
 
 		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
@@ -248,10 +262,8 @@ function populateSubmenu(data){
 				}
 			}
 		}
-
 	}
 
-	// minisubmenu();
 	var heighty = i * 30;
 	$('#sidebarmenu').css({'height': heighty + 'px'});
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
@@ -269,8 +281,7 @@ $(document).ready(function(){
 	getcardurl = getcardurl.replace("lang=ar", "");
 	getcardurl = getcardurl.replace("lang=en", "");
 	getcardurl = getcardurl.replace("lang=ch", "");
-	
-	console.log(getcardurl);
+
 	
 	$.ajax({
 		url: getcardurl
@@ -279,8 +290,9 @@ $(document).ready(function(){
 		for (var i = 0; i <= data.length-1; i++) {
 			card( $('#products'), data[i]);
 		}
-		$('.searchresultcount').text('Showing ' + i + ' results');
+		$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
 		resizeClasses();
+		setTimeout(function() {resizeClasses();}, 5);
 	});
 	$(window).on('resize', resizeClasses);
 
@@ -297,7 +309,7 @@ $(document).ready(function(){
 		url: getpropsurl
 	}).done(function(data) {
 		data = jQuery.parseJSON(data);
-		$('.filterArea').append('<p class="filtr"><i class="ui icon filter"></i> Filters:</p>');
+		$('.filterArea').append('<p class="filtr" locale="filters"><i class="ui icon filter"></i> @:</p>');
 		for (var i = 0; i <= data.length-1; i++) {
 			var propname = data[i][0].Property[locale('Name')];
 			var propID = 'filt_'+data[i][0].Property.ID;
@@ -321,6 +333,7 @@ $(document).ready(function(){
 
 
 		}
+		refreshLocale();
 		populateFliterFromUrl();
 	});
 
@@ -347,15 +360,23 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#lang').dropdown('set selected', $.query.get('lang'));
+	if($.query.get('lang') == 'en'){
+		$('#lang').find('.default.text').html('<i class="gb flag"></i>');
+	}else if($.query.get('lang') == 'ar'){
+		$('#lang').find('.default.text').html('<i class="eg flag"></i>');
+	}else if($.query.get('lang') == 'ch'){
+		$('#lang').find('.default.text').html('<i class="cn flag"></i>');
+	}
+
+	// $('#lang').dropdown('set selected', $.query.get('lang'));
 	$('#Home-nav')      .prop('href', "Home?lang="+ $.query.get('lang'));
 
 	
 
 	$('#mysidebarmenu').hover(function(){
-		$('.showmore')     .animate({opacity: '0.0', 'bottom': -60}, 100);
-		$('.shadowmore')   .animate({opacity: '0.0'}, 100);
-		$('#mysidebarmenu').animate({ height: '400px' }, 100);
+		$('.showmore')     .animate({opacity: '0.0', 'bottom': -60}, 150);
+		$('.shadowmore')   .animate({opacity: '0.0'}, 150);
+		$('#mysidebarmenu').animate({ height: '400px' }, 150);
 
 	}, function(){
 		$('.showmore')     .animate({opacity: '1.0', 'bottom': 0}, 200);
@@ -364,8 +385,19 @@ $(document).ready(function(){
 
 	});
 
+	
+	refreshLocale();
 });
 
+function refreshLocale(){
+	var numbof = $('[locale]');
+	for (var i = 0; i <= numbof.length -1; i++) {
+	   var current_Val = $(numbof[i]).html();
+	   var key = $(numbof[i]).attr('locale')
+	   var newVal = current_Val.replace('@', getFromLocale(key));
+	   $(numbof[i]).html( newVal );
+	}
+}
 function isthere(cont, pram){
 	if(cont == pram){
 		return true;

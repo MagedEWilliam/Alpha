@@ -170,9 +170,12 @@ body.pushable>.pusher{
 .smallfont{
 	font-size: 12px;
 }
-
+.ui.dropdown.hundredinwidth .menu {
+	left:auto !important;
+	right: 0 !important;
+}
 .hundredinwidth{
-	width: 105px !important;
+	margin-top: 31px;
 	float: right;
 }
 
@@ -200,7 +203,8 @@ body.pushable>.pusher{
 	float: left;
 	text-align: left;
 	width: 160px;
-	padding-top: 22px;
+	padding-top: 29px;
+	margin-bottom: 5px;
 }
 
 .some-margin{
@@ -241,7 +245,7 @@ body.pushable>.pusher{
 }
 #line0{
 	float: right;
-	width:85%;
+	width:89%;
 	margin-top: 10px;
 	height: 10px;
 	background-color: #0061a5;
@@ -285,6 +289,9 @@ div.ui.image.longy{
 	.ui.selection.dropdown.lang {
 		margin-top: 17px;
 	}
+	.top-nav-sub-group{
+		width: 90%;
+	}
 }
 
 @media only screen and (max-width: 1279px){
@@ -292,15 +299,13 @@ div.ui.image.longy{
 		font-size: 10px;
 	}
 	.tel-space{
-		float: left;
 		text-align: right;
-		width: 160px;
-		padding-top: 0px;
-		margin-bottom: 9px;
+		margin-bottom: 8px;
 	}
 	.lang {
-		margin-top: 0px;
+		float: right;
 	}
+	
 	.smallfont{
 		font-size: 10px;
 	}
@@ -309,10 +314,25 @@ div.ui.image.longy{
 	}
 	#line0 p{
 		padding-left: 35px;
+		padding-top: 1px;
+		font-size: 7px;
 	}
 	.showmore{
 		font-size: 10px;
 	}
+}
+
+@media only screen and (max-width: 1199px){
+	p.tel-space{
+		float: right !important;
+		margin-bottom: 0px;
+		padding-top: 10px;
+		
+	}
+	.lang {
+		margin-top: 14px;
+	}
+	
 }
 
 @media only screen and (max-width: 565px){
@@ -344,7 +364,7 @@ div.ui.image.longy{
 	}
 	#line0{
 		margin-top: 0px;
-		 width: 50px;
+		width: 75%;
 	}
 	#line0 p{
 		color: #0061a5;
@@ -360,6 +380,8 @@ div.ui.image.longy{
 	}
 	p.tel-space{
 		float: right !important;
+		margin-bottom: 0px;
+		padding-top: 10px;
 		
 	}
 	.hundredinwidth{
@@ -375,8 +397,7 @@ div.ui.image.longy{
 		font-size: 10px;
 	}
 	.lang{
-		width: 70px !important;
-		height: 20px !important;
+		margin-top: 7px;
 	}
 	.ui.breadcrumb{
 		display: none;

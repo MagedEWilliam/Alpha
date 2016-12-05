@@ -7,69 +7,90 @@
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {
 				$res .= '<a href="'.$row['url'].'?lang='.$_GET['lang'].'" id="nav_'.$row['url'].'">';
+
 				if( $_GET['lang'] == 'en' ){
-					$res .= $row['Name'];
+					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+						$res .=  '<div id="activeNav"></div>';
+						$res .= $row['Name'];
+						$res .=  '</a>';
+					}else{
+						$res .= $row['Name'];
+						$res .=  '</a>';
+					}
 				}else if( $_GET['lang'] == 'ar' ){
-					$res .= $row['NameAr'];
+					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+						$res .=  '<div id="activeNav"></div>';
+						$res .= $row['NameAr'];
+						$res .=  '</a>';
+					}else{
+						$res .= $row['NameAr'];
+						$res .=  '</a>';
+					}
 				}else if( $_GET['lang'] == 'ch' ){
-					$res .= $row['NameCh'];
+					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+						$res .=  '<div id="activeNav"></div>';
+						$res .= $row['NameCh'];
+						$res .=  '</a>';
+					}else{
+						$res .= $row['NameCh'];
+						$res .=  '</a>';
+					}
 				}
-				
-				if(strtolower($active_nav_name) == strtolower($row['Name'])){
-					$res .=  '<div id="activeNav"></div></a>';
-				}else{
-					$res .=  '</a>';
-				}
+
 			}
+
 		}
 		echo mysqli_error($mysqli);
 		return $res;
 	}
+
+	include_once('classes/class_getLocale.php');
 ?>
+<script type="text/javascript">
+	var Glocale = <?php print_r(geLocale()) ?>;
+</script>
 <div class="ui container large nopad" >
 	
 	<div class="ui internally celled grid nopad goodtimes" id="topnav">
 		<div class="row nopad">
-			<div class="four wide column nopad nobox logo">
+			<div class="five wide column nopad nobox logo">
 				<div class="alpha">
-					<a href="Home-nav" id="Home-nav">ALPHA</a>
+					<a href="Home-nav" id="Home-nav" locale="alpha">@</a>
 				</div>
-				<div id="line0"><p>Light up your life</p></div>
+				<div id="line0" locale="lightUpYourLife"><p>@</p></div>
 				<img src="../assets/alpha2.png">
 			</div>
 			<div class="eight wide column nopad nobox top-nav-group">
-				<div class="top-nav-sub-group">
-					<?php echo getNavItems($active_nav_name); ?>
-					
-				</div>
+				<div class="top-nav-sub-group"><?php echo getNavItems($active_nav_name); ?></div>
 				<div id="line1"></div>
 			</div>
-			<div class="four wide column nopad nobox rtl top-nav-sub-group">
+			<div class="three wide column nopad nobox rtl top-nav-sub-group">
 				<div class="top-tel-sub-group">
 					<p class="tel-space smallfont" style="float: left">tel: +20 22 39 03 110</p>
 
-					<select class="lang smallfont hundredinwidth" id="mlang">
-						<option value="ar">Arabic</option>
+					<!-- <select class="lang smallfont hundredinwidth" id="mlang">
+						<option value="ar">عربي</option>
 						<option value="en">English</option>
-						<option value="ch">Chinese</option>
-					</select>
+						<option value="ch">中文</option>
+					</select> -->
 
-					<div class="ui inline selection instant dropdown lang smallfont hundredinwidth"  id="lang">
+
+					<div class="ui instant dropdown lang smallfont hundredinwidth"  id="lang">
 					<input type="hidden" name="language">
-  					<i class="dropdown icon farright"></i>
-					<div class="default text">Select Friend</div>
-						<div class="menu">
+  					<i class="dropdown  icon farright"></i>
+					<div class="default text"></div>
+						<div class=" menu">
 							<div class="item" data-value="ar">
-							<i class="icon translate"></i>
-								Arabic
+							<i class="eg flag"></i>
+								عربي
 							</div>
 							<div class="item" data-value="en">
-								<i class="icon translate"></i>
+								<i class="gb flag"></i>
 								English
 							</div>
 							<div class="item" data-value="ch">
-								<i class="icon translate"></i>
-								Chinese
+								<i class="cn flag"></i>
+								中文
 							</div>
 						</div>
 					</div>
