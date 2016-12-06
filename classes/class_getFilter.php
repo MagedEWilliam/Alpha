@@ -62,7 +62,7 @@ class Card
 		$db  = Database::getInstance();
 		$mysqli = $db->getConnection();
 
-		$sqlQuery = "SELECT * FROM `property` WHERE filterable = 0 AND ID =" .$id;
+		$sqlQuery = "SELECT * FROM `property` WHERE filterable = 1 AND ID =" .$id;
 
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {

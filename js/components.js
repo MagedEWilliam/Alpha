@@ -82,15 +82,32 @@ function rtlSlpadrPad(cls, val){
 	return '<td class="'+cls+'">'+val+'</td>';
 }
 
+function lblSlpadrPad(val){
+	return '<div class="ui label" style="float:left;">'+val+'</div>';
+}
+
 function trtd(prop){
 	var temp = "";
-	for (var i = 0; i <= prop.Subcategory.length-1; i++) {
-		temp += '<tr>'
-		+rtlSlpadrPad('rtl Fixedtd slpad rpad ', prop.Subcategory[i][locale('Name')])
-		+rtlSlpadrPad('slpad', prop.Subcategory[i][locale('value')])
-		+'</tr>';
-	}
+
+	$.each(prop.Subcategory, function(i, value) {
+		if(prop.Subcategory[i]['Name'] != "Subcategory"){
+			temp += '<tr>'
+			temp += rtlSlpadrPad('rtl Fixedtd slpad rpad', prop.Subcategory[i][locale('Name')]);
+			temp += '<td class="slpad">';
+			temp += lblSlpadrPad( prop.Subcategory[i][locale('value')]);
+
+			$.each(prop.Subcategory[i]['more'], function(x, value) {
+				temp += lblSlpadrPad( prop.Subcategory[i]['more'][x][locale('value')] );
+			});
+
+			temp += '</td>';
+			temp += '</tr>';
+		}
+	});
+
+	
 	return temp;
+	
 }
 
 function categorylist(text, url, i){
@@ -287,6 +304,7 @@ $(document).ready(function(){
 		url: getcardurl
 	}).done(function(data) {
 		data = jQuery.parseJSON(data);
+		console.log(data[0]);
 		for (var i = 0; i <= data.length-1; i++) {
 			card( $('#products'), data[i]);
 		}
@@ -294,6 +312,8 @@ $(document).ready(function(){
 		resizeClasses();
 		setTimeout(function() {resizeClasses();}, 5);
 	});
+
+
 	$(window).on('resize', resizeClasses);
 
 
@@ -318,7 +338,7 @@ $(document).ready(function(){
 					<div class="ui fluid normal dropdown selection multiple norm ">\
 						<input type="hidden" name="'+propID+'" value="">\
 						<i class="dropdown icon"></i>\
-						<div class="default text">Filter by '+propname+'</div>\
+						<div class="default text">'+ getFromLocale('filterBy') + ' '+propname+'</div>\
 						<div class="menu">\
 			';
 
@@ -352,7 +372,6 @@ $(document).ready(function(){
 
 	$('#lang').dropdown({
 		on: 'hover',
-		duration: 100,
 		action: function(text, value) {
 			var newurl = window.location.href;
 			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );

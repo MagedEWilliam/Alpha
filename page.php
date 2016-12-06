@@ -33,18 +33,29 @@ function getContentOf(){
 	}
 }
 
+
+function _locale($word){
+	if($_GET['lang'] == 'en'){
+		return $word;
+	}elseif ($_GET['lang'] == 'ar') {
+		return $word . 'Ar';
+	}elseif ($_GET['lang'] == 'ch') {
+		return $word . 'Ch';
+	}
+}
+
 $res = getContentOf();
 global $active_nav_name;
-$active_nav_name = $res['Name'];
+$active_nav_name = $res;
 ?>
 <!DOCTYPE html>
 <!-- <html dir="rtl"> -->
 <html>
 <head>
-	<title><?php echo $active_nav_name ?></title>
+	<title><?php echo $active_nav_name[_locale('Name')] ?></title>
 	<link rel="icon" href="../assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="../libs/semantic/semantic.min.css">
-	<?php include_once("css/style.php") ?>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<script type="text/javascript" src="../libs/jquery.min.js"></script>
 	<script type="text/javascript" src="../libs/jquery.flip.min.js"></script>
 	<script type="text/javascript" src="../libs/jquery.query-object.min.js"></script>
@@ -61,7 +72,7 @@ $active_nav_name = $res['Name'];
 				<div class="ui container large">
 					<div class="ui internally celled grid ui segment">
 						<div class="row  ">
-						<?php echo $res['content']; ?>
+						<?php echo $active_nav_name['content']; ?>
 					</div>
 				</div>
 			</div>

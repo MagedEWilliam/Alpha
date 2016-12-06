@@ -3,8 +3,9 @@ header('Content-Type: application/json; charset=utf-8');
 require('class_database.php');
 
 $card = new Card;
+// echo '<pre>';
 print_r($card->getCards());
-
+// echo '</pre>';
 class Card
 {
 
@@ -88,7 +89,8 @@ class Card
 		}
 
 		echo mysqli_error($mysqli);
-		return  json_encode($res);
+		return  json_encode( self::distinctIt($res) );
+		return  self::distinctIt($res);
 	}
 
 	static public function isDistinct($sub, $orgin){
@@ -98,6 +100,39 @@ class Card
 			}
 		}
 		return true;
+	}
+
+	static public function distinctIt($data){
+		$filtered = $data;
+		$base = $data;
+
+		if( isset($data) ){
+			foreach ($filtered as $key => $value) {
+
+				// print_r( $filtered[$key]['item']['catID'] );
+				foreach ($filtered[$key]['Subcategory'] as $_key => $_value) {
+					$isfirst = true;
+					// var_dump( 'Compare me', $_value['ID'] );
+					if(isset( $base[$key]['Subcategory'][$_key] )){
+						$base[$key]['Subcategory'][$_key]['more']  = [];
+					}
+					foreach ($base[$key]['Subcategory'] as $__key => $__value) {
+						if(isset( $__value['propertyID'] )){
+							if($_value['ID'] == $__value['propertyID']){
+								// var_dump( 'to', $__value['propertyID'] );
+								if(!$isfirst){
+									array_push($base[$key]['Subcategory'][$_key]['more'], $base[$key]['Subcategory'][$__key]);
+									unset($base[$key]['Subcategory'][$__key]);
+								}
+								$isfirst = false;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return $base;
 	}
 
 	static public function getProperty($id, $sub)
@@ -111,7 +146,7 @@ class Card
 		`property`.NameAr, 
 		`property`.NameCh,
 
-		`value`.ID, 
+		`value`.ID AS valueID, 
 		`value`.propertyID, 
 		`value`.value, 
 		`value`.valueAr, 
@@ -133,7 +168,9 @@ class Card
 				array_push($res, $row);
 			}
 		}
-		return  $res;
+
+		return $res;
 	}
+
 }
 ?>

@@ -9,7 +9,7 @@
 				$res .= '<a href="'.$row['url'].'?lang='.$_GET['lang'].'" id="nav_'.$row['url'].'">';
 
 				if( $_GET['lang'] == 'en' ){
-					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
 						$res .=  '<div id="activeNav"></div>';
 						$res .= $row['Name'];
 						$res .=  '</a>';
@@ -18,7 +18,7 @@
 						$res .=  '</a>';
 					}
 				}else if( $_GET['lang'] == 'ar' ){
-					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
 						$res .=  '<div id="activeNav"></div>';
 						$res .= $row['NameAr'];
 						$res .=  '</a>';
@@ -27,7 +27,7 @@
 						$res .=  '</a>';
 					}
 				}else if( $_GET['lang'] == 'ch' ){
-					if(strtolower($active_nav_name) == strtolower($row['Name'])){
+					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
 						$res .=  '<div id="activeNav"></div>';
 						$res .= $row['NameCh'];
 						$res .=  '</a>';
@@ -43,7 +43,7 @@
 		echo mysqli_error($mysqli);
 		return $res;
 	}
-
+	
 	include_once('classes/class_getLocale.php');
 ?>
 <script type="text/javascript">
