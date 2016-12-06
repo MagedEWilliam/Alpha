@@ -1,3 +1,4 @@
+<style type="text/css">
 	body.pushable>.pusher{
 		background-color: #f4f4f4;
 		border-collapse: collapse;
@@ -158,8 +159,13 @@
 		src: url(../assets/Bahij_TheSansArabic-Bold.ttf);
 	}
 
+	@font-face {
+		font-family: 'NotoSansSC';
+		src: url(../assets/NotoSansSC-Bold.otf);
+	}
+
 	.goodtimes{
-		font-family: goodtime !important;
+		font-family: goodtime, Bahij, 'NotoSansSC' !important;
 	}
 
 	.breakit{
@@ -444,3 +450,4 @@
 			position: relative;
 		}
 	}
+</style>

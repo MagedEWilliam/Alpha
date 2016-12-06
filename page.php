@@ -38,12 +38,13 @@ global $active_nav_name;
 $active_nav_name = $res['Name'];
 ?>
 <!DOCTYPE html>
+<!-- <html dir="rtl"> -->
 <html>
 <head>
 	<title><?php echo $active_nav_name ?></title>
 	<link rel="icon" href="../assets/alpha2.png">
 	<link rel="stylesheet" type="text/css" href="../libs/semantic/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<?php include_once("css/style.php") ?>
 	<script type="text/javascript" src="../libs/jquery.min.js"></script>
 	<script type="text/javascript" src="../libs/jquery.flip.min.js"></script>
 	<script type="text/javascript" src="../libs/jquery.query-object.min.js"></script>
