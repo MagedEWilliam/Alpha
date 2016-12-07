@@ -53,16 +53,7 @@ $active_nav_name = $res;
 <html>
 <head>
 	<title><?php echo $active_nav_name[_locale('Name')] ?></title>
-	<link rel="icon" href="../assets/alpha2.png">
-	<link rel="stylesheet" type="text/css" href="../libs/semantic/semantic.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/style.css">
-	<script type="text/javascript" src="../libs/jquery.min.js"></script>
-	<script type="text/javascript" src="../libs/jquery.flip.min.js"></script>
-	<script type="text/javascript" src="../libs/jquery.query-object.min.js"></script>
-	<script type="text/javascript" src="../libs/semantic/semantic.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="../libs/amazonmenu/amazonmenu.css">
-	<script src="../libs/amazonmenu/amazonmenu.min.js"></script>
-	<script type="text/javascript" src="../js/components.js"></script>
+	<?php $_GET['__level']=1; include('pages/links.php') ?>
 </head>
 <body id="example" class="layouts pushable">
 	<?php include_once('pages/topnav/topnav.php'); ?>
@@ -70,10 +61,14 @@ $active_nav_name = $res;
 		<div class="full height">
 			<div class="article">
 				<div class="ui container large">
-					<div class="ui internally celled grid ui segment">
-						<div class="row  ">
-						<?php echo $active_nav_name['content']; ?>
-					</div>
+					<div class="ui internally stackable celled grid ui segment">
+						<?php 
+						if(get_current_route() == 'product_details'){	
+							include_once('pages/products/produc_details.php');
+						} else{
+							echo $active_nav_name['content'];
+						}
+						?>
 				</div>
 			</div>
 		</div>

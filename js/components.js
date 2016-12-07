@@ -37,7 +37,7 @@ function card(target, ItemProp){
 			\
 			<div class=" getdown">\
 				<div class="ui tiny buttons detailtable">\
-					<button class="ui yellow  small button"><p class="goodtimes">'+getFromLocale('details')+'</p></button >\
+					<a class="ui yellow small button" href="product_details?lang=ar&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
 					<div class="or"></div>\
 					<button class="ui blue   small button"><p class="goodtimes">'+getFromLocale('toCart')+'</p></button >\
 				</div>\
@@ -47,6 +47,23 @@ function card(target, ItemProp){
 		</div>\
 		\
 		');
+	modaleinfo();
+}
+
+function modaleinfo(){
+	$('#products').append('\
+			<div id="product_details" class="ui small modal">\
+			  <div class="header">Header</div>\
+			  <div class="image content">\
+			      <img class="image">\
+			      <div class="description">\
+			      <p></p>\
+			    </div>\
+			  </div>\
+			</div>\
+			\
+		');
+	$('#product_details').modal({transition: 'fade up'});
 }
 
 function getFromLocale(word){
@@ -78,6 +95,10 @@ function tinyimagelabel(val, src){
 	return '<div class="ui tiny image label"><img src="'+src+'">'+val+'</div>';
 }
 
+function trlSlpadrPad(id, cls){
+	return '<tr id="'+id+'" class="'+cls+'"></tr>';
+}
+
 function rtlSlpadrPad(cls, val){
 	return '<td class="'+cls+'">'+val+'</td>';
 }
@@ -104,10 +125,8 @@ function trtd(prop){
 			temp += '</tr>';
 		}
 	});
-
 	
 	return temp;
-	
 }
 
 function categorylist(text, url, i){
@@ -285,128 +304,6 @@ function populateSubmenu(data){
 	$('#sidebarmenu').css({'height': heighty + 'px'});
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
 }
-
-$(document).ready(function(){
-	var local  =  $.query.get('lang');
-	var cat    =  $.query.get('cat');
-	var subcat =  $.query.get('subcat');
-
-	var getcardurl = "../classes/class_getCard.php";
-	if(cat != ''){
-		getcardurl += $.query.toString();
-	}
-	getcardurl = getcardurl.replace("lang=ar", "");
-	getcardurl = getcardurl.replace("lang=en", "");
-	getcardurl = getcardurl.replace("lang=ch", "");
-
-	
-	$.ajax({
-		url: getcardurl
-	}).done(function(data) {
-		data = jQuery.parseJSON(data);
-		console.log(data[0]);
-		for (var i = 0; i <= data.length-1; i++) {
-			card( $('#products'), data[i]);
-		}
-		$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
-		resizeClasses();
-		setTimeout(function() {resizeClasses();}, 5);
-	});
-
-
-	$(window).on('resize', resizeClasses);
-
-
-	var getpropsurl = "../classes/class_getFilter.php";
-	if(cat != ''){
-		getpropsurl += '?cat=' + cat;
-	}
-	if(subcat != ''){
-		getpropsurl += '&subcat=' + subcat;
-	}
-	
-	$.ajax({
-		url: getpropsurl
-	}).done(function(data) {
-		data = jQuery.parseJSON(data);
-		$('.filterArea').append('<p class="filtr" locale="filters"><i class="ui icon filter"></i> @:</p>');
-		for (var i = 0; i <= data.length-1; i++) {
-			var propname = data[i][0].Property[locale('Name')];
-			var propID = 'filt_'+data[i][0].Property.ID;
-			var stri = '\
-				<div class="ui sub header norm notopmarg">'+propname+'</div>\
-					<div class="ui fluid normal dropdown selection multiple norm ">\
-						<input type="hidden" name="'+propID+'" value="">\
-						<i class="dropdown icon"></i>\
-						<div class="default text">'+ getFromLocale('filterBy') + ' '+propname+'</div>\
-						<div class="menu">\
-			';
-
-			for (var x = 0; x <= data[i][0].Value.length -1; x++) {
-				stri += '<div class="item" data-value="'+data[i][0].Value[x].ID+'">'+data[i][0].Value[x][locale('value')]+'</div>';
-			}
-
-			stri += '</div>\
-				</div>\
-			</div>';
-			$('.filterArea').append(stri);
-
-
-		}
-		refreshLocale();
-		populateFliterFromUrl();
-	});
-
-
-
-
-	$.ajax({
-		url: "../classes/class_getCategory.php"
-	}).done(function(data) {
-		data = jQuery.parseJSON(data);
-		 // for (var x = 0; x <= 5; x++) {
-			populateSubmenu(data);
-		 // }
-		amazonmenu.init({menuid: 'mysidebarmenu'});
-	});
-
-	$('#lang').dropdown({
-		on: 'hover',
-		action: function(text, value) {
-			var newurl = window.location.href;
-			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
-			window.location.href = gotothis;
-		}
-	});
-
-	if($.query.get('lang') == 'en'){
-		$('#lang').find('.default.text').html('<i class="gb flag"></i>');
-	}else if($.query.get('lang') == 'ar'){
-		$('#lang').find('.default.text').html('<i class="eg flag"></i>');
-	}else if($.query.get('lang') == 'ch'){
-		$('#lang').find('.default.text').html('<i class="cn flag"></i>');
-	}
-
-	// $('#lang').dropdown('set selected', $.query.get('lang'));
-	$('#Home-nav')      .prop('href', "Home?lang="+ $.query.get('lang'));
-
-	
-
-	$('#mysidebarmenu').hover(function(){
-		$('.showmore')     .animate({opacity: '0.0', 'bottom': -60}, 150);
-		$('.shadowmore')   .animate({opacity: '0.0'}, 150);
-		$('#mysidebarmenu').animate({ height: '400px' }, 150);
-
-	}, function(){
-		$('.showmore')     .animate({opacity: '1.0', 'bottom': 0}, 200);
-		$('.shadowmore')   .animate({opacity: '1.0'}, 200);
-		$('#mysidebarmenu').animate({ height: '150px' }, 100);
-
-	});
-
-	
-	refreshLocale();
-});
 
 function refreshLocale(){
 	var numbof = $('[locale]');

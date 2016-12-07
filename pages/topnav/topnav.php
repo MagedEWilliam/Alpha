@@ -85,7 +85,7 @@
 								عربي
 							</div>
 							<div class="item" data-value="en">
-								<i class="gb flag"></i>
+								<i class="us flag"></i>
 								English
 							</div>
 							<div class="item" data-value="ch">

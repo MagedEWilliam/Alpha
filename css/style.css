@@ -45,6 +45,7 @@ body.pushable>.pusher{
 	bottom: 30px;
 	background-image: url(../assets/shadowup.png);
 	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 .showmore{
 	width: 100%;
@@ -177,6 +178,10 @@ body.pushable>.pusher{
 	width: 105px !important;
 }
 
+.FixedFixedtd{
+	width: 105px;
+}
+
 .smallfont{
 	font-size: 12px;
 }
@@ -272,6 +277,10 @@ body.pushable>.pusher{
 
 .thumpimg{
 	width: 50px;
+}
+
+.bragimg{
+
 }
 
 .front.content{
