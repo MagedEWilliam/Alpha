@@ -66,14 +66,13 @@
 			</div>
 			<div class="three wide column nopad nobox rtl top-nav-sub-group">
 				<div class="top-tel-sub-group">
-					<p class="tel-space smallfont" style="float: left">tel: +20 22 39 03 110</p>
 
 					<!-- <select class="lang smallfont hundredinwidth" id="mlang">
 						<option value="ar">عربي</option>
 						<option value="en">English</option>
 						<option value="ch">中文</option>
 					</select> -->
-
+					<p style="float: right; height: 100%;width: 25%;"></p>
 
 					<div class="ui instant dropdown lang smallfont hundredinwidth"  id="lang">
 					<input type="hidden" name="language">
@@ -94,6 +93,8 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- <p class="tel-space smallfont" style="float: left">tel: +20 22 39 03 110</p> -->
 
 				</div>
 				<div id="line2"></div>

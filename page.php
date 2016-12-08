@@ -49,7 +49,6 @@ global $active_nav_name;
 $active_nav_name = $res;
 ?>
 <!DOCTYPE html>
-<!-- <html dir="rtl"> -->
 <html>
 <head>
 	<title><?php echo $active_nav_name[_locale('Name')] ?></title>
@@ -61,7 +60,7 @@ $active_nav_name = $res;
 		<div class="full height">
 			<div class="article">
 				<div class="ui container large">
-					<div class="ui internally stackable celled grid ui segment">
+					<div class="ui internally stackable celled grid segment topping">
 						<?php 
 						if(get_current_route() == 'product_details'){	
 							include_once('pages/products/produc_details.php');

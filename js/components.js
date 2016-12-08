@@ -1,12 +1,12 @@
 function card(target, ItemProp){
 	$(target).append('\
-		<div class="ui card card3d longproduct">\
-			<div class="ui  image longy" >\
-				<div class="front content fillitcontent">\
-				<img src="'+ItemProp.item.image+'" class="fillitup">\
+		<div class="ui link card  longproduct">\
+			<div class="ui slide masked move up reveal longy image" >\
+				<div class="content fillitcontent">\
+				<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
 			</div>\
 			\
-			<div class=" back content heigh">\
+			<div class="back hidden content heigh" >\
 				<div class="fastdetails">\
 						<table class="ui very compact striped unstackable table " style="margin-bottom:0;">\
 							<tbody>\
@@ -28,7 +28,7 @@ function card(target, ItemProp){
 				</div>\
 			</div>\
 			</div>\
-			<div class="content parento">\
+			<div class="visible content parento">\
 				<div class=" getdown">\
 				<div class="ui header">'+ItemProp.item[locale('Name')]+'</div>\
 				<div class="meta">'+ItemProp.item.code+'</div>\
@@ -37,9 +37,9 @@ function card(target, ItemProp){
 			\
 			<div class=" getdown">\
 				<div class="ui tiny buttons detailtable">\
-					<a class="ui yellow small button" href="product_details?lang=ar&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
+					<a class="ui yellow small button" id="'+ItemProp.item.code+'" href="product_details?lang='+$.query.get('lang')+'&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
 					<div class="or"></div>\
-					<button class="ui blue   small button"><p class="goodtimes">'+getFromLocale('toCart')+'</p></button >\
+					<button class="ui blue small button"><p class="goodtimes">'+getFromLocale('toCart')+'</p></button >\
 				</div>\
 			</div>\
 			</div>\
@@ -47,23 +47,27 @@ function card(target, ItemProp){
 		</div>\
 		\
 		');
-	modaleinfo();
+	document.getElementById(ItemProp.item.code).addEventListener("click", function(event){
+	    event.preventDefault();
+		modaleinfo(ItemProp.item.code);
+	});
 }
 
-function modaleinfo(){
-	$('#products').append('\
-			<div id="product_details" class="ui small modal">\
-			  <div class="header">Header</div>\
-			  <div class="image content">\
-			      <img class="image">\
-			      <div class="description">\
-			      <p></p>\
-			    </div>\
-			  </div>\
-			</div>\
-			\
+function modaltoopen(e){
+	e.preventDefault();
+}
+
+function modaleinfo(item){
+	$('#product_details').html('');
+	$('#product_details').append('\
+		      \
+		    <div class="description">\
+		      <iframe class="ui iframe" frameborder="0" src="../pages/products/produc_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
+		    </div>\
+		    \
 		');
 	$('#product_details').modal({transition: 'fade up'});
+	$('#product_details').modal('show');
 }
 
 function getFromLocale(word){
@@ -171,42 +175,44 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
+	// $('#subcatmob').hide();
 	if (window.screen.width > 1200) {
 		the3dcard(true);
-        subcatmobalt(false);
+        // subcatmobalt(false);
 	}
 	if ( window.screen.width < 1000) {
 		the3dcard(true);
-        productalt(true);
-        sideNavalt(true);
-		subcatmobalt(false);
+        //productalt(true);
+        //sideNavalt(true);
+		// subcatmobalt(false);
     }
     if ( window.screen.width > 1000) {
-        productalt(3);
-        sideNavalt(true);
+        //productalt(3);
+        //sideNavalt(true);
     }
     if ( window.screen.width < 565) {
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
-    	subcatmobalt(true);
-    	sideNavalt(false);
-    	productalt(false);
+    	// subcatmobalt(true);
+    	//sideNavalt(false);
+    	//productalt(false);
 		the3dcard(false);
 	}
 
 }
 
 function the3dcard(i){
+	var haschi = $('.back.hidden').length;
 	if(i){
-		$('#sideNav').show();
-	    $('.card3d').flip({
-			trigger: 'hover',
-			speed: 300
-		});
-	    $('.card3d').flip(false);
+		if(haschi == 0){
+			$('.back').addClass('hidden content');
+		}
+		$('.front').show();
     }else{
-    	$('#sideNav').hide();
-        $('.card3d').flip(true);
+		if(haschi > 0){
+			$('.back').removeClass('hidden content');
+		}
+	 	$('.front').hide();
     }
 }
 

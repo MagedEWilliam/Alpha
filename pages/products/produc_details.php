@@ -2,15 +2,21 @@
 
 
 if( isset($_GET['compo']) ){
-require_once('../../classes/class_database.php');
+	$level = '';
+for ($i=0; $i < $_GET['__level'] ; $i++) { 
+	$level .= '../';
+}
+require_once($level.'classes/class_database.php');
 	echo '<!DOCTYPE html>
-<html><head>';
-	$_GET['__level']=2;
+<html style="height: 100%;">
+<head>';
 	include('../links.php');
-	echo '</head><body>';
-
+	echo '</head>
+	<body style="height:100%;">
+	<div class="ui " style="height: 100%;" >
+					<div class="ui internally stackable nomarg celled grid ui segment" style="height:100%;">';
 	
-include_once('../../classes/class_getLocale.php');
+include_once($level.'classes/class_getLocale.php');
 }
 ?>
 <script type="text/javascript">
@@ -20,7 +26,7 @@ include_once('../../classes/class_getLocale.php');
 	<div class="eight wide column">
 
 		<center>
-			<img src="http://noorina.com/website-images/view/5497f0e01c4bf.jpg" class="bragimg">
+			<img src="" class="bragimg">
 		</center>
 
 		<br>
@@ -45,6 +51,6 @@ include_once('../../classes/class_getLocale.php');
 </div>
 <?php
 if( isset($_GET['compo']) ){
-	echo '</body></html>';
+	echo '</div></div></body></html>';
 }
 ?>

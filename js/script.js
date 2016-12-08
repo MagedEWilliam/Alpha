@@ -25,7 +25,9 @@ $(document).ready(function(){
 		});
 	}
 
-	if(window.location.pathname == "/ALPHA/page/product_details" || window.location.pathname == "/page/product_details"){
+	if(window.location.pathname == "/ALPHA/page/product_details" || window.location.pathname == "/page/product_details"
+	 || window.location.pathname == "/ALPHA/pages/products/produc_details.php"
+		){
 		if($.query.get('product_id') != ''){
 
 			var themrurl = '';
@@ -34,12 +36,13 @@ $(document).ready(function(){
 			}else{
 				themrurl ="../classes/class_getDetails.php?product_id=" + $.query.get('product_id');
 			}
+
 			$.ajax({
 				url: themrurl
 			}).done(function(data) {
 				data = jQuery.parseJSON(data);
-				console.log(data);
-				
+
+				$('.bragimg').attr('src', data[0].item['image']);
 				$('#product_details').append( trlSlpadrPad('tr_Name' , '') );
 				$('#tr_Name').append(rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Name')
 					+ rtlSlpadrPad('slpad content', '<h4>' + data[0].item[locale('Name')] + '</h4')
@@ -109,8 +112,6 @@ $(document).ready(function(){
 					</div>\
 				</div>';
 				$('.filterArea').append(stri);
-
-
 			}
 			refreshLocale();
 			populateFliterFromUrl();
@@ -122,27 +123,26 @@ $(document).ready(function(){
 		themrurl = '../../classes/class_getCategory.php';
 	}else{
 		themrurl = '../classes/class_getCategory.php';
+
+		$.ajax({
+			url: themrurl
+		}).done(function(data) {
+			data = jQuery.parseJSON(data);
+			 // for (var x = 0; x <= 5; x++) {
+				populateSubmenu(data);
+			 // }
+			amazonmenu.init({menuid: 'mysidebarmenu'});
+		});
+
+		$('#lang').dropdown({
+			on: 'hover',
+			action: function(text, value) {
+				var newurl = window.location.href;
+				var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
+				window.location.href = gotothis;
+			}
+		});
 	}
-	console.log(themrurl);
-
-	$.ajax({
-		url: themrurl
-	}).done(function(data) {
-		data = jQuery.parseJSON(data);
-		 // for (var x = 0; x <= 5; x++) {
-			populateSubmenu(data);
-		 // }
-		amazonmenu.init({menuid: 'mysidebarmenu'});
-	});
-
-	$('#lang').dropdown({
-		on: 'hover',
-		action: function(text, value) {
-			var newurl = window.location.href;
-			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
-			window.location.href = gotothis;
-		}
-	});
 
 	if($.query.get('lang') == 'en'){
 		$('#lang').find('.default.text').html('<i class="gb flag"></i>');
@@ -153,7 +153,6 @@ $(document).ready(function(){
 	}
 
 	$('#Home-nav')      .prop('href', "Home?lang="+ $.query.get('lang'));
-
 	
 
 	$('#mysidebarmenu').hover(function(){

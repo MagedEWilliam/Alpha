@@ -4,6 +4,7 @@ for ($i=0; $i < $_GET['__level'] ; $i++) {
 	$level .= '../';
 }
 ?>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <link rel="icon" href="<?php echo $level; ?>assets/alpha2.png">
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>libs/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>css/style.css">
