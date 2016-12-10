@@ -23,24 +23,18 @@ include_once($level.'classes/class_getLocale.php');
 	var Glocale = <?php print_r(geLocale()) ?>;
 </script>
 <div class="row">
-	<div class="eight wide column">
+	<div class="ten wide column">
 
-		<center>
-			<img src="" class="bragimg">
-		</center>
+		<h4 class="goodtimes ">Items details</h4>
+		<table class="ui very compact striped unstackable table" id="product_details">
+			<tbody>
 
-		<br>
-		<center>
-			<button class="ui blue button">
-				<p class="goodtimes" locale="toCart">
-					<i class="ui icon cart"></i>
-					@
-				</p>
-			</button>
-		</center>
+			</tbody>
+		</table>
+
 	</div>
-	<div class="eight wide column">
-		<h4 class="goodtimes ">Product details</h4>
+	<div class="six wide column">
+		<h4 class="goodtimes ">total</h4>
 		<table class="ui very compact striped unstackable table" id="product_details">
 			<tbody>
 
