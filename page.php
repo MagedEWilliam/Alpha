@@ -67,7 +67,7 @@ $active_nav_name = $res;
 						}elseif(get_current_route() == 'products'){	
 							include_once('pages/products/products.php');
 						}elseif(get_current_route() == 'cart'){	
-							include_once('pages/products/products.php');
+							include_once('pages/cart/products.php');
 						}else{
 							echo $active_nav_name['content'];
 						}

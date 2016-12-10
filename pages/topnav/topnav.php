@@ -10,7 +10,7 @@
 
 				if( $_GET['lang'] == 'en' ){
 					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
-						$res .=  '<div id="activeNav"></div>';
+						// $res .=  '<div id="activeNav"></div>';
 						$res .= $row['Name'];
 						$res .=  '</a>';
 					}else{
@@ -19,7 +19,7 @@
 					}
 				}else if( $_GET['lang'] == 'ar' ){
 					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
-						$res .=  '<div id="activeNav"></div>';
+						// $res .=  '<div id="activeNav"></div>';
 						$res .= $row['NameAr'];
 						$res .=  '</a>';
 					}else{
@@ -28,7 +28,7 @@
 					}
 				}else if( $_GET['lang'] == 'ch' ){
 					if(strtolower($active_nav_name['Name']) == strtolower($row['Name'])){
-						$res .=  '<div id="activeNav"></div>';
+						// $res .=  '<div id="activeNav"></div>';
 						$res .= $row['NameCh'];
 						$res .=  '</a>';
 					}else{
@@ -53,25 +53,23 @@
 	
 	<div class="ui internally celled grid nopad goodtimes" id="topnav">
 		<div class="row nopad">
-			<div class="five wide column nopad nobox logo">
+			<div class="sixteen wide column nopad nobox logo">
 				<div class="alpha">
 					<a href="Home-nav" id="Home-nav" locale="alpha">@</a>
+					<img src="../assets/alpha2.png">
 				</div>
-				<div id="line0" locale="lightUpYourLife"><p>@</p></div>
-				<img src="../assets/alpha2.png">
-			</div>
-			<div class="eight wide column nopad nobox top-nav-group">
-				<div class="top-nav-sub-group"><?php echo getNavItems($active_nav_name); ?></div>
-				<div id="line1"></div>
-			</div>
-			<div class="three wide column nopad nobox rtl top-nav-sub-group">
+				
+			
+				<div class="top-nav-sub-group"><center><?php echo getNavItems($active_nav_name); ?></center></div>
+				
+			
 				<div class="top-tel-sub-group">
 					
-					<p style="float: right; height: 100%;width: 20%;"></p>
+					<p class="mrspace"></p>
 
 					<div class="ui instant dropdown lang smallfont hundredinwidth"  id="lang">
 					<input type="hidden" name="language">
-  					<i class="dropdown icon farright"></i>
+						<i class="dropdown icon farright"></i>
 					<div class="default text"></div>
 						<div class=" menu">
 							<div class="item" data-value="ar">
@@ -89,10 +87,14 @@
 						</div>
 					</div>
 
-					<!-- <p class="tel-space smallfont" style="float: left">tel: +20 22 39 03 110</p> -->
+				     <div class="ui label carticon">
+					  <i class="ui cart icon"></i>
+					  Cart
+					  <div class="detail">20</div>
+					</div>
 
 				</div>
-				<div id="line2"></div>
+				<div id="line0"><p>Light up your life</p></div>
 			</div>
 		</div>
 	</div>

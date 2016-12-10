@@ -1,6 +1,5 @@
 <?php
 
-
 if( isset($_GET['compo']) ){
 	$level = '';
 for ($i=0; $i < $_GET['__level'] ; $i++) { 

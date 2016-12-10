@@ -2,7 +2,13 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
-
+.carticon{
+	margin-top: 20px !important;
+}
+.top-tel-sub-group{
+	width: 20%;
+	float: right;
+}
 #activeNav{
 	position: absolute;
 	background-color: #f7da00;
@@ -14,13 +20,13 @@ body.pushable>.pusher{
 }
 .underimg{
 	width: 100%;
-    z-index: 50;
-    padding-bottom: 0px;
-    padding-top: 65px;
-    height: 85px;
-    position: fixed;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
+	z-index: 50;
+	padding-bottom: 0px;
+	padding-top: 65px;
+	height: 85px;
+	position: fixed;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
 }
 #mysidebarmenu{
 	overflow: hidden;
@@ -80,10 +86,12 @@ body.pushable>.pusher{
 	margin-top: 10px  !important;
 }
 
-.ui.list .list>.item a.header, .ui.list>.item a.header:hover{color: #ffffff;}
+.ui.list .list>.item a.header, .ui.list>.item a.header:hover{
+	color: #ffffff;
+}
 
 .topping{
-top:45px;	
+	top:45px;	
 }
 #topnav{
 	height: 65px;
@@ -93,7 +101,7 @@ top:45px;
 	position: fixed;
 	z-index: 1000;
 	left: 0px;
-    padding-left: 50px !important;
+	padding-left: 50px !important;
 }
 .article .ui.container.large{
 	margin-top: 35px;
@@ -134,13 +142,8 @@ top:45px;
 .notopmarg{
 	margin-top: 5px !important;
 }
-.norm{
-	font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
-}
 
-.parento{
-	height: 150px;
-}
+.parento {height : 150px;}
 
 .getdown{
 	padding-top: 5px;
@@ -195,6 +198,10 @@ top:45px;
 	src: url(../assets/NotoSansSC-Bold.otf);
 }
 
+.norm{
+	font-family : Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
 .goodtimes{
 	font-family: goodtime, Bahij, 'NotoSansSC' !important;
 }
@@ -242,9 +249,16 @@ top:45px;
 
 .top-nav-sub-group{
 	margin-top: 25px;
+	float: left;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
 }
 .top-nav-sub-group a{
 	color: #0061a5;
+	margin-left: 2%;
 }
 
 .tel-space{
@@ -263,9 +277,12 @@ top:45px;
 	position: absolute;
 	top:0px;
 	width: 65px;
+	left: 0;
 }
 
 .alpha{
+	float: left;
+	width: 150px;
 	margin-top: 20px;
 	margin-left:65px;
 	font-size: 25px;
@@ -275,7 +292,7 @@ top:45px;
 #line2{
 	float: left;
 	width:100%;
-	margin-top: 12px;
+	margin-top: 8px;
 	height: 10px;
 	background-color: #0061a5;
 }
@@ -288,12 +305,13 @@ top:45px;
 #line0 p{
 	font-size: 8px;
 	color: #f7da00;
-	padding-left: 17px;
 	letter-spacing: 1px;
 }
 #line0{
-	float: right;
-	width:89%;
+	width: 100%;
+	padding-left: 15px;
+	margin-left: 50px;
+	float: left;
 	margin-top: 10px;
 	height: 10px;
 	background-color: #0061a5;
@@ -313,7 +331,7 @@ top:45px;
 }
 
 .bragimg{
-max-width: 100%;
+	max-width: 100%;
 }
 
 .front.content{
@@ -321,7 +339,7 @@ max-width: 100%;
 }
 
 div.ui.image.longy{
-    overflow: visible;
+	overflow: visible;
 }
 #mysidebarmenu{
 	z-index: 999;
@@ -329,6 +347,12 @@ div.ui.image.longy{
 #Home-nav{
 	color: #0061a5;
 }
+.mrspace{
+	float: right;
+	height: 100%;
+	width: 20%;
+}
+
 @media only screen and (min-width: 1280px){
 	.ui.container {
 		width: 92%;
@@ -344,7 +368,7 @@ div.ui.image.longy{
 		margin-top: 17px;
 	}
 	.top-nav-sub-group{
-		width: 90%;
+		width: 600px;
 	}
 }
 
@@ -367,7 +391,6 @@ div.ui.image.longy{
 		bottom: -26px
 	}
 	#line0 p{
-		padding-left: 35px;
 		padding-top: 1px;
 		font-size: 7px;
 	}
@@ -386,14 +409,51 @@ div.ui.image.longy{
 		margin-top: 25px;
 	}
 	.article .ui.container.large{
-    	margin-top: 10px;
+		margin-top: 10px;
 	}
 	#line2{
-		margin-top: 17px;
+		margin-top: 11px;
+	}
+	
+	#topnav{
+		padding-left: 20px !important;
+	}
+	.top-tel-sub-group{
+		width: 25%;
+	}
+	.carticon{
+		padding-left: 5px !important;
+		padding-right: 5px !important;
+	}
+}
+
+@media only screen and (max-width: 999px){
+	.carticon{
+		float: right;
+		margin-top: 0px !important; 
+		margin-right: 1px !important; 
+	}
+	.lang {
+		margin-top: 5px !important;
+	}
+	.mrspace{
+		width: 10%;
+	}
+}
+@media only screen and (max-width: 900px){
+	.lang {
+		margin-top: 5px;
 	}
 }
 
 @media only screen and (max-width: 565px){
+	.detail{
+		margin-left: 0;
+	}
+	.carticon{
+		font-size: 8px !important;
+		margin-top: 5px !important;
+	}
 	.ui.very.compact.table td{
 		font-size: 14px;
 	}
@@ -407,7 +467,7 @@ div.ui.image.longy{
 		padding-left: 0px !important;
 	}
 	.ui.internally.stackable.celled.grid.ui.segment{
-    	margin-top: 0px;
+		margin-top: 0px;
 	}
 	.ui.internally.stackable.celled.grid.segment{
 		padding-right: 5px;
@@ -425,6 +485,7 @@ div.ui.image.longy{
 	}
 	#Home-nav{
 		font-size: 15px;
+		color: #f4f4f4;
 	}
 	.smallfont{
 		font-size: 7px;
@@ -438,16 +499,22 @@ div.ui.image.longy{
 		overflow-y: scroll;
 		width: 100%;
 	}
-	.top-nav-sub-group{
+	.top-nav-sub-group center{
 		width: 350px;
-		padding-left: 10px;
+		height: 30px;
+	}
+	.top-nav-sub-group{
+		margin-left: 50px;
+		overflow-y: scroll;
+		width: 60%;
+		/*padding-left: 10px;*/
 		margin-top: 20px;
-		margin-bottom: 6px;
-		text-align:left !important;
+		
 	}
 	#line0{
 		margin-top: 0px;
-		width: 65%;
+		    margin-left: 35px;
+		
 	}
 	#line0 p{
 		color: #0061a5;
@@ -459,7 +526,7 @@ div.ui.image.longy{
 		margin-top: 0px;
 	}
 	#line2{
-		margin-top: 7.5px;
+		margin-top: 0px;
 	}
 	p.tel-space{
 
@@ -477,10 +544,9 @@ div.ui.image.longy{
 	#topnav{
 		height: 50px;
 
-    position: fixed;
-    z-index: 1000;
-    left: 0px;
-
+		position: fixed;
+		z-index: 1000;
+		left: 0px;
 	}
 	.article .ui.container.large{
 		margin-top: 50px;
@@ -489,14 +555,10 @@ div.ui.image.longy{
 		font-size: 13px;
 	}
 	.lang{
-		margin-top: 20px;
-	}
-	.ui.breadcrumb{
+		margin-top: 5px !important;
 	}
 	.hideme{
 		display: none;
-	}
-	#srchres{
 	}
 	#subcatmob{
 		padding-bottom: 2px;
@@ -504,8 +566,6 @@ div.ui.image.longy{
 	.topspace{
 		padding-top: 5px;
 		padding-bottom: 5px;
-	}
-	.mobilefil{
 	}
 	#mobilesubmenu{
 		width: 150px;
@@ -519,21 +579,21 @@ div.ui.image.longy{
 	.front.content{
 		display: none;
 	}
+
 	div.ui.image.longy{
-    	overflow: scroll;
+		overflow: scroll;
 	}
 	.fastdetails{
 		position: relative;
 	}
 	.article .ui.container.large{
-    	margin-top: 10px;
+		margin-top: 10px;
 	}
 	#topnav{
 		padding-left: 0px !important;
 	}
 	.underimg{
-	    padding-top: 50px;
-
+		padding-top: 50px;
 	}
 	.amazonmenu ul li > div, .amazonmenu ul li > ul{
 		left: 0 !important;
@@ -544,5 +604,4 @@ div.ui.image.longy{
 	#sideNav{
 		display: none;
 	}
-	#Home-nav{}
 }

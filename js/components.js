@@ -186,7 +186,7 @@ function resizeClasses(){
     if ( window.screen.width < 565) {
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
-    	$('#Home-nav').text('Menu');
+    	// $('#Home-nav').text('|');
 		the3dcard(false);
 	}
 }
