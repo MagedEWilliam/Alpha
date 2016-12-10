@@ -175,18 +175,18 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
+	$('#activeNav').width($('.imactive').width()+5);
+	$('#activeNav').css({'left': $('.imactive').position().left -5,
+	 'background-color': '#f7da00'});
 	if (window.screen.width > 1200) {
 		the3dcard(true);
 	}
 	if ( window.screen.width < 1000) {
 		the3dcard(true);
     }
-    if ( window.screen.width > 1000) {
-    }
     if ( window.screen.width < 565) {
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
-    	// $('#Home-nav').text('|');
 		the3dcard(false);
 	}
 }

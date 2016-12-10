@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var cat    =  $.query.get('cat');
 	var subcat =  $.query.get('subcat');
 
+
 	var getcardurl = "../classes/class_getCard.php";
 	if(cat != ''){
 		getcardurl += $.query.toString();
@@ -11,6 +12,7 @@ $(document).ready(function(){
 	getcardurl = getcardurl.replace("lang=en", "");
 	getcardurl = getcardurl.replace("lang=ch", "");
 
+	setTimeout(function(){resizeClasses();},10);
 	if(window.location.pathname == "/ALPHA/page/products" || window.location.pathname == "/page/products"){
 		$.ajax({
 			url: getcardurl
@@ -21,7 +23,6 @@ $(document).ready(function(){
 			}
 			$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
 			resizeClasses();
-			setTimeout(function() {resizeClasses();}, 5);
 		});
 	}
 

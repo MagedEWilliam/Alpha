@@ -11,12 +11,12 @@ body.pushable>.pusher{
 }
 #activeNav{
 	position: absolute;
-	background-color: #f7da00;
+	
 	height: 10px;
 	left: -5px;
 	right: -5px;
-
-	bottom: -25px
+	bottom: -25px;
+	top: 32px !important;
 }
 .underimg{
 	width: 100%;
@@ -256,8 +256,11 @@ body.pushable>.pusher{
 	left: 0;
 	right: 0;
 }
-.top-nav-sub-group a{
+.top-nav-sub-group a.imactive{
 	color: #0061a5;
+}
+.top-nav-sub-group a{
+	color: #000;
 	margin-left: 2%;
 }
 
@@ -539,7 +542,8 @@ div.ui.image.longy{
 		width: auto !important;
 	}
 	#activeNav{	
-		top: 22px;
+		top: 20px !important;
+
 	}
 	#topnav{
 		height: 50px;
