@@ -63,8 +63,12 @@ $active_nav_name = $res;
 					<div class="ui internally stackable celled grid segment topping">
 						<?php 
 						if(get_current_route() == 'product_details'){	
-							include_once('pages/products/produc_details.php');
-						} else{
+							include_once('pages/products/product_details.php');
+						}elseif(get_current_route() == 'products'){	
+							include_once('pages/products/products.php');
+						}elseif(get_current_route() == 'cart'){	
+							include_once('pages/products/products.php');
+						}else{
 							echo $active_nav_name['content'];
 						}
 						?>

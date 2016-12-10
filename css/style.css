@@ -12,6 +12,16 @@ body.pushable>.pusher{
 
 	bottom: -25px
 }
+.underimg{
+	width: 100%;
+    z-index: 50;
+    padding-bottom: 0px;
+    padding-top: 65px;
+    height: 85px;
+    position: fixed;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
 #mysidebarmenu{
 	overflow: hidden;
 	height: 150px;
@@ -76,7 +86,7 @@ body.pushable>.pusher{
 top:45px;	
 }
 #topnav{
-	height: 75px;
+	height: 65px;
 	width: 100%;
 	background-color: #f4f4f4;
 	line-height: 1 !important;
@@ -86,7 +96,7 @@ top:45px;
     padding-left: 50px !important;
 }
 .article .ui.container.large{
-	margin-top: 50px;
+	margin-top: 35px;
 }
 
 .nopad{
@@ -411,7 +421,7 @@ div.ui.image.longy{
 	}
 	.logo img{
 		padding-top: 2px;
-		width: 45px;
+		width: 49px;
 	}
 	#Home-nav{
 		font-size: 15px;
@@ -446,10 +456,10 @@ div.ui.image.longy{
 	}
 	#line1{
 		width: 400px;
-		margin-top: 1px;
+		margin-top: 0px;
 	}
 	#line2{
-		margin-top: 8px;
+		margin-top: 7.5px;
 	}
 	p.tel-space{
 
@@ -465,7 +475,7 @@ div.ui.image.longy{
 		top: 22px;
 	}
 	#topnav{
-		height: 55px;
+		height: 50px;
 
     position: fixed;
     z-index: 1000;
@@ -482,13 +492,11 @@ div.ui.image.longy{
 		margin-top: 20px;
 	}
 	.ui.breadcrumb{
-		/*display: none;*/
 	}
 	.hideme{
 		display: none;
 	}
 	#srchres{
-		/*display: none;*/
 	}
 	#subcatmob{
 		padding-bottom: 2px;
@@ -498,7 +506,6 @@ div.ui.image.longy{
 		padding-bottom: 5px;
 	}
 	.mobilefil{
-		/*display: block;*/
 	}
 	#mobilesubmenu{
 		width: 150px;
@@ -524,4 +531,18 @@ div.ui.image.longy{
 	#topnav{
 		padding-left: 0px !important;
 	}
+	.underimg{
+	    padding-top: 50px;
+
+	}
+	.amazonmenu ul li > div, .amazonmenu ul li > ul{
+		left: 0 !important;
+	}
+	.eight.wide.column.nopad.nobox.top-nav-group{
+		height: 52px;
+	}
+	#sideNav{
+		display: none;
+	}
+	#Home-nav{}
 }

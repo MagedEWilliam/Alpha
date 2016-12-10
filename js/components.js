@@ -62,7 +62,7 @@ function modaleinfo(item){
 	$('#product_details').append('\
 		      \
 		    <div class="description">\
-		      <iframe class="ui iframe" frameborder="0" src="../pages/products/produc_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
+		      <iframe class="ui iframe" frameborder="0" src="../pages/products/product_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
 		    </div>\
 		    \
 		');
@@ -175,30 +175,20 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
-	// $('#subcatmob').hide();
 	if (window.screen.width > 1200) {
 		the3dcard(true);
-        // subcatmobalt(false);
 	}
 	if ( window.screen.width < 1000) {
 		the3dcard(true);
-        //productalt(true);
-        //sideNavalt(true);
-		// subcatmobalt(false);
     }
     if ( window.screen.width > 1000) {
-        //productalt(3);
-        //sideNavalt(true);
     }
     if ( window.screen.width < 565) {
     	$('head [name=viewport]').remove();
     	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
-    	// subcatmobalt(true);
-    	//sideNavalt(false);
-    	//productalt(false);
+    	$('#Home-nav').text('Menu');
 		the3dcard(false);
 	}
-
 }
 
 function the3dcard(i){

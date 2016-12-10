@@ -66,17 +66,12 @@
 			</div>
 			<div class="three wide column nopad nobox rtl top-nav-sub-group">
 				<div class="top-tel-sub-group">
-
-					<!-- <select class="lang smallfont hundredinwidth" id="mlang">
-						<option value="ar">عربي</option>
-						<option value="en">English</option>
-						<option value="ch">中文</option>
-					</select> -->
-					<p style="float: right; height: 100%;width: 25%;"></p>
+					
+					<p style="float: right; height: 100%;width: 20%;"></p>
 
 					<div class="ui instant dropdown lang smallfont hundredinwidth"  id="lang">
 					<input type="hidden" name="language">
-  					<i class="dropdown  icon farright"></i>
+  					<i class="dropdown icon farright"></i>
 					<div class="default text"></div>
 						<div class=" menu">
 							<div class="item" data-value="ar">
@@ -101,4 +96,5 @@
 			</div>
 		</div>
 	</div>
+	<img src="../assets/shadowdown.png" class="underimg">
 </div>

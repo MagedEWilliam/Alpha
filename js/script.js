@@ -26,7 +26,7 @@ $(document).ready(function(){
 	}
 
 	if(window.location.pathname == "/ALPHA/page/product_details" || window.location.pathname == "/page/product_details"
-	 || window.location.pathname == "/ALPHA/pages/products/produc_details.php"
+	 || window.location.pathname == "/ALPHA/pages/products/product_details.php" || window.location.pathname == "/pages/products/product_details.php"
 		){
 		if($.query.get('product_id') != ''){
 
@@ -145,7 +145,7 @@ $(document).ready(function(){
 	}
 
 	if($.query.get('lang') == 'en'){
-		$('#lang').find('.default.text').html('<i class="gb flag"></i>');
+		$('#lang').find('.default.text').html('<i class="us flag"></i>');
 	}else if($.query.get('lang') == 'ar'){
 		$('#lang').find('.default.text').html('<i class="eg flag"></i>');
 	}else if($.query.get('lang') == 'ch'){
