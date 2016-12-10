@@ -60,7 +60,7 @@ class Card
 					$sqlQuery .= " (`catproperty`.catID = " . $_GET['cat'];
 				}
 				if($key == 'subcat'){
-					$sqlQuery .= " AND (`catproperty`.categoryID = ". $_GET['subcat'];
+					$sqlQuery .= " AND (`catproperty`.valueID = ". $_GET['subcat'];
 					$sqlQuery .= ')';
 				}
 				if($key == 'cat'){

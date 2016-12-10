@@ -288,7 +288,7 @@ function populateSubmenu(data){
 		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
 				if( subsub[k]['Name'] == "Subcategory"){
-					var sublink = link + "&subcat=" + subsub[k]['categoryID'];
+					var sublink = link + "&subcat=" + subsub[k]['valueID'];
 					folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
 					mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
 				}

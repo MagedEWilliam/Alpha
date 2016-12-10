@@ -38,7 +38,7 @@ class Category
 		$res = [];
 		$sqlQuery = "SELECT `catproperty`.`categoryID`, `catproperty`.`catID`, `catproperty`.`showquick`, 
 		`property`.`ID`, `property`.`Name`, `property`.`NameAr`, `property`.`NameCh`,
-		`value`.`ID`, `value`.`value`, `value`.`valueAr`, `value`.`valueCh`
+		`value`.`ID` AS valueID, `value`.`value`, `value`.`valueAr`, `value`.`valueCh`
 		FROM `catproperty`
 		INNER JOIN `property` ON `catproperty`.`propertyID` = `property`.`ID`
 		INNER JOIN `value` ON `catproperty`.`valueID` = `value`.`ID`
