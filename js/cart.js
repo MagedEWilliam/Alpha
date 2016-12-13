@@ -99,12 +99,12 @@ function rowofcartitem(item, i){
             <h3>'+item[locale('Name')]+'</h3>\
             <p>'+item.code+'</p>\
           </td>\
-          <td>\
+          <td class="collapsing">\
             <a class="ui icon button"><i class="ui icon minus"></i></a>\
             <a class="ui icon button"><i class="ui icon plus"></i></a>\
-            <input name="qun['+i+']" type="number" value="1" min="0">\
+            <input style="width: 100px;" name="qun['+i+']" type="number" value="1" min="0">\
           </td>\
-          <td><a id="_'+item.code+'_" class="ui icon button"><i class="ui icon trash"></i></a></td>\
+          <td class="collapsing"><a id="_'+item.code+'_" class="ui icon button"><i class="ui icon trash"></i></a></td>\
         </tr>';
 }
 
