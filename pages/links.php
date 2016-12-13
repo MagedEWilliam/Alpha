@@ -14,5 +14,6 @@ for ($i=0; $i < $_GET['__level'] ; $i++) {
 <script type="text/javascript" src="<?php echo $level; ?>libs/semantic/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>libs/amazonmenu/amazonmenu.css">
 <script src="<?php echo $level; ?>libs/amazonmenu/amazonmenu.min.js"></script>
+<script type="text/javascript" src="<?php echo $level; ?>js/cart.js"></script>
 <script type="text/javascript" src="<?php echo $level; ?>js/components.js"></script>
 <script type="text/javascript" src="<?php echo $level; ?>js/script.js"></script>

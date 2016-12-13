@@ -36,12 +36,18 @@ class Card
 		";
 
 		if(count($_GET) > 0){
-			$sqlQuery .= 'WHERE ';
+			$sqlQuery .= ' WHERE ';
 		}
 
 		foreach ($_GET as $key => $value) {
 			$getcurval = explode('_', $key);
-
+          
+          if( isset($_GET['exactID']) ){
+            if( $_GET['exactID'] != '' ){
+              $sqlQuery .= ' `subcategory`.`code` = "' . $_GET['exactID'] . '"';
+            }
+          }
+          
 			if($getcurval[0] == 'filt' &&  $value != ''){
 				$explodevalu = explode(',', $value);
 				
@@ -70,9 +76,9 @@ class Card
 
 		}
 
-// echo '<pre>';
-// print_r($sqlQuery);
-// echo '</pre>';
+/* echo '<pre>';
+ print_r($sqlQuery);
+ echo '</pre>';*/
 
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {

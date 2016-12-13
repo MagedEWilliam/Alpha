@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var cat    =  $.query.get('cat');
 	var subcat =  $.query.get('subcat');
 
+    $('.carticon .detail').text(cart.count());
 
 	var getcardurl = "../classes/class_getCard.php";
 	if(cat != ''){
@@ -19,7 +20,13 @@ $(document).ready(function(){
 		}).done(function(data) {
 			data = jQuery.parseJSON(data);
 			for (var i = 0; i <= data.length-1; i++) {
-				card( $('#products'), data[i]);
+              var teclasses = '';
+              if( cart.isset(data[i].item.code) ){
+                teclasses = 'blue';
+              }else{
+                teclasses = 'disabled';
+              }
+				card( $('#products'), data[i], teclasses);
 			}
 			$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
 			resizeClasses();

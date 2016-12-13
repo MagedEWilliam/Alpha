@@ -96,9 +96,7 @@ include_once('classes/class_getLocale.php');
 					</div>
 
 					<a class="ui label carticon" href="cart?lang=<?php echo $_GET['lang']; ?>">
-						<i class="ui cart icon"></i>
-						Cart
-						<div class="detail">20</div>
+						<i class="ui cart icon"></i>Cart<div class="detail">0</div>
 					</a>
 
 				</div>

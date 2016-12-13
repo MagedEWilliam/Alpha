@@ -1,4 +1,7 @@
-function card(target, ItemProp){
+function card(target, ItemProp, classes){
+  var cartnaming = '';
+  if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
+  else{ cartnaming = getFromLocale('added')  + ' ✓';}
 	$(target).append('\
 		<div class="ui link card  longproduct">\
 			<div class="ui slide masked move up reveal longy image" >\
@@ -39,7 +42,7 @@ function card(target, ItemProp){
 				<div class="ui tiny buttons detailtable">\
 					<a class="ui yellow small button" id="'+ItemProp.item.code+'" href="product_details?lang='+$.query.get('lang')+'&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
 					<div class="or"></div>\
-					<button class="ui blue small button"><p class="goodtimes">'+getFromLocale('toCart')+'</p></button >\
+					<a class="ui '+classes+' small button"  id="cart_'+ItemProp.item.code+'" ><p class="goodtimes">'+ cartnaming +'</p></a>\
 				</div>\
 			</div>\
 			</div>\
@@ -47,9 +50,12 @@ function card(target, ItemProp){
 		</div>\
 		\
 		');
-	document.getElementById(ItemProp.item.code).addEventListener("click", function(event){
-	    event.preventDefault();
-		modaleinfo(ItemProp.item.code);
+  document.getElementById(ItemProp.item.code).addEventListener("click", function(event){
+  event.preventDefault();
+    modaleinfo(ItemProp.item.code);
+	});
+    $('#cart_' + ItemProp.item.code).on("click", function(event){
+		tothecart(ItemProp.item.code, event);
 	});
 }
 
@@ -60,7 +66,9 @@ function modaltoopen(e){
 function modaleinfo(item){
 	$('#product_details').html('');
 	$('#product_details').append('\
-		      \
+		    <div class="header"><a class="ui small button" onclick="$(\'.modal\').modal(\'hide\')">\
+              <i class="ui close icon"></i>\
+              Close</a></div>\
 		    <div class="description">\
 		      <iframe class="ui iframe" frameborder="0" src="../pages/products/product_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
 		    </div>\
@@ -175,9 +183,11 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
+  if($('.imactive').length > 0){
 	$('#activeNav').width($('.imactive').width()+5);
 	$('#activeNav').css({'left': $('.imactive').position().left -5,
 	 'background-color': '#f7da00'});
+  }
 	if (window.screen.width > 1200) {
 		the3dcard(true);
 	}
