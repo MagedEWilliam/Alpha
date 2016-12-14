@@ -3,6 +3,13 @@ $(document).ready(function(){
 	var cat    =  $.query.get('cat');
 	var subcat =  $.query.get('subcat');
 
+   $('.carticon').hover(
+      function(){
+        $('.carticon').addClass('green');
+    }, 
+      function(){
+        $('.carticon').removeClass('green');
+    });
     $('.carticon .detail').text(cart.count());
 
 	var getcardurl = "../classes/class_getCard.php";

@@ -95,12 +95,12 @@ include_once('classes/class_getLocale.php');
 						</div>
 					</div>
 
-					<a class="ui label carticon" href="cart?lang=<?php echo $_GET['lang']; ?>">
-						<i class="ui cart icon"></i>Cart<div class="detail">0</div>
+					<a class="ui label carticon" locale="cart" href="cart?lang=<?php echo $_GET['lang']; ?>">
+						<i class="ui cart icon"></i>@<div class="detail">0</div>
 					</a>
 
 				</div>
-				<div id="line0"><p>Light up your life</p></div>
+				<div id="line0"><p locale="lightUpYourLife">@</p></div>
 			</div>
 		</div>
 	</div>

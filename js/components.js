@@ -2,7 +2,7 @@ function card(target, ItemProp, classes){
   var cartnaming = '';
   if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
   else{ cartnaming = getFromLocale('added')  + ' ✓';}
-	$(target).append('\
+	var drawacard = '\
 		<div class="ui link card  longproduct">\
 			<div class="ui slide masked move up reveal longy image" >\
 				<div class="content fillitcontent">\
@@ -36,8 +36,17 @@ function card(target, ItemProp, classes){
 				<div class="ui header">'+ItemProp.item[locale('Name')]+'</div>\
 				<div class="meta">'+ItemProp.item.code+'</div>\
 			</div>\
-			<br>\
-			\
+			';
+
+			if(classes == 'blue'){
+				drawacard += '<input type="number" id="Qun_'+ItemProp.item.code+'" style="float:right;width:100px;margin-bottom:5px;" value="1">';
+				drawacard += '<label style="float:right; margin-right: 5px">×</label>';
+				drawacard += '<label style="float:left;">$000.00</label>';
+			} else {
+				drawacard += '<br style="margin-bottom:5px;">';
+			}
+
+			drawacard += '\
 			<div class=" getdown">\
 				<div class="ui tiny buttons detailtable">\
 					<a class="ui yellow small button" id="'+ItemProp.item.code+'" href="product_details?lang='+$.query.get('lang')+'&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
@@ -48,13 +57,16 @@ function card(target, ItemProp, classes){
 			</div>\
 			</div>\
 		</div>\
-		\
-		');
-  document.getElementById(ItemProp.item.code).addEventListener("click", function(event){
-  event.preventDefault();
-    modaleinfo(ItemProp.item.code);
+		';
+
+	$(target).append(drawacard);
+
+	$('#' + ItemProp.item.code).on("click", function(event){
+		event.preventDefault();
+		modaleinfo(ItemProp.item.code);
 	});
-    $('#cart_' + ItemProp.item.code).on("click", function(event){
+
+	$('#cart_' + ItemProp.item.code).on("click", function(event){
 		tothecart(ItemProp.item.code, event);
 	});
 }

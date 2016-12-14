@@ -14,7 +14,8 @@ if( isset($_GET['compo']) ){
   echo '</head>
 	<body style="height:100%;">
 	<div class="ui " style="height: 100%;" >
-					<div class="ui internally stackable nomarg celled grid ui segment" style="height:100%;">';
+					<div class="ui internally stackable nomarg celled grid ui segment"
+                    style="height:100%;">';
 
   include_once($level.'classes/class_getLocale.php');
 }
@@ -23,26 +24,37 @@ if( isset($_GET['compo']) ){
   var Glocale = <?php print_r(geLocale()) ?>;
 </script>
 <div class="row">
-  <div class="ten wide column">
+  <div class="eleven wide column">
 
-    <h4 class="goodtimes ">Items details</h4>
+    <h4 class="goodtimes " locale="itemsDetails">@</h4>
     <table class="ui very compact striped  table" id="product_details">
       <tbody>
         <script>echoCart();</script>
       </tbody>
     </table>
 
-
+    <br>
 
   </div>
-  <div class="six wide column">
-    <h4 class="goodtimes ">total</h4>
-
+  <div class="five wide column" style="position: relative;">
+    <!-- <h4 class="goodtimes" locale="total">@</h4> -->
+    <center>
+      <a class="ui massive button blue">
+        <i class="ui icon paypal"></i>
+        Proceed to Paypal
+      </a>
+    </center>
+    <br>
   </div>
 
 </div>
+
 <?php
   if( isset($_GET['compo']) ){
-    echo '</div></div></body></html>';
+    echo '\
+          </div>\
+        </div>\
+      </body>\
+    </html>';
   }
 ?>
