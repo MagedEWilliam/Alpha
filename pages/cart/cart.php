@@ -41,7 +41,7 @@ if( isset($_GET['compo']) ){
         <center>
           <button type="submit" class="ui massive button blue">
             <i class="ui icon paypal"></i>
-            Proceed to Paypal
+            Checkout with Paypal
           </button>
         </center>
         <br>

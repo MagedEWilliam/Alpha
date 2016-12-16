@@ -22,14 +22,17 @@ $exec->setPayerId($payerId);
 echo '<pre>';
 try{
 	$result = $payment->execute($exec, $paypal);
-	print_r($result);
+	
+	print_r(gettype($result) );
+
+		print_r($payment );
+
+	
 }catch(Exception $e){
 	$data = json_decode($e->getData());
-	print_r($data->message);
-	die();
+	print_r( $data->message );
 }
 echo '</pre>';
-echo 'Payment made, Thanks.';
 
 //save to db.
 //present user with signup with thier email pre-filled.

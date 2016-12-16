@@ -68,9 +68,12 @@ $active_nav_name = $res;
 							include_once('pages/products/products.php');
 						}elseif(get_current_route() == 'cart'){	
 							include_once('pages/cart/cart.php');
+						}elseif(get_current_route() == 'pay'){	
+							require_once('_pay.php');
 						}else{
 							echo $active_nav_name['content'];
 						}
+						// echo get_current_route();
 						?>
 				</div>
 			</div>

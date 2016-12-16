@@ -173,3 +173,7 @@ function tothecart(item, e){
   $('.carticon').addClass('green');
   cart.add(item, 'fromProduct');
 }
+
+if($.query.get('success') == "true" && $.query.get('paymentId') !='' && $.query.get('token') !='' && $.query.get('PayerID') !=''){
+  cart.clear();
+}

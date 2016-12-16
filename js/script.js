@@ -5,7 +5,9 @@ $(document).ready(function(){
 
    $('.carticon').hover(
       function(){
-        $('.carticon').addClass('green');
+      	if( $('.carticon .detail').text() != 0 ){
+        	$('.carticon').addClass('green');
+    	}
     }, 
       function(){
         $('.carticon').removeClass('green');
