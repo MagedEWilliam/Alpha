@@ -1,6 +1,6 @@
 function rowofcartitem(item, i, target){
   $(target).append('<tr id="__'+item.code+'__">\
-  <input type="hidden" id="'+item.code+'">\
+  <input type="hidden" value="'+item.code+'" id="'+item.code+'" name="item_code['+i+']">\
   <td class="collapsing">\
     <img src="'+item.image+'" width="100"></td>\
   <td>\
