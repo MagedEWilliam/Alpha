@@ -6,7 +6,7 @@ function get_current_route(){
 	$what_you_want = $path['basename'];
 	return $what_you_want;
 }
-
+//Hey brother
 function getContentOf(){
 	$page      = get_current_route();
 	$db        = Database::getInstance();
