@@ -2,6 +2,10 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
+.ui.segment{
+	border-radius:0 !important;
+	border: 1px;
+}
 .ui.link.card{
 	border-radius: 0;
 	box-shadow: none;
