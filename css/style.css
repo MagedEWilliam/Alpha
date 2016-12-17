@@ -6,6 +6,9 @@ body.pushable>.pusher{
 	border-radius: 0;
 	box-shadow: none;
 }
+.addr{
+	width: 49% !important;
+}
 .ui.cards>.card>.content{
 	border-top:1px solid rgb(208, 209, 210);
 }
@@ -64,7 +67,7 @@ body.pushable>.pusher{
 	margin-top: -300px !important;
 }
 #product_details{
-	height: 80%;
+	/*height: 80%;*/
 }
 .image.content, .description, .iframe{
 	display: block;

@@ -40,6 +40,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     
     echo '<br>';
     print_r( $payment->id );
+    print_r( hash('sha512', $payment->id) );
     print_r( $payment->intent );
     print_r( $payment->state );
     print_r( $payment->cart );

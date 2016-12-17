@@ -44,7 +44,24 @@ if( isset($_GET['compo']) ){
             Checkout with Paypal
           </button>
         </center>
-        <br>
+
+        <div class="ui divider"></div>
+
+        <div class="ui top attached tabular menu">
+          <a onclick="$('iframe').height(200);" class="item active" data-tab="first">Login</a>
+          <a onclick="$('iframe').height(500);" class="item" data-tab="second">Sign up</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="first">
+          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/login_part.php"></iframe>
+        </div>
+
+        <div class="ui bottom attached tab segment" data-tab="second">
+          <iframe style="width: 100%;" height="500" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
+        </div>
+
+        <script type="text/javascript">
+          $('.menu .item').tab();
+        </script>
       </div>
 
     </form>
