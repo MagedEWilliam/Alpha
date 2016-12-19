@@ -54,7 +54,7 @@ $active_nav_name = $res;
 	<title><?php echo $active_nav_name[_locale('Name')] ?></title>
 	<?php $_GET['__level']=1; include('pages/links.php') ?>
 </head>
-<body id="example" class="layouts pushable">
+<body id="example" class="layouts pushable" style="overflow-y: scroll;">
 	<?php include_once('pages/topnav/topnav.php'); ?>
 	<div class="pusher">
 		<div class="full height">

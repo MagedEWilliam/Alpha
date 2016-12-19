@@ -145,9 +145,7 @@ $(document).ready(function(){
 			url: themrurl
 		}).done(function(data) {
 			data = jQuery.parseJSON(data);
-			 // for (var x = 0; x <= 5; x++) {
-				populateSubmenu(data);
-			 // }
+			populateSubmenu(data);
 			amazonmenu.init({menuid: 'mysidebarmenu'});
 		});
 
@@ -162,10 +160,13 @@ $(document).ready(function(){
 	}
 
 	if($.query.get('lang') == 'en'){
+		$('.ui.buttons .or:before').css({'content':'or'});
 		$('#lang').find('.default.text').html('<i class="us flag"></i>');
 	}else if($.query.get('lang') == 'ar'){
+		$('.ui.buttons .or:before').css({'content':'أو'});
 		$('#lang').find('.default.text').html('<i class="eg flag"></i>');
 	}else if($.query.get('lang') == 'ch'){
+		$('.ui.buttons .or:before').css({'content':'要么'});
 		$('#lang').find('.default.text').html('<i class="cn flag"></i>');
 	}
 

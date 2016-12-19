@@ -8,9 +8,13 @@ function rowofcartitem(item, i, target){
     <p>'+item.code+'</p>\
   </td>\
   <td class="collapsing">\
-    <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
-    <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
-    <input style="width: 100px;height:30px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+    \
+    <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
+      <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+      <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
+      <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
+    </div>\
+    \
     <a id="_'+item.code+'_" style="margin-left:10px;" class="ui icon button"><i class="ui icon trash"></i></a>\
   </td>\
 </tr>');
@@ -97,7 +101,7 @@ var cart = {
           $('.carticon .detail').text(cart.count());
           $('#cart_' + data[0].item.code + ' p').text( getFromLocale('added') + ' ✓' );
 
-          $('#Qun_' + data[0].item.code).hide();
+          $('#Qun_' + data[0].item.code ).hide();
 
           $('#cart_' + data[0].item.code).removeClass('blue');
           $('#cart_' + data[0].item.code).addClass('disabled');
@@ -117,10 +121,10 @@ var cart = {
     if ( cart.isset(item.code) ){
       var getting = cart.get('cart');
       
-      var initqun = $('#Qun_' + item.code).val();
+      var initqun = $('#Qun_' + item.code + ' input').val();
       if(initqun < 1){
         item.qun = 1;
-        $('#Qun_' + item.code).val(1);
+        $('#Qun_' + item.code + ' input').val(1);
       }else{
         item.qun = initqun;
       }

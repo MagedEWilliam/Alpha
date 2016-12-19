@@ -6,6 +6,18 @@ body.pushable>.pusher{
 	border-radius: 0;
 	box-shadow: none;
 }
+.ui.grid.segment{
+	border-radius: 0;
+}
+.ui.celled.grid, .ui.celled.grid>.row{
+	box-shadow:none;
+}
+.ui.grid.segment{
+	border: 1px solid #fff !important;
+}
+.top-nav-sub-group a:hover {
+	color: #2185D0;
+}
 .addr{
 	width: 49% !important;
 }
@@ -66,9 +78,10 @@ body.pushable>.pusher{
 #product_details.modal{
 	margin-top: -300px !important;
 }
-#product_details{
-	/*height: 80%;*/
+#product_details.modal{
+	height: 80%;
 }
+
 .image.content, .description, .iframe{
 	display: block;
 	width: 100%;
@@ -118,7 +131,7 @@ body.pushable>.pusher{
 #topnav{
 	height: 65px;
 	width: 100%;
-	background-color: #f4f4f4;
+	background-color: rgba(244, 244, 244, 0.96);
 	line-height: 1 !important;
 	position: fixed;
 	z-index: 1000;

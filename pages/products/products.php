@@ -36,6 +36,9 @@ function _subcat($itemID){
 	<div class="filterArea" style="width: 100%;">
 		
 	</div>
+	<br>
+	<br>
+	<br>
 </div>
 <div class="thirteen wide column " id="product">
 
@@ -84,7 +87,7 @@ function _subcat($itemID){
 
 	</div>
 	<br>
-	<div class="ui divider"></div>
+	
 	<div id="productfooter">
 	</div>
 	<div id="product_details" class="ui modal">

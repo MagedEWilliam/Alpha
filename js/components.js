@@ -4,7 +4,7 @@ function card(target, ItemProp, classes){
   else{ cartnaming = getFromLocale('added')  + ' ✓';}
 	var drawacard = '\
 		<div class="ui link card  longproduct">\
-			<div class="ui slide masked move up reveal longy image" >\
+			<div class="ui slide masked move up reveal image" >\
 				<div class="content fillitcontent">\
 				<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
 			</div>\
@@ -39,12 +39,16 @@ function card(target, ItemProp, classes){
 			';
 
 			if(classes == 'blue'){
-				drawacard += '<input type="number" id="Qun_'+ItemProp.item.code+'" style="float:right;width:100px;margin-bottom:5px;" value="1">';
-				drawacard += '<label style="float:right; margin-right: 5px">×</label>';
-				drawacard += '<label style="float:left;">$000.00</label>';
+				drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:140px;height:25px;margin-bottom:5px;">\
+									<input type="text" value="1" style="width:60px;" lass="ui tiny">\
+									<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
+									<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
+								</div>';
 			} else {
 				drawacard += '<br style="margin-bottom:5px;">';
 			}
+			
+			drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$000.00</label>';
 
 			drawacard += '\
 			<div class=" getdown">\
@@ -68,6 +72,21 @@ function card(target, ItemProp, classes){
 
 	$('#cart_' + ItemProp.item.code).on("click", function(event){
 		tothecart(ItemProp.item.code, event);
+	});
+
+	var imtcod = ItemProp.item.code;
+	$('#Qun_'+imtcod+' div.minusOne').on('click', function(){
+		var current = $( $('#Qun_'+imtcod+' input') ).val();
+		if(current > 1){
+			$( $('#Qun_'+imtcod+' input') ).val(Number(current)-1);
+			qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
+		}
+	});
+
+	$('#Qun_'+imtcod+' div.addOne').on('click', function(){
+		var current = $( $('#Qun_'+imtcod+' input') ).val();
+		$( $('#Qun_'+imtcod+' input') ).val(Number(current)+1);
+		qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
 	});
 }
 
@@ -290,6 +309,8 @@ function minisubmenu(){
 	});
 }
 
+var subcatdups = [];
+
 function populateSubmenu(data){
 	var local = $.query.get('lang');
 	for (var i = 0; i <= data.length-1; i++) {
@@ -309,10 +330,14 @@ function populateSubmenu(data){
 
 		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
+				
+				var issubdub = issubdubs( subcatdups, subsub[k]['valueID'], k );
 				if( subsub[k]['Name'] == "Subcategory"){
-					var sublink = link + "&subcat=" + subsub[k]['valueID'];
-					folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
-					mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
+					if(issubdub){
+						var sublink = link + "&subcat=" + subsub[k]['valueID'];
+						folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
+						mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
+					}
 				}
 			}
 		}
@@ -321,6 +346,17 @@ function populateSubmenu(data){
 	var heighty = i * 30;
 	$('#sidebarmenu').css({'height': heighty + 'px'});
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
+}
+
+function issubdubs(subcatdups, compa, k){
+	var issubdubs = true;
+	for (var d = 0; d < subcatdups.length; d++) {
+		if(subcatdups[d] == compa){
+			issubdubs = false;
+		}
+	}
+	subcatdups[k] = compa;
+	return issubdubs;
 }
 
 function refreshLocale(){

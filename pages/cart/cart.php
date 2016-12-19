@@ -48,14 +48,21 @@ if( isset($_GET['compo']) ){
         <div class="ui divider"></div>
 
         <div class="ui top attached tabular menu">
-          <a onclick="$('iframe').height(200);" class="item active" data-tab="first">Login</a>
-          <a onclick="$('iframe').height(500);" class="item" data-tab="second">Sign up</a>
+          <a class="item active" data-tab="first">Track order</a>
+          <a class="item" data-tab="second">Login</a>
+          <a class="item" data-tab="third">Sign up</a>
+          
         </div>
+
         <div class="ui bottom attached tab segment active" data-tab="first">
-          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/login_part.php"></iframe>
+          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
         </div>
 
         <div class="ui bottom attached tab segment" data-tab="second">
+          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/login_part.php"></iframe>
+        </div>
+
+        <div class="ui bottom attached tab segment" data-tab="third">
           <iframe style="width: 100%;" height="500" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
         </div>
 
