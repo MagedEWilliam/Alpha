@@ -1,6 +1,4 @@
 <?php
-
-
 if( isset($_GET['compo']) ){
   $level = '';
   for ($i=0; $i < $_GET['__level'] ; $i++) { 
@@ -38,12 +36,20 @@ if( isset($_GET['compo']) ){
       </div>
       <div class="five wide column" style="position: relative;">
         <!-- <h4 class="goodtimes" locale="total">@</h4> -->
+        <div class="ui segment">
+          
+
+          <h4 class="floatleft notopmargin">Total:</h4>
+          <h4 class="floatright notopmargin" id="subtotal">$0</h4>
+
+          <br>
         <center>
-          <button type="submit" class="ui massive button blue">
+          <button type="submit" class="ui massive button blue" locale="checkoutwithpaypal">
             <i class="ui icon paypal"></i>
-            Checkout with Paypal
+            @
           </button>
         </center>
+        </div>
 
         <div class="ui divider"></div>
 

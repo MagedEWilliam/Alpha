@@ -39,16 +39,16 @@ function card(target, ItemProp, classes){
 			';
 
 			if(classes == 'blue'){
-				drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:140px;height:25px;margin-bottom:5px;">\
-									<input type="text" value="1" style="width:60px;" lass="ui tiny">\
+				drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:155px;height:25px;margin-bottom:5px;">\
+									<input type="number" value="1" style="width:60px;" lass="ui tiny">\
 									<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
 									<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
 								</div>';
 			} else {
-				drawacard += '<br style="margin-bottom:5px;">';
+				
 			}
 			
-			drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$000.00</label>';
+			drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price)+'</label>';
 
 			drawacard += '\
 			<div class=" getdown">\
@@ -215,8 +215,8 @@ function nativeSelect(cls, id){
 
 function resizeClasses(){
   if($('.imactive').length > 0){
-	$('#activeNav').width($('.imactive').width()+5);
-	$('#activeNav').css({'left': $('.imactive').position().left -5,
+	$('#activeNav').css('width', (Number( $('.imactive').css('width').replace('px', '') ) ) + 'px' );
+	$('#activeNav').css({'left': $('.imactive').position().left,
 	 'background-color': '#f7da00'});
   }
 	if (window.screen.width > 1200) {

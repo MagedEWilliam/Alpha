@@ -95,8 +95,11 @@ include_once('classes/class_getLocale.php');
 						</div>
 					</div>
 
-					<a class="ui label carticon" locale="cart" href="cart?lang=<?php echo $_GET['lang']; ?>">
-						<i class="ui cart icon"></i>@<div class="detail">0</div>
+
+					<a class="ui  image label carticon" style="padding-left: 0!important;" locale="guest" href="cart?lang=<?php echo $_GET['lang']; ?>">
+						<div class="detail" style="margin-right: 0px;margin-left: 9px;border-radius:0;">0</div>
+						<i class="ui cart icon"></i>
+						@
 					</a>
 
 				</div>

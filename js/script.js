@@ -3,6 +3,16 @@ $(document).ready(function(){
 	var cat    =  $.query.get('cat');
 	var subcat =  $.query.get('subcat');
 
+	$(window).keydown(function(event){
+		if(event.keyCode == 13) {
+			event.preventDefault();
+			return false;
+		}
+	});
+
+	updateSubtotal();
+	refreshLocale();
+
    $('.carticon').hover(
       function(){
       	if( $('.carticon .detail').text() != 0 ){

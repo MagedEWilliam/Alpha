@@ -1,9 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../../libs/semantic/semantic.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/style.css">
-<script type="text/javascript" src="../../libs/jquery.min.js"></script>
-<script type="text/javascript" src="../../libs/semantic/semantic.min.js"></script>
-
-<form method="post" action="#" class="ui form">
+<form method="POST" action="#" class="ui segment form" style="width:400px; max-width: 400px;margin-top:0px;">
 	<div class="field">
 		<label>Email:</label>
 		<input type="text" name="uname">
@@ -14,8 +9,8 @@
 		<input type="password" name="uname">
 	</div>
 	
-	<button class="ui button">
+	<a class="ui button">
 		<i class="ui icon unlock alternate"></i>
 		Login
-	</button>
+	</a>
 </form>

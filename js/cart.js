@@ -7,6 +7,13 @@ function rowofcartitem(item, i, target){
     <h3>'+item[locale('Name')]+'</h3>\
     <p>'+item.code+'</p>\
   </td>\
+  <td class="collapsing paddingLefttozero paddingRighttozero">\
+  $\
+  </td>\
+  <td class="collapsing paddingLefttozero">\
+  '+Number(item.price)+'\
+  <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
+  </td>\
   <td class="collapsing">\
     \
     <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
@@ -30,22 +37,22 @@ function rowofcartitem(item, i, target){
     $('#_'+item.code+'_').removeClass ('red');
   });
 
-  $( $('#__'+item.code+'__ input')[1] ).on('change', function(e){
+  $( $('#__'+item.code+'__ input')[2] ).on('change', function(e){
     qunChanges(item.code, e.currentTarget);
   });
 
   $('#__'+item.code+'__ .minusOne').on('click', function(){
-    var current = $( $('#__'+item.code+'__ input')[1] ).val();
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
     if(current > 1){
-      $( $('#__'+item.code+'__ input')[1] ).val(Number(current)-1);
-      qunChanges(item.code, $('#__'+item.code+'__ input')[1] );
+      $( $('#__'+item.code+'__ input')[2] ).val(Number(current)-1);
+      qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
     }
   });
 
   $('#__'+item.code+'__ .addOne').on('click', function(){
-    var current = $( $('#__'+item.code+'__ input')[1] ).val();
-    $( $('#__'+item.code+'__ input')[1] ).val(Number(current)+1);
-    qunChanges(item.code, $('#__'+item.code+'__ input')[1] );
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
+    $( $('#__'+item.code+'__ input')[2] ).val(Number(current)+1);
+    qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
   });
 
 }
@@ -58,6 +65,23 @@ function echoCart(){
     rowofcartitem(thecart[i], i, '#product_details tbody');
   }
 }
+
+
+function updateSubtotal(){
+  var subtotal = 0;
+
+  $('#product_details tr').each(function(key, elm){
+    var elem = $(elm).find('input');
+    var price = $(elem[1]).val();
+    var qun = $(elem[2]).val();
+    subtotal += price * qun;
+
+    $('#subtotal').text( '$' + subtotal );
+  });
+
+}
+
+$(window).on('click keydown', updateSubtotal);
 
 var iteminfo = {
   get: function(key){
@@ -177,7 +201,6 @@ function tothecart(item, e){
   $('.carticon').addClass('green');
   cart.add(item, 'fromProduct');
 }
-
 if($.query.get('success') == "true" && $.query.get('paymentId') !='' && $.query.get('token') !='' && $.query.get('PayerID') !=''){
   cart.clear();
 }

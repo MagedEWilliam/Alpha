@@ -27,7 +27,8 @@ class Card
 		`subcategory`.`Name`   ,
 		`subcategory`.`NameAr` ,
 		`subcategory`.`NameCh` ,
-		`subcategory`.`image`  
+		`subcategory`.`image` ,
+		`subcategory`.`price`  
 
 		FROM `catproperty` 
 

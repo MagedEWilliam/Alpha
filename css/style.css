@@ -2,9 +2,21 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
+.detail{
+	margin-left: 0 !important;
+}
+.toowide{
+	width:100% !important;
+}
 .ui.link.card{
 	border-radius: 0;
 	box-shadow: none;
+}
+.paddingLefttozero{
+	padding-left: 0 !important;
+}
+.paddingRighttozero{
+	padding-right: 0 !important;
 }
 .ui.grid.segment{
 	border-radius: 0;
@@ -36,21 +48,32 @@ body.pushable>.pusher{
 	background-color: #e0e1e2;
 }
 .carticon{
-	margin-top: 20px !important;
-}
+	margin-left: 0 !important;
+	margin-top: 15px !important;
+	float: left;
 
+	/*border-radius: 5px 5px 0 0 !important;*/
+	/*width: 105px;*/
+}
+.loginfo{
+	text-align:center;
+	float: left;
+	border-radius: 0 0 5px 5px !important;
+	margin-left: 0 !important;
+	width: 105px;
+}
 .top-tel-sub-group{
 	width: 20%;
 	float: right;
 }
 #activeNav{
 	position: absolute;
-	
+	min-width: 30px;
 	height: 10px;
 	left: -5px;
 	right: -5px;
 	bottom: -25px;
-	top: 32px !important;
+	top: 30px !important;
 }
 .underimg{
 	width: 100%;
@@ -86,6 +109,9 @@ body.pushable>.pusher{
 	display: block;
 	width: 100%;
 	height: 100%;
+}
+.notopmargin{
+	margin-top: 0 !important;
 }
 .floatright{
 	float: right !important;
@@ -263,7 +289,7 @@ body.pushable>.pusher{
 	right: 0 !important;
 }
 .hundredinwidth{
-	margin-top: 31px;
+	margin-top: 22px;
 	float: right;
 }
 
@@ -389,7 +415,9 @@ div.ui.image.longy{
 	float: right;
 	height: 100%;
 	width: 20%;
+	margin:1 !important;
 }
+
 
 @media only screen and (min-width: 1280px){
 	.ui.container {
@@ -467,7 +495,7 @@ div.ui.image.longy{
 
 @media only screen and (max-width: 999px){
 	.carticon{
-		float: right;
+		float: left;
 		margin-top: 0px !important; 
 		margin-right: 1px !important; 
 	}
@@ -476,6 +504,7 @@ div.ui.image.longy{
 	}
 	.mrspace{
 		width: 10%;
+
 	}
 }
 @media only screen and (max-width: 900px){
@@ -488,12 +517,11 @@ div.ui.image.longy{
 	.ui.link.card{
 		width: 100% !important;
 	}
-	.detail{
-		margin-left: 0;
-	}
-	.carticon{
+	
+
+	.carticon, .loginfo{
 		font-size: 8px !important;
-		margin-top: 5px !important;
+		margin-top: 0px !important;
 	}
 	.ui.very.compact.table td{
 		font-size: 14px;
@@ -541,7 +569,7 @@ div.ui.image.longy{
 		width: 100%;
 	}
 	.top-nav-sub-group center{
-		width: 350px;
+		/*width: 350px;*/
 		height: 30px;
 	}
 	.top-nav-sub-group{
@@ -597,7 +625,7 @@ div.ui.image.longy{
 		font-size: 13px;
 	}
 	.lang{
-		margin-top: 5px !important;
+		margin-top: 0px !important;
 	}
 	.hideme{
 		display: none;

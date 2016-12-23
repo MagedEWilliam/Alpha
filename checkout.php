@@ -183,7 +183,7 @@ foreach ($_POST['item_code'] as $key => $value) {
 	$product = $itemFromDB[0]['item'][$cartitem->_locale('Name')];
 	$subcat = $itemFromDB[0]['item'][$cartitem->_locale('CatName')];
 	$qun     = $_POST['qun'][$key];
-	$price   = 2.5;
+	$price   = $_POST['price'][$key];
 	$total   += $price * $qun;
 	$discription = 'Item code: '.$_POST['item_code'][$key];
 	$url = SITE_URL.'page/product_details?lang='.$_GET['lang'].'&product_id='.$_POST['item_code'][$key];
