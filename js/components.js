@@ -1,67 +1,67 @@
 function card(target, ItemProp, classes){
-  var cartnaming = '';
-  if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
-  else{ cartnaming = getFromLocale('added')  + ' ✓';}
+	var cartnaming = '';
+	if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
+	else{ cartnaming = getFromLocale('added')  + ' ✓';}
 	var drawacard = '\
-		<div class="ui link card  longproduct">\
-			<div class="ui slide masked move up reveal image" >\
-				<div class="content fillitcontent">\
-				<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
-			</div>\
-			\
-			<div class="back hidden content heigh" >\
-				<div class="fastdetails">\
-						<table class="ui very compact striped unstackable table " style="margin-bottom:0;">\
-							<tbody>\
-								\
-								<tr>\
-									<td class="rtl slpad rpad">\
-										<img src="'+ItemProp.item.image+'"  class="thumpimg">\
-									</td>\
-									<td  class="slpad content">\
-										<b>'+ItemProp.item[locale('Name')]+'</b>\
-									<br>\
-										<p>'+ItemProp.item.code+'</p>\
-									</td>\
-								</tr>'
-								+trtd(ItemProp)
-								+
-							'</tbody>\
-						</table>\
-				</div>\
-			</div>\
-			</div>\
-			<div class="visible content parento">\
-				<div class=" getdown">\
-				<div class="ui header">'+ItemProp.item[locale('Name')]+'</div>\
-				<div class="meta">'+ItemProp.item.code+'</div>\
-			</div>\
-			';
+	<div class="ui link card  longproduct">\
+	<div class="ui slide masked move up reveal image" >\
+	<div class="content fillitcontent">\
+	<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
+	</div>\
+	\
+	<div class="back hidden content heigh" >\
+	<div class="fastdetails">\
+	<table class="ui very compact striped unstackable table " style="margin-bottom:0;">\
+	<tbody>\
+	\
+	<tr>\
+	<td class="rtl slpad rpad">\
+	<img src="'+ItemProp.item.image+'"  class="thumpimg">\
+	</td>\
+	<td  class="slpad content">\
+	<b>'+ItemProp.item[locale('Name')]+'</b>\
+	<br>\
+	<p>'+ItemProp.item.code+'</p>\
+	</td>\
+	</tr>'
+	+trtd(ItemProp)
+	+
+	'</tbody>\
+	</table>\
+	</div>\
+	</div>\
+	</div>\
+	<div class="visible content parento">\
+	<div class=" getdown">\
+	<div class="ui header">'+ItemProp.item[locale('Name')]+'</div>\
+	<div class="meta">'+ItemProp.item.code+'</div>\
+	</div>\
+	';
 
-			if(classes == 'blue'){
-				drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:155px;height:25px;margin-bottom:5px;">\
-									<input type="number" value="1" style="width:60px;" lass="ui tiny">\
-									<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
-									<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
-								</div>';
-			} else {
-				
-			}
-			
-			drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price)+'</label>';
+	if(classes == 'blue'){
+		drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:155px;height:25px;margin-bottom:5px;">\
+		<input type="number" value="1" style="width:60px;" lass="ui tiny">\
+		<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
+		<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
+		</div>';
+	} else {
 
-			drawacard += '\
-			<div class=" getdown">\
-				<div class="ui tiny buttons detailtable">\
-					<a class="ui yellow small button" id="'+ItemProp.item.code+'" href="product_details?lang='+$.query.get('lang')+'&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
-					<div class="or"></div>\
-					<a class="ui '+classes+' small button"  id="cart_'+ItemProp.item.code+'" ><p class="goodtimes">'+ cartnaming +'</p></a>\
-				</div>\
-			</div>\
-			</div>\
-			</div>\
-		</div>\
-		';
+	}
+
+	drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price)+'</label>';
+
+	drawacard += '\
+	<div class=" getdown">\
+	<div class="ui tiny buttons detailtable">\
+	<a class="ui yellow small button" id="'+ItemProp.item.code+'" href="product_details?lang='+$.query.get('lang')+'&product_id='+ ItemProp.item.code +'"><p class="goodtimes">'+getFromLocale('details')+'</p></a>\
+	<div class="or"></div>\
+	<a class="ui '+classes+' small button"  id="cart_'+ItemProp.item.code+'" ><p class="goodtimes">'+ cartnaming +'</p></a>\
+	</div>\
+	</div>\
+	</div>\
+	</div>\
+	</div>\
+	';
 
 	$(target).append(drawacard);
 
@@ -97,13 +97,13 @@ function modaltoopen(e){
 function modaleinfo(item){
 	$('#product_details').html('');
 	$('#product_details').append('\
-		    <div class="header"><a class="ui small button" onclick="$(\'.modal\').modal(\'hide\')">\
-              <i class="ui close icon"></i>\
-              Close</a></div>\
-		    <div class="description">\
-		      <iframe class="ui iframe" frameborder="0" src="../pages/products/product_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
-		    </div>\
-		    \
+		<div class="header"><a class="ui small button" onclick="$(\'.modal\').modal(\'hide\')">\
+		<i class="ui close icon"></i>\
+		Close</a></div>\
+		<div class="description">\
+		<iframe class="ui iframe" frameborder="0" src="../pages/products/product_details.php?lang='+$.query.get('lang')+'&product_id='+ item +'&compo=1&__level=2">\
+		</div>\
+		\
 		');
 	$('#product_details').modal({transition: 'fade up'});
 	$('#product_details').modal('show');
@@ -175,17 +175,25 @@ function trtd(prop){
 function categorylist(text, url, i){
 	var ret = 
 	'<div class="item">\
-		<div class="content">\
-			<a class="header popupmeup_'+i+'" href="'+url+'">'+text+'</a>\
-			<div class="ui fluid popup right center transition hidden tailcover">\
-				<div class="ui grid" style="width: 400px;height:100px;z-index:800">\
-					<div class="column">1</div>\
-				</div>\
-				<img class="tail" src="assets/tip.png"/>\
-			</div>\
-		</div>\
+	<div class="content">\
+	<a class="header popupmeup_'+i+'" href="'+url+'">'+text+'</a>\
+	<div class="ui fluid popup right center transition hidden tailcover">\
+	<div class="ui grid" style="width: 400px;height:100px;z-index:800">\
+	<div class="column">1</div>\
+	</div>\
+	<img class="tail" src="assets/tip.png"/>\
+	</div>\
+	</div>\
 	</div>';
 	return ret;
+}
+
+function nfolders(target, text, link, i, cls){
+	$(target).append( '<td id="sub_'+i+'">\
+		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
+		</td>');
+
+	return '#sub_' + i;
 }
 
 function folders(target, text, link, i, cls){
@@ -204,30 +212,30 @@ function mfolders(target, text, link, i, cls){
 
 function nativeSelect(cls, id){
 	var ret = '\
-		<select class="'+cls+'" id="'+id+'">\
-		    <option value="ar">Arabic</option>\
-		    <option value="en">English</option>\
-		    <option value="ch">Chinese</option>\
-		</select>\
+	<select class="'+cls+'" id="'+id+'">\
+	<option value="ar">Arabic</option>\
+	<option value="en">English</option>\
+	<option value="ch">Chinese</option>\
+	</select>\
 	';
 	return ret;
 }
 
 function resizeClasses(){
-  if($('.imactive').length > 0){
-	$('#activeNav').css('width', (Number( $('.imactive').css('width').replace('px', '') ) ) + 'px' );
-	$('#activeNav').css({'left': $('.imactive').position().left,
-	 'background-color': '#f7da00'});
-  }
+	if($('.imactive').length > 0){
+		$('#activeNav').css('width', (Number( $('.imactive').css('width').replace('px', '') ) ) + 'px' );
+		$('#activeNav').css({'left': $('.imactive').position().left,
+			'background-color': '#f7da00'});
+	}
 	if (window.screen.width > 1200) {
 		the3dcard(true);
 	}
 	if ( window.screen.width < 1000) {
 		the3dcard(true);
-    }
-    if ( window.screen.width < 565) {
-    	$('head [name=viewport]').remove();
-    	$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
+	}
+	if ( window.screen.width < 565) {
+		$('head [name=viewport]').remove();
+		$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
 		the3dcard(false);
 	}
 }
@@ -239,27 +247,27 @@ function the3dcard(i){
 			$('.back').addClass('hidden content');
 		}
 		$('.front').show();
-    }else{
+	}else{
 		if(haschi > 0){
 			$('.back').removeClass('hidden content');
 		}
-	 	$('.front').hide();
-    }
+		$('.front').hide();
+	}
 }
 
 function productalt(i){
 	if(i == true){
 		$('#product').removeClass('thirteen wide column ');
-        $('#product').removeClass('ten');
-        $('#product').removeClass('sixteen');
-        $('#product').addClass('ten wide column');
+		$('#product').removeClass('ten');
+		$('#product').removeClass('sixteen');
+		$('#product').addClass('ten wide column');
 	}else if(i == false){
 		$('#product').removeClass('ten');
-    	$('#product').removeClass('ten wide column');
-        $('#product').addClass('sixteen wide column');
+		$('#product').removeClass('ten wide column');
+		$('#product').addClass('sixteen wide column');
 	}else if(i == 3){
-    	$('#product').removeClass('ten wide column');
-        $('#product').addClass('thirteen wide column');
+		$('#product').removeClass('ten wide column');
+		$('#product').addClass('thirteen wide column');
 	}
 }
 
@@ -324,7 +332,7 @@ function populateSubmenu(data){
 		
 		$(nowfolder).append('<ul id="sub__'+i+'">');
 		
-			
+
 		folders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
 		mfolders('#' + 'sub_m_' + i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_m-1", '');
 
@@ -348,6 +356,39 @@ function populateSubmenu(data){
 	if(local != 'en'){$('#mysidebarmenu li').css({'font-size':'15px'});}
 }
 
+function populateMiniCategory(data){
+	var local = $.query.get('lang');
+	for (var i = 0; i <= data.length-1; i++) {
+		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
+		var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
+		
+		var subsub = data[i]['subcategory'][0];
+		var subsubcount = subsub.length;
+
+		$('#mobilesubmenu').append('<optgroup id="sub_m_'+i+'" label='+data[i][locale('Name')]+' ">');
+		
+		$(nowfolder).append('<ul id="sub__'+i+'">');
+		
+
+		folders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
+		mfolders('#' + 'sub_m_' + i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_m-1", '');
+
+		if(subsubcount > 0){
+			for (var k = 0; k < subsubcount; k++) {
+				
+				var issubdub = issubdubs( subcatdups, subsub[k]['valueID'], k );
+				if( subsub[k]['Name'] == "Subcategory"){
+					if(issubdub){
+						var sublink = link + "&subcat=" + subsub[k]['valueID'];
+						folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
+						mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
+					}
+				}
+			}
+		}
+	}
+}
+
 function issubdubs(subcatdups, compa, k){
 	var issubdubs = true;
 	for (var d = 0; d < subcatdups.length; d++) {
@@ -362,10 +403,10 @@ function issubdubs(subcatdups, compa, k){
 function refreshLocale(){
 	var numbof = $('[locale]');
 	for (var i = 0; i <= numbof.length -1; i++) {
-	   var current_Val = $(numbof[i]).html();
-	   var key = $(numbof[i]).attr('locale')
-	   var newVal = current_Val.replace('@', getFromLocale(key));
-	   $(numbof[i]).html( newVal );
+		var current_Val = $(numbof[i]).html();
+		var key = $(numbof[i]).attr('locale')
+		var newVal = current_Val.replace('@', getFromLocale(key));
+		$(numbof[i]).html( newVal );
 	}
 }
 function isthere(cont, pram){
@@ -389,12 +430,16 @@ function populateFliterFromUrl(){
 		}
 		$(cont[i]).parent().dropdown({
 			'onChange': function(value, text, name){
-				goto( 'products' + $.query.set($($(this)[0]).find('input').first().prop('name'), value).toString() );
+				goto( 'products' + $.query.set($($(this)[0]).find('input').first().prop('name'), value).toString(), true );
 			}
 		});
 	}
 }
 
-var goto = function goto(url){
-	window.location.href = url;
+var goto = function goto(url, newpage){
+	if(newpage){
+		window.location.href = url;
+	}else{
+		window.open(url, '_blank');
+	}
 };

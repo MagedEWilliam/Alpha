@@ -21,48 +21,57 @@ if( isset($_GET['compo']) ){
      <script type="text/javascript">
       var Glocale = <?php print_r(geLocale()) ?>;
     </script>
-    <form class="row" method="POST" action="http://localhost/ALPHA/checkout.php?lang=<?php echo $_GET['lang']?>">
-      <div class="eleven wide column">
+    
+    <form class="row" method="POST" action="<?php 
+    if($_SERVER['SERVER_NAME'] == 'localhost'){
+      echo "http://localhost/ALPHA/checkout.php?lang=" . $_GET['lang'];
+    }else{
+      echo "http://i-alfa.info/checkout.php?lang=" . $_GET['lang'];
+    }
+    ?>">
+    <div class="eleven wide column">
 
-        <h4 class="goodtimes " locale="itemsDetails">@</h4>
-        <table class="ui very compact striped  table" id="product_details">
-          <tbody>
-            <script>echoCart();</script>
-          </tbody>
-        </table>
+      <h4 class="goodtimes " locale="itemsDetails">@</h4>
+      <table class="ui very compact striped  table" id="product_details">
+        <tbody>
+          <script>echoCart();</script>
+        </tbody>
+      </table>
+
+      <br>
+
+    </div>
+    <div class="five wide column" style="position: relative;">
+
+      <div class="ui segment">
+
+
+        <h4 class="floatleft notopmargin">Total:</h4>
+        <h4 class="floatright notopmargin" id="subtotal">$0</h4>
 
         <br>
-
-      </div>
-      <div class="five wide column" style="position: relative;">
-        <!-- <h4 class="goodtimes" locale="total">@</h4> -->
-        <div class="ui segment">
-          
-
-          <h4 class="floatleft notopmargin">Total:</h4>
-          <h4 class="floatright notopmargin" id="subtotal">$0</h4>
-
-          <br>
         <center>
-          <button type="submit" class="ui massive button blue" locale="checkoutwithpaypal">
+          <button type="submit" class="ui massive button blue" id="checkdisout" locale="checkoutwithpaypal">
             <i class="ui icon paypal"></i>
             @
           </button>
+
         </center>
-        </div>
+      </div>
 
-        <div class="ui divider"></div>
-
-        <div class="ui top attached tabular menu">
-          <a class="item active" data-tab="first">Track order</a>
+      <div class="ui divider"></div>
+      <div class="ui top attached tabular menu">
+        <a class="item active" data-tab="first">Track order</a>
+          <!--
           <a class="item" data-tab="second">Login</a>
           <a class="item" data-tab="third">Sign up</a>
-          
-        </div>
+        -->
+      </div>
 
-        <div class="ui bottom attached tab segment active" data-tab="first">
-          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
-        </div>
+      <div class="ui bottom attached tab segment active" data-tab="first">
+        <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
+      </div>
+<!--
 
         <div class="ui bottom attached tab segment" data-tab="second">
           <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/login_part.php"></iframe>
@@ -71,19 +80,27 @@ if( isset($_GET['compo']) ){
         <div class="ui bottom attached tab segment" data-tab="third">
           <iframe style="width: 100%;" height="500" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
         </div>
+      -->
+    </div>
 
-        <script type="text/javascript">
-          $('.menu .item').tab();
-        </script>
-      </div>
+  </form>
+  <script type="text/javascript">
+    if( cart.get('cart') == null ) {
+      $('form').attr('action', '');
+      $('#checkdisout').remove();
+      $('[locale=itemsDetails]').remove();
+      $('h4').parent().remove();
+      $('.divider').remove();
+      $('table').remove();
+    }
+    $('.menu .item').tab();
+  </script> 
 
-    </form>
-
-    <?php
-    if( isset($_GET['compo']) ){
-      echo '\
-    </div>\
+  <?php
+  if( isset($_GET['compo']) ){
+    echo '\
   </div>\
+</div>\
 </body>\
 </html>';
 }

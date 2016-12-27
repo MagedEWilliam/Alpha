@@ -10,20 +10,6 @@ $(document).ready(function(){
 		}
 	});
 
-	updateSubtotal();
-	refreshLocale();
-
-   $('.carticon').hover(
-      function(){
-      	if( $('.carticon .detail').text() != 0 ){
-        	$('.carticon').addClass('green');
-    	}
-    }, 
-      function(){
-        $('.carticon').removeClass('green');
-    });
-    $('.carticon .detail').text(cart.count());
-
 	var getcardurl = "../classes/class_getCard.php";
 	if(cat != ''){
 		getcardurl += $.query.toString();
@@ -32,19 +18,61 @@ $(document).ready(function(){
 	getcardurl = getcardurl.replace("lang=en", "");
 	getcardurl = getcardurl.replace("lang=ch", "");
 
+	if(pageName() == "Home"){
+		$('.my-homeSlider').unslider({
+			infinite: true,
+			autoplay: true,
+			arrows: false,
+			delay: 	5000
+		});
+
+
+		$.getJSON( getcardurl, function( data ) {
+			for (var i = 0; i <= 3; i++) {
+				var teclasses = '';
+				if( cart.isset(data[i].item.code) ){
+					teclasses = 'blue';
+				}else{
+					teclasses = 'disabled';
+				}
+				card( $('.miniproducts'), data[i], teclasses);
+			}
+		});
+
+		$.getJSON( '../classes/class_getCategory.php', function( data ) {
+			populateMiniCategory(data);
+		});
+
+	}
+	updateSubtotal();
+	refreshLocale();
+
+	$('.carticon').hover(
+		function(){
+			if( $('.carticon .detail').text() != 0 ){
+				$('.carticon').addClass('green');
+			}
+		}, 
+		function(){
+			$('.carticon').removeClass('green');
+		});
+	$('.carticon .detail').text(cart.count());
+
+	
+
 	setTimeout(function(){resizeClasses();},10);
-	if(window.location.pathname == "/ALPHA/page/products" || window.location.pathname == "/page/products"){
+	if(pageName() == "products"){
 		$.ajax({
 			url: getcardurl
 		}).done(function(data) {
 			data = jQuery.parseJSON(data);
 			for (var i = 0; i <= data.length-1; i++) {
-              var teclasses = '';
-              if( cart.isset(data[i].item.code) ){
-                teclasses = 'blue';
-              }else{
-                teclasses = 'disabled';
-              }
+				var teclasses = '';
+				if( cart.isset(data[i].item.code) ){
+					teclasses = 'blue';
+				}else{
+					teclasses = 'disabled';
+				}
 				card( $('#products'), data[i], teclasses);
 			}
 			$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
@@ -52,8 +80,8 @@ $(document).ready(function(){
 		});
 	}
 
-	if(window.location.pathname == "/ALPHA/page/product_details" || window.location.pathname == "/page/product_details"
-	 || window.location.pathname == "/ALPHA/pages/products/product_details.php" || window.location.pathname == "/pages/products/product_details.php"
+	if(pageName() == "product_details" || pageName() == "product_details"
+		|| pageName() == "product_details.php" || pageName() == "product_details.php"
 		){
 		if($.query.get('product_id') != ''){
 
@@ -89,10 +117,10 @@ $(document).ready(function(){
 					$('#tr_'+x).append( rtlSlpadrPad('rtl Fixedtd slpad rpad', value[locale('Name')]) );
 					var sometext = '<td class="slpad">';
 					sometext += '<div class="ui label" style="float:left;">' +
-						 value[locale('value')] + '</div>';
+					value[locale('value')] + '</div>';
 					$.each(data[0].Subcategory[x].more, function(y, _value) {
 						sometext += '<div class="ui label" style="float:left;">' +
-						 _value[locale('value')] + '</div>';
+						_value[locale('value')] + '</div>';
 					});
 
 					$('#tr_'+x).append(sometext );
@@ -123,12 +151,12 @@ $(document).ready(function(){
 				var propname = data[i][0].Property[locale('Name')];
 				var propID = 'filt_'+data[i][0].Property.ID;
 				var stri = '\
-					<div class="ui sub header norm notopmarg">'+propname+'</div>\
-						<div class="ui fluid normal dropdown selection multiple norm ">\
-							<input type="hidden" name="'+propID+'" value="">\
-							<i class="dropdown icon"></i>\
-							<div class="default text">'+ getFromLocale('filterBy') + ' '+propname+'</div>\
-							<div class="menu">\
+				<div class="ui sub header norm notopmarg">'+propname+'</div>\
+				<div class="ui fluid normal dropdown selection multiple norm ">\
+				<input type="hidden" name="'+propID+'" value="">\
+				<i class="dropdown icon"></i>\
+				<div class="default text">'+ getFromLocale('filterBy') + ' '+propname+'</div>\
+				<div class="menu">\
 				';
 
 				for (var x = 0; x <= data[i][0].Value.length -1; x++) {
@@ -136,7 +164,7 @@ $(document).ready(function(){
 				}
 
 				stri += '</div>\
-					</div>\
+				</div>\
 				</div>';
 				$('.filterArea').append(stri);
 			}
@@ -198,3 +226,9 @@ $(document).ready(function(){
 	
 	refreshLocale();
 });
+
+function pageName(){
+	var path = window.location.pathname;
+	var name = path.split('/');
+	return name[name.length-1];
+}

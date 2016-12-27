@@ -10,7 +10,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 
 echo '<pre>';
-print_r($_POST);
+//print_r($_POST);
 echo '</pre>';
 
 require 'classes/paypal_init.php';
@@ -238,6 +238,7 @@ try{
 	echo '<pre>';
 	print_r($e);
 	echo '</pre>';
+	echo '<script>setTimeout(function(){ location.reload(); }, 50);</script>';
 	die($e);
 }
 

@@ -59,10 +59,13 @@ function rowofcartitem(item, i, target){
 function qunChanges (targ, source){
   cart.updateQun( targ, $(source).val() );
 }
+
 function echoCart(){
   var thecart = cart.get('cart');
-  for(var i=0; i<= thecart.length-1 ; i++){
-    rowofcartitem(thecart[i], i, '#product_details tbody');
+  if(thecart != null){
+    for(var i=0; i<= thecart.length-1 ; i++){
+      rowofcartitem(thecart[i], i, '#product_details tbody');
+    }
   }
 }
 

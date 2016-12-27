@@ -17,3 +17,7 @@ for ($i=0; $i < $_GET['__level'] ; $i++) {
 <script type="text/javascript" src="<?php echo $level; ?>js/cart.js"></script>
 <script type="text/javascript" src="<?php echo $level; ?>js/components.js"></script>
 <script type="text/javascript" src="<?php echo $level; ?>js/script.js"></script>
+
+<link rel="stylesheet" href="<?php echo $level; ?>libs/unslider/dist/css/unslider.css">
+<link rel="stylesheet" href="<?php echo $level; ?>libs/unslider/dist/css/unslider-dots.css">
+<script src="<?php echo $level; ?>libs/unslider/dist/js/unslider-min.js"></script>

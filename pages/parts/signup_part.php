@@ -29,6 +29,11 @@
 		<textarea name="address" placeholder=" Enter the shipping destination"><?php echo $payment->payer->payer_info->shipping_address->line1 . ", " . $payment->payer->payer_info->shipping_address->city . ", " . $payment->payer->payer_info->shipping_address->state; ?></textarea>
 	</div>
 
-
+<a class="ui button">
+		<i class="ui icon unlock alternate"></i>
+		Signup
+	</a>
 
 <script>$('.checkbox').checkbox();</script>
+
+</form>

@@ -60,7 +60,7 @@ $active_nav_name = $res;
 		<div class="full height">
 			<div class="article">
 				<div class="ui container large">
-					<div class="ui internally stackable celled grid segment topping">
+					<div class="ui stackable grid segment topping" style="box-shadow: none;">
 						<?php 
 						if(get_current_route() == 'product_details'){	
 							include_once('pages/products/product_details.php');
@@ -70,13 +70,17 @@ $active_nav_name = $res;
 							include_once('pages/cart/cart.php');
 						}elseif(get_current_route() == 'pay'){	
 							require_once('_pay.php');
-						}else{
+						}elseif(get_current_route() == 'Home'){	
+							require_once('pages/home/home.php');
+						}
+						else{
 							echo $active_nav_name['content'];
 						}
 						// echo get_current_route();
 						?>
 				</div>
 			</div>
+				<?php include_once('pages/parts/footer_part.php'); ?>
 		</div>
 	</div>
 </div>
