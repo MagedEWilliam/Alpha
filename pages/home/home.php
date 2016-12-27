@@ -106,9 +106,9 @@
 			<h3 class="goodtimes" style="margin-top: 1px;">OUR Categories</h3>	
 			<p style="width: 50%;">Discover our modern technology of over 15 category of established and emerging technology from Bulbs, Boxes, Miscellaneous, LED and more.</p>
 
-			<table class=" stackable minicategory" style="float: left;">
+			<div class="ui stackable grid  minicategory" style="float: left;">
 				
-			</table>
+			</div>
 
 
 			<a class="ui primary basic button" style="margin-top: 14px;" href="products?lang=<?php echo $_GET['lang'];?>">BROWSE ALL PRODUCTS</a>

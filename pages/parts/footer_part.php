@@ -1,4 +1,4 @@
-<br>
+<br><br><br>
 <div style="position: relative;">
 	<img src="../assets/shadowdown.png" class="shadowdown">
 	<div class="ui container large pagefooter">

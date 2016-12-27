@@ -64,22 +64,24 @@ body.pushable>.pusher{
 }
 .minicategory{
 	width: 100%;
-	text-align: left;
+	text-align: center;
+	margin: 0 !important;
+	margin-right: 0px !important;
+	margin-left: 0px !important;
 }
-.minicategory > li > a{
+.minicategory > div > a{
 	font-family: goodtime, Bahij, 'NotoSansSC' !important;
-	margin-left: 5px;
-
+	text-align: center;
+	width: 100%;
+	margin-left: 10px;
 }
 .minicategory li{
 	padding-top: 10px !important;
 	color: #eee;
 }
-.minicategory > li{
-	width: 24%;
-	height: 200px;
+.minicategory > div{
+	/*height: 200px;*/
 	float: left;
-	margin-left: 1%;
 	background-color: #eee;
 	list-style-type: none;
 }

@@ -189,9 +189,17 @@ function categorylist(text, url, i){
 }
 
 function nfolders(target, text, link, i, cls){
-	$(target).append( '<td id="sub_'+i+'">\
+	$(target).append( '<div id="suub_'+i+'">\
 		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
-		</td>');
+		</div>');
+
+	return '#sub_' + i;
+}
+
+function mnfolders(target, text, link, i, cls){
+	$(target).append( '<div class="four wide column" id="sub_'+i+'">\
+		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
+		</div>');
 
 	return '#sub_' + i;
 }
@@ -360,18 +368,14 @@ function populateMiniCategory(data){
 	var local = $.query.get('lang');
 	for (var i = 0; i <= data.length-1; i++) {
 		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
-		var nowfolder = folders('#sidebarmenu', data[i][locale('Name')], link, i, '');
+		var nowfolder = mnfolders('.minicategory', data[i][locale('Name')], link, i, '');
 		
 		var subsub = data[i]['subcategory'][0];
 		var subsubcount = subsub.length;
-
-		$('#mobilesubmenu').append('<optgroup id="sub_m_'+i+'" label='+data[i][locale('Name')]+' ">');
 		
-		$(nowfolder).append('<ul id="sub__'+i+'">');
+		$(nowfolder).append('<li id="sub__'+i+'">');
 		
-
-		folders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
-		mfolders('#' + 'sub_m_' + i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_m-1", '');
+		nfolders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
 
 		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
@@ -380,8 +384,7 @@ function populateMiniCategory(data){
 				if( subsub[k]['Name'] == "Subcategory"){
 					if(issubdub){
 						var sublink = link + "&subcat=" + subsub[k]['valueID'];
-						folders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
-						mfolders('#' + 'sub_m_' + i, subsub[k][locale('value')], sublink, "sub_m" + k, '');
+						nfolders('#' + 'sub__' + i, subsub[k][locale('value')], sublink, "sub_" + k, 'noshadows');
 					}
 				}
 			}
