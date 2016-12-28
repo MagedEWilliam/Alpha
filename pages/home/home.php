@@ -16,7 +16,6 @@
 						<h1>LED Technology</h1>
 						<div class="popin">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor neque ipsum. Nullam imperdiet ipsum id dapibus egestas. Nullam leo odio, tempus eu tortor ac, rhoncus feugiat ex. Curabitur varius diam a volutpat commodo. Vestibulum nec massa non neque aliquet facilisis. Mauris ac purus neque.</p>
-							<a class="ui button">Read more</a>
 						</div>
 					</div>
 				</li>
@@ -25,7 +24,6 @@
 						<h1>LED Technology</h1>
 						<div class="popin">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor neque ipsum. Nullam imperdiet ipsum id dapibus egestas. Nullam leo odio, tempus eu tortor ac, rhoncus feugiat ex. Curabitur varius diam a volutpat commodo. Vestibulum nec massa non neque aliquet facilisis. Mauris ac purus neque.</p>
-							<a class="ui button">Read more</a>
 						</div>
 					</div>
 				</li>
@@ -34,7 +32,6 @@
 						<h1>LED Technology</h1>
 						<div class="popin">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor neque ipsum. Nullam imperdiet ipsum id dapibus egestas. Nullam leo odio, tempus eu tortor ac, rhoncus feugiat ex. Curabitur varius diam a volutpat commodo. Vestibulum nec massa non neque aliquet facilisis. Mauris ac purus neque.</p>
-							<a class="ui button">Read more</a>
 						</div>
 					</div>
 				</li>
@@ -151,4 +148,7 @@
 <br>
 
 </div>
+<script>
+	langdrop();
+</script>
 

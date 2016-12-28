@@ -472,6 +472,8 @@ div#product.wide.column{
 	height: 23px;
 	background-color: #0061a5;
 	border-radius: 0 0 0 20px;
+	background: linear-gradient(45deg,  transparent 10px, #0061a5 0) bottom left;
+
 }
 
 .submenumob{

@@ -49,6 +49,7 @@ global $active_nav_name;
 $active_nav_name = $res;
 ?>
 <!DOCTYPE html>
+<!-- <html <?php //if( isset($_GET['lang']) &&  $_GET['lang'] == "ar" ) { echo ' dir="rtl" '; } ?>> -->
 <html>
 <head>
 	<title><?php echo $active_nav_name[_locale('Name')] ?></title>

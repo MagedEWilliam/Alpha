@@ -183,14 +183,7 @@ $(document).ready(function(){
 				amazonmenu.init({menuid: 'mysidebarmenu'});
 			});
 
-			$('#lang').dropdown({
-				on: 'hover',
-				action: function(text, value) {
-					var newurl = window.location.href;
-					var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
-					window.location.href = gotothis;
-				}
-			});
+			langdrop();
 		}
 	}
 
@@ -229,4 +222,14 @@ function pageName(){
 	var path = window.location.pathname;
 	var name = path.split('/');
 	return name[name.length-1];
+}
+function langdrop(){
+	$('#lang').dropdown({
+		on: 'hover',
+		action: function(text, value) {
+			var newurl = window.location.href;
+			var gotothis = newurl.replace(/lang=[^&]+/, 'lang='+ value );
+			window.location.href = gotothis;
+		}
+	});
 }

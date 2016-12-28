@@ -374,8 +374,6 @@ function populateMiniCategory(data){
 		var subsubcount = subsub.length;
 		
 		$(nowfolder).append('<li id="sub__'+i+'">');
-		
-		nfolders ('#' + 'sub__' +  i, getFromLocale("all") + ' ' + data[i][locale('Name')], link, "sub_-1", 'noshadows');
 
 		if(subsubcount > 0){
 			for (var k = 0; k < subsubcount; k++) {
