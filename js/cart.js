@@ -1,16 +1,27 @@
 function rowofcartitem(item, i, target){
   $(target).append('<tr id="__'+item.code+'__">\
-  <input type="hidden" id="'+item.code+'">\
+  <input type="hidden" value="'+item.code+'" id="'+item.code+'" name="item_code['+i+']">\
   <td class="collapsing">\
     <img src="'+item.image+'" width="100"></td>\
   <td>\
     <h3>'+item[locale('Name')]+'</h3>\
     <p>'+item.code+'</p>\
   </td>\
+  <td class="collapsing paddingLefttozero paddingRighttozero">\
+  $\
+  </td>\
+  <td class="collapsing paddingLefttozero">\
+  '+Number(item.price)+'\
+  <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
+  </td>\
   <td class="collapsing">\
-    <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
-    <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
-    <input style="width: 100px;height:30px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+    \
+    <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
+      <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+      <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
+      <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
+    </div>\
+    \
     <a id="_'+item.code+'_" style="margin-left:10px;" class="ui icon button"><i class="ui icon trash"></i></a>\
   </td>\
 </tr>');
@@ -26,34 +37,54 @@ function rowofcartitem(item, i, target){
     $('#_'+item.code+'_').removeClass ('red');
   });
 
-  $( $('#__'+item.code+'__ input')[1] ).on('change', function(e){
+  $( $('#__'+item.code+'__ input')[2] ).on('change', function(e){
     qunChanges(item.code, e.currentTarget);
   });
 
   $('#__'+item.code+'__ .minusOne').on('click', function(){
-    var current = $( $('#__'+item.code+'__ input')[1] ).val();
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
     if(current > 1){
-      $( $('#__'+item.code+'__ input')[1] ).val(Number(current)-1);
-      qunChanges(item.code, $('#__'+item.code+'__ input')[1] );
+      $( $('#__'+item.code+'__ input')[2] ).val(Number(current)-1);
+      qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
     }
   });
 
   $('#__'+item.code+'__ .addOne').on('click', function(){
-    var current = $( $('#__'+item.code+'__ input')[1] ).val();
-    $( $('#__'+item.code+'__ input')[1] ).val(Number(current)+1);
-    qunChanges(item.code, $('#__'+item.code+'__ input')[1] );
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
+    $( $('#__'+item.code+'__ input')[2] ).val(Number(current)+1);
+    qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
   });
 
 }
 function qunChanges (targ, source){
   cart.updateQun( targ, $(source).val() );
 }
+
 function echoCart(){
   var thecart = cart.get('cart');
-  for(var i=0; i<= thecart.length-1 ; i++){
-    rowofcartitem(thecart[i], i, '#product_details tbody');
+  if(thecart != null){
+    for(var i=0; i<= thecart.length-1 ; i++){
+      rowofcartitem(thecart[i], i, '#product_details tbody');
+    }
   }
 }
+
+
+function updateSubtotal(){
+  var subtotal = 0;
+
+  $('#product_details tr').each(function(key, elm){
+    var elem = $(elm).find('input');
+    var price = $(elem[1]).val();
+    var qun = $(elem[2]).val();
+    subtotal += price * qun;
+
+    $('#subtotal').text( '$' + subtotal );
+  });
+
+}
+
+$(window).on('click keydown', updateSubtotal);
 
 var iteminfo = {
   get: function(key){
@@ -97,7 +128,7 @@ var cart = {
           $('.carticon .detail').text(cart.count());
           $('#cart_' + data[0].item.code + ' p').text( getFromLocale('added') + ' ✓' );
 
-          $('#Qun_' + data[0].item.code).hide();
+          $('#Qun_' + data[0].item.code ).hide();
 
           $('#cart_' + data[0].item.code).removeClass('blue');
           $('#cart_' + data[0].item.code).addClass('disabled');
@@ -117,10 +148,10 @@ var cart = {
     if ( cart.isset(item.code) ){
       var getting = cart.get('cart');
       
-      var initqun = $('#Qun_' + item.code).val();
+      var initqun = $('#Qun_' + item.code + ' input').val();
       if(initqun < 1){
         item.qun = 1;
-        $('#Qun_' + item.code).val(1);
+        $('#Qun_' + item.code + ' input').val(1);
       }else{
         item.qun = initqun;
       }
@@ -172,4 +203,7 @@ var cart = {
 function tothecart(item, e){
   $('.carticon').addClass('green');
   cart.add(item, 'fromProduct');
+}
+if($.query.get('success') == "true" && $.query.get('paymentId') !='' && $.query.get('token') !='' && $.query.get('PayerID') !=''){
+  cart.clear();
 }

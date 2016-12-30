@@ -48,13 +48,23 @@ class Card
 				
 				$prop = self::getProperty( $row['propertyID'] );
 				if(count($prop) > 0){
-					
-					array_push($res, $prop);
+					if ( self::isDistinct( $res, $prop ) ){
+						array_push($res, $prop);
+					}
 				}
 			}
 		}
 		echo mysqli_error($mysqli);
-		return  json_encode($res);
+		return  json_encode( $res );
+	}
+
+	static public function isDistinct($sub, $orgin){
+		foreach ($sub as $key => $value) {
+			if( $value[0]['Property']['ID']  == $orgin[0]['Property']['ID'] ){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	static public function getProperty($id)

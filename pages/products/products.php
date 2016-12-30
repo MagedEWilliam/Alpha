@@ -21,73 +21,77 @@ function _subcat($itemID){
 	return $row;
 }
 ?>
+<div class="row">
+	<div class="three wide column goodtimes" id="sideNav">
+		<p locale="categories"><i class="ui icon list layout"></i> @:</p>
 
-<div class="three wide column goodtimes" id="sideNav">
-	<p locale="categories"><i class="ui icon list layout"></i> @:</p>
-
-	<div id="mysidebarmenu" class="amazonmenu">
-		<ul id="sidebarmenu">
+		<div id="mysidebarmenu" class="amazonmenu">
+			<ul id="sidebarmenu">
+				
+			</ul>
+			<img src="../assets/shadowdown.png" style="width:100%;">
+			<div class="shadowmore"></div>
+			<div class="showmore" locale="showMore">@ <i class="ui icon angle down"></i></div>
+		</div>
+		<div class="filterArea" style="width: 100%;">
 			
-		</ul>
-		<img src="../assets/shadowdown.png" style="width:100%;">
-		<div class="shadowmore"></div>
-		<div class="showmore" locale="showMore">@ <i class="ui icon angle down"></i></div>
+		</div>
+		<br>
+		<br>
+		<br>
 	</div>
-	<div class="filterArea" style="width: 100%;">
-		
-	</div>
-</div>
-<div class="thirteen wide column " id="product">
+	<div class="thirteen wide column " id="product">
 
-	<div class="ui grid">
+		<div class="ui grid">
 
-		<div class="nine wide column" id="subcatmob">
-			<div class="mobilefil">
-				<a href="#" class="ui tiny button submenumob floatleft" locale="filters">≡@</a>
-				<select class="floatright shideme topspace" id="mobilesubmenu">
-					<option id="defuloptsub" locale="categories">@</option>
-				</select>
-			</div>
+			<div class="nine wide column" id="subcatmob">
+				<div class="mobilefil">
+					<a href="#" class="ui tiny button submenumob floatleft" locale="filters">≡@</a>
+					<select class="floatright shideme topspace" id="mobilesubmenu">
+						<option id="defuloptsub" locale="categories">@</option>
+					</select>
+				</div>
 
-			<div class="ui breadcrumb">
-				<a class="section" id="Home-crumb">
-					<i class="ui home icon"></i>
-				</a>
-				<span class="divider">/</span>
-				<div class="section" locale="products">@</div>
-				<?php 
-				if( isset($_GET['cat']) ){
-					if( $_GET['cat'] != '' ){
-						echo '<span class="divider">/</span><div class="section">';
-						echo _cat($_GET['cat'])[locale('Name')];
-						echo '</div>';
+				<div class="ui breadcrumb">
+					<a class="section" id="Home-crumb">
+						<i class="ui home icon"></i>
+					</a>
+					<span class="divider">/</span>
+					<div class="section" locale="products">@</div>
+					<?php 
+					if( isset($_GET['cat']) ){
+						if( $_GET['cat'] != '' ){
+							echo '<span class="divider">/</span><div class="section">';
+							echo _cat($_GET['cat'])[locale('Name')];
+							echo '</div>';
+						}
 					}
-				}
-				if( isset($_GET['subcat']) ){
-					if( $_GET['subcat'] != '' ){
-						echo '<span class="divider">/</span><div class="section">';
-						echo _subcat($_GET['subcat'])[locale('value')];
-						echo '</div>';
+					if( isset($_GET['subcat']) ){
+						if( $_GET['subcat'] != '' ){
+							echo '<span class="divider">/</span><div class="section">';
+							echo _subcat($_GET['subcat'])[locale('value')];
+							echo '</div>';
+						}
 					}
-				}
-				?>
+					?>
+
+				</div>
 
 			</div>
+			<div class="seven wide column rtl searchresultcount" id="srchres">
+				<p class="rtl">search result</p>
+			</div>
+		</div>
+		<br>
+		<div id="products" class="ui cards">
 
 		</div>
-		<div class="seven wide column rtl searchresultcount" id="srchres">
-			<p class="rtl">search result</p>
-		</div>
-	</div>
-	<br>
-	<div id="products" class="ui cards">
-
-	</div>
-	<br>
-	<div class="ui divider"></div>
-	<div id="productfooter">
-	</div>
-	<div id="product_details" class="ui modal">
+		<br>
 		
+		<div id="productfooter">
+		</div>
+		<div id="product_details" class="ui modal">
+			
+		</div>
 	</div>
 </div>

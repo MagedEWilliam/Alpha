@@ -21,7 +21,7 @@ include_once($level.'classes/class_getLocale.php');
 <script type="text/javascript">
 	var Glocale = <?php print_r(geLocale()) ?>;
 </script>
-<div class="row">
+<div class="row" action="checkout.php">
 	<div class="eight wide column">
 		<center>
 			<img src="" class="bragimg">

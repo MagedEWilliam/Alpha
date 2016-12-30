@@ -2,13 +2,131 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
-.ui.segment{
-	border-radius:0 !important;
-	border: 1px;
+.logo{
+	width: 160px
+}
+.my-homeSlider li{
+	position: relative;
+	height: 100%;
+}
+.thead h1{
+	margin-bottom: 0;
+}
+
+.thead .popin{
+	border-left: 2px solid #eee;
+	padding-left: 15px;
+}
+.thead{
+	position: absolute;
+	bottom:4px;
+	width: 50%;
+	height: auto;
+	background-color: rgba(0,0,0,.5);
+	z-index: 9;
+	padding: 15px;
+	text-align: left;
+	color: #fff;
+}
+.shadowdown{
+	width: 100%;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	z-index: 9;	
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+	border-top: 4px solid #bbb;
+}
+.pagefooter h5{
+	margin-top: 20px;
+}
+.pagefooter{
+	position: relative;
+	padding-top: 25px;
+	height: 350px;
+}
+.tailer div{
+	width: 50px;
+	height: 31%;
+	background-color: #f4f4f4;
+	
+}
+.tailer{
+	position: absolute;
+	
+	top:0;
+	height: 100%;
+}
+.miniproducts .longproduct, .miniproducts{
+	float: left;
+	margin-top: 0;
+}
+.minicategory{
+	width: 100%;
+	text-align: center;
+	margin: 0 !important;
+	margin-right: 0px !important;
+	margin-left: 0px !important;
+}
+.minicategory > div > a{
+	font-family: goodtime, Bahij, 'NotoSansSC' !important;
+	text-align: center;
+	width: 100%;
+	margin-left: 10px;
+}
+.minicategory li{
+	padding-top: 10px !important;
+	color: #eee;
+}
+.minicategory > div{
+	/*height: 200px;*/
+	float: left;
+	background-color: #eee;
+	list-style-type: none;
+}
+
+.minicategory > li > ul {
+	margin-top: 0px;
+}
+.minicategory > li > ul > li, .minicategory > li > ul > li >a {
+	color: #333;
+}
+
+.detail{
+	margin-left: 0 !important;
+}
+div#product.wide.column{
+	box-shadow: -1px 0 0 0 #d0d1d2;
+}
+.toowide{
+	width:100% !important;
+	margin-bottom: 0px;
 }
 .ui.link.card{
 	border-radius: 0;
 	box-shadow: none;
+}
+.paddingLefttozero{
+	padding-left: 0 !important;
+}
+.paddingRighttozero{
+	padding-right: 0 !important;
+}
+.ui.grid.segment{
+	border-radius: 0;
+}
+.ui.celled.grid, .ui.celled.grid>.row{
+	box-shadow:none;
+}
+.ui.grid.segment{
+	border: 1px solid #fff !important;
+}
+.top-nav-sub-group a:hover {
+	color: #2185D0;
+}
+.addr{
+	width: 49% !important;
 }
 .ui.cards>.card>.content{
 	border-top:1px solid rgb(208, 209, 210);
@@ -25,21 +143,29 @@ body.pushable>.pusher{
 	background-color: #e0e1e2;
 }
 .carticon{
-	margin-top: 20px !important;
+	margin-left: 0 !important;
+	margin-top: 15px !important;
+	float: left;
 }
-
+.loginfo{
+	text-align:center;
+	float: left;
+	border-radius: 0 0 5px 5px !important;
+	margin-left: 0 !important;
+	width: 105px;
+}
 .top-tel-sub-group{
 	width: 20%;
 	float: right;
 }
 #activeNav{
 	position: absolute;
-	
+	min-width: 30px;
 	height: 10px;
 	left: -5px;
 	right: -5px;
 	bottom: -25px;
-	top: 32px !important;
+	top: 30px !important;
 }
 .underimg{
 	width: 100%;
@@ -67,13 +193,17 @@ body.pushable>.pusher{
 #product_details.modal{
 	margin-top: -300px !important;
 }
-#product_details{
+#product_details.modal{
 	height: 80%;
 }
+
 .image.content, .description, .iframe{
 	display: block;
 	width: 100%;
 	height: 100%;
+}
+.notopmargin{
+	margin-top: 0 !important;
 }
 .floatright{
 	float: right !important;
@@ -114,12 +244,12 @@ body.pushable>.pusher{
 }
 
 .topping{
-	top:45px;	
+	top:45px;
 }
 #topnav{
 	height: 65px;
 	width: 100%;
-	background-color: #f4f4f4;
+	background-color: rgba(244, 244, 244, 0.96);
 	line-height: 1 !important;
 	position: fixed;
 	z-index: 1000;
@@ -203,7 +333,7 @@ body.pushable>.pusher{
 }
 
 .longproduct{
-	width: 315px !important;
+	/*width: 315px !important;*/
 }
 
 @font-face {
@@ -251,7 +381,7 @@ body.pushable>.pusher{
 	right: 0 !important;
 }
 .hundredinwidth{
-	margin-top: 31px;
+	margin-top: 22px;
 	float: right;
 }
 
@@ -281,6 +411,8 @@ body.pushable>.pusher{
 }
 .top-nav-sub-group a.imactive{
 	color: #0061a5;
+	padding-bottom: 15px;
+	border-bottom: 10px solid #f7da00;
 }
 .top-nav-sub-group a{
 	color: #000;
@@ -339,8 +471,11 @@ body.pushable>.pusher{
 	margin-left: 50px;
 	float: left;
 	margin-top: 10px;
-	height: 10px;
+	height: 23px;
 	background-color: #0061a5;
+	border-radius: 0 0 0 20px;
+	background: linear-gradient(45deg,  transparent 10px, #0061a5 0) bottom left;
+
 }
 
 .submenumob{
@@ -377,8 +512,34 @@ div.ui.image.longy{
 	float: right;
 	height: 100%;
 	width: 20%;
+	margin:1 !important;
 }
+.adv{
+	color: #fff;position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-57%, -50%)
 
+}
+.advthumb{
+	background-image: url(https://docs.google.com/uc?id=0B4r418jG6C2USVlldUs5dWFlY0k);background-size:100% 100%;
+}
+.ui.stackable.page.grid{
+	margin-left: 0 !important;
+}
+.tailer{
+	right: 0;
+	display: block;
+}
+.tom{
+	background-image: url(https://docs.google.com/uc?id=0B4r418jG6C2Udi1ydS1HRDNGSDg);
+	height: 350px;
+	background-size: 100%;
+}
+.pagefooter pre{
+	overflow:visible;
+}
 @media only screen and (min-width: 1280px){
 	.ui.container {
 		width: 92%;
@@ -455,7 +616,7 @@ div.ui.image.longy{
 
 @media only screen and (max-width: 999px){
 	.carticon{
-		float: right;
+		float: left;
 		margin-top: 0px !important; 
 		margin-right: 1px !important; 
 	}
@@ -465,23 +626,45 @@ div.ui.image.longy{
 	.mrspace{
 		width: 10%;
 	}
+	.thead{
+		width: 100%;
+	}
+	.advthumb{
+		height: 150px
+	}
+	.tailer{
+		display: none;
+	}
+	.tom{
+		height: 150px;
+	}
+	.pagefooter{
+		height: auto;
+	}
+	.topping{
+		top:80px;
+	}
 }
 @media only screen and (max-width: 900px){
 	.lang {
 		margin-top: 5px;
 	}
+	
 }
 
 @media only screen and (max-width: 565px){
 	.ui.link.card{
 		width: 100% !important;
 	}
-	.detail{
-		margin-left: 0;
+	.top-nav-sub-group a.imactive{
+		padding-bottom: 5px;
 	}
-	.carticon{
+	.adv{
+		transform: translate(-50%, -50%);
+	}
+	.carticon, .loginfo{
 		font-size: 8px !important;
-		margin-top: 5px !important;
+		margin-top: 0px !important;
 	}
 	.ui.very.compact.table td{
 		font-size: 14px;
@@ -585,7 +768,7 @@ div.ui.image.longy{
 		font-size: 13px;
 	}
 	.lang{
-		margin-top: 5px !important;
+		margin-top: 0px !important;
 	}
 	.hideme{
 		display: none;
