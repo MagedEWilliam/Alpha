@@ -43,43 +43,44 @@ function _subcat($itemID){
 	<div class="thirteen wide column " id="product">
 
 		<div class="ui grid">
+			<div class="row">
+				<div class="nine wide column" id="subcatmob">
+					<div class="mobilefil">
+						<a href="#" class="ui tiny button submenumob floatleft" locale="filters">≡@</a>
+						<select class="floatright shideme topspace" id="mobilesubmenu">
+							<option id="defuloptsub" locale="categories">@</option>
+						</select>
+					</div>
 
-			<div class="nine wide column" id="subcatmob">
-				<div class="mobilefil">
-					<a href="#" class="ui tiny button submenumob floatleft" locale="filters">≡@</a>
-					<select class="floatright shideme topspace" id="mobilesubmenu">
-						<option id="defuloptsub" locale="categories">@</option>
-					</select>
-				</div>
-
-				<div class="ui breadcrumb">
-					<a class="section" id="Home-crumb">
-						<i class="ui home icon"></i>
-					</a>
-					<span class="divider">/</span>
-					<div class="section" locale="products">@</div>
-					<?php 
-					if( isset($_GET['cat']) ){
-						if( $_GET['cat'] != '' ){
-							echo '<span class="divider">/</span><div class="section">';
-							echo _cat($_GET['cat'])[locale('Name')];
-							echo '</div>';
+					<div class="ui breadcrumb">
+						<a class="section" id="Home-crumb">
+							<i class="ui home icon"></i>
+						</a>
+						<span class="divider">/</span>
+						<div class="section" locale="products">@</div>
+						<?php 
+						if( isset($_GET['cat']) ){
+							if( $_GET['cat'] != '' ){
+								echo '<span class="divider">/</span><div class="section">';
+								echo _cat($_GET['cat'])[locale('Name')];
+								echo '</div>';
+							}
 						}
-					}
-					if( isset($_GET['subcat']) ){
-						if( $_GET['subcat'] != '' ){
-							echo '<span class="divider">/</span><div class="section">';
-							echo _subcat($_GET['subcat'])[locale('value')];
-							echo '</div>';
+						if( isset($_GET['subcat']) ){
+							if( $_GET['subcat'] != '' ){
+								echo '<span class="divider">/</span><div class="section">';
+								echo _subcat($_GET['subcat'])[locale('value')];
+								echo '</div>';
+							}
 						}
-					}
-					?>
+						?>
+
+					</div>
 
 				</div>
-
-			</div>
-			<div class="seven wide column rtl searchresultcount" id="srchres">
-				<p class="rtl">search result</p>
+				<div class="seven wide column rtl searchresultcount" id="srchres">
+					<p class="rtl">search result</p>
+				</div>
 			</div>
 		</div>
 		<br>

@@ -80,7 +80,7 @@ class Card
 /* echo '<pre>';
  print_r($sqlQuery);
  echo '</pre>';*/
-
+$sqlQuery .= ' ORDER BY `subcategory`.`ordering` ';
 		$res = [];
 		if ($result = $mysqli->query($sqlQuery)) {
 			while ($row = $result->fetch_assoc()) {

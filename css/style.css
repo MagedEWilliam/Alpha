@@ -558,6 +558,14 @@ div.ui.image.longy{
 		width: 600px;
 	}
 }
+@media only screen and (max-width: 1280px){
+	.ui.link.card{
+		width: 250px;
+	}
+	.topping{
+		top: 65px;
+	}
+}
 
 @media only screen and (max-width: 1279px){
 	.top-nav-group a {
@@ -649,10 +657,15 @@ div.ui.image.longy{
 	.lang {
 		margin-top: 5px;
 	}
-	
+	.ui.link.card{
+		width: 260px;
+	}
 }
 
 @media only screen and (max-width: 565px){
+	.ui.reveal{
+		font-size: 1em !important;
+	}
 	.ui.link.card{
 		width: 100% !important;
 	}

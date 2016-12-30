@@ -11,7 +11,7 @@ function card(target, ItemProp, classes){
 	\
 	<div class="back hidden content heigh" >\
 	<div class="fastdetails">\
-	<table class="ui very compact striped unstackable table " style="margin-bottom:0;">\
+	<table class="ui striped unstackable table " style="margin-bottom:0;">\
 	<tbody>\
 	\
 	<tr>\
@@ -143,11 +143,11 @@ function trlSlpadrPad(id, cls){
 }
 
 function rtlSlpadrPad(cls, val){
-	return '<td class="'+cls+'">'+val+'</td>';
+	return '<td  style="padding-top:1px;padding-bottom:2px;" class="'+cls+'">'+val+'</td>';
 }
 
 function lblSlpadrPad(val){
-	return '<div class="ui label" style="float:left;">'+val+'</div>';
+	return '<b style="float:left;"">'+val+' </b>';
 }
 
 function trtd(prop){
@@ -157,11 +157,11 @@ function trtd(prop){
 		if(prop.Subcategory[i]['Name'] != "Subcategory"){
 			temp += '<tr>'
 			temp += rtlSlpadrPad('rtl Fixedtd slpad rpad', prop.Subcategory[i][locale('Name')]);
-			temp += '<td class="slpad">';
+			temp += '<td class="slpad" style="padding-top:1px;padding-bottom:2px;">';
 			temp += lblSlpadrPad( prop.Subcategory[i][locale('value')]);
 
 			$.each(prop.Subcategory[i]['more'], function(x, value) {
-				temp += lblSlpadrPad( prop.Subcategory[i]['more'][x][locale('value')] );
+				temp += lblSlpadrPad( ', ' + prop.Subcategory[i]['more'][x][locale('value')] );
 			});
 
 			temp += '</td>';
@@ -179,7 +179,9 @@ function categorylist(text, url, i){
 	<a class="header popupmeup_'+i+'" href="'+url+'">'+text+'</a>\
 	<div class="ui fluid popup right center transition hidden tailcover">\
 	<div class="ui grid" style="width: 400px;height:100px;z-index:800">\
+	<div class="row">\
 	<div class="column">1</div>\
+	</div>\
 	</div>\
 	<img class="tail" src="assets/tip.png"/>\
 	</div>\
@@ -231,12 +233,15 @@ function nativeSelect(cls, id){
 
 function resizeClasses(){
 	if (window.screen.width > 1200) {
+		$('.move.up').addClass('.reveal');
 		the3dcard(true);
 	}
 	if ( window.screen.width < 1000) {
+		$('.move.up').addClass('.reveal');
 		the3dcard(true);
 	}
 	if ( window.screen.width < 565) {
+		$('.move.up').removeClass('.reveal');
 		$('head [name=viewport]').remove();
 		$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
 		the3dcard(false);
