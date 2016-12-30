@@ -4,7 +4,8 @@
 	<div class="ui container large pagefooter">
 		<div class="ui stackable grid">
 			<div class="four wide column">
-				<img src="../assets/alpha2xlarge.png" class="logo">
+
+				<img src="https://drive.google.com/uc?id=0B4r418jG6C2UTzFkRGJfdXhhbms" class="logo">
 			</div>
 			<form class="four wide column">
 				<h5 class="goodtimes">PRODUCTS:</h5>

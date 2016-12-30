@@ -65,7 +65,7 @@ include_once('classes/class_getLocale.php');
 				
 				<div class="top-nav-sub-group">
 					<center>
-						<?php echo getNavItems($active_nav_name); ?>
+						<?php echo getNavItems( getPageID(get_current_route()) ); ?>
 						<div id="activeNav"></div>
 					</center>
 				</div>

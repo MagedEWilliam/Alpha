@@ -46,7 +46,7 @@ $(document).ready(function(){
 	}
 	updateSubtotal();
 	refreshLocale();
-
+	
 	$('.carticon').hover(
 		function(){
 			if( $('.carticon .detail').text() != 0 ){

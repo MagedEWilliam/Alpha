@@ -197,7 +197,7 @@ function nfolders(target, text, link, i, cls){
 }
 
 function mnfolders(target, text, link, i, cls){
-	$(target).append( '<div class="four wide column" id="sub_'+i+'">\
+	$(target).append( '<div style="width:24.9% !important" class="four wide column" id="sub_'+i+'">\
 		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
 		</div>');
 
@@ -230,11 +230,6 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
-	if($('.imactive').length > 0){
-		$('#activeNav').css('width', (Number( $('.imactive').css('width').replace('px', '') ) ) + 'px' );
-		$('#activeNav').css({'left': $('.imactive').position().left,
-			'background-color': '#f7da00'});
-	}
 	if (window.screen.width > 1200) {
 		the3dcard(true);
 	}
@@ -409,7 +404,22 @@ function refreshLocale(){
 		var newVal = current_Val.replace('@', getFromLocale(key));
 		$(numbof[i]).html( newVal );
 	}
+	refreshinlineLocale();
 }
+
+function refreshinlineLocale(){
+	var numbof = $('[inlineLocale]');
+	for (var i = 0; i <= numbof.length -1; i++) {
+		var current_Val = $(numbof[i]).html();
+		var key = $(numbof[i]).attr('inlineLocale');
+		var tarprep = key.split(':');
+		var target = tarprep[0];
+		var val = getFromLocale(tarprep[1]);
+		var newVal = $(numbof[i]).attr(target).replace('@', val);
+		$(numbof[i]).attr(target, newVal);
+	}
+}
+
 function isthere(cont, pram){
 	if(cont == pram){
 		return true;

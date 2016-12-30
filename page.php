@@ -7,7 +7,7 @@ function get_current_route(){
 	return $what_you_want;
 }
 
-function getContentOf(){
+function _getContentOf(){
 	$page      = get_current_route();
 	$db        = Database::getInstance();
 	$mysqli    = $db->getConnection();
@@ -33,6 +33,37 @@ function getContentOf(){
 	}
 }
 
+function getContentOf(){
+	$page      = get_current_route();
+	$db        = Database::getInstance();
+	$mysqli    = $db->getConnection();
+
+	$sqlQuery = "SELECT * FROM `composepage`";
+	$sqlQuery .= " INNER JOIN `parts` on composepage.partid = parts.ID";
+	$sqlQuery .= " Where `composepage`.`pageid` = " . getPageID(get_current_route())['ID'];
+
+	$res = '';
+	if ($result = $mysqli->query($sqlQuery)) {
+		echo mysqli_error($mysqli);
+		while ($row = $result->fetch_assoc()) {
+			$res .= $row['content'];
+		}
+	}
+	return $res;
+}
+
+function getPageID($page){
+	$db        = Database::getInstance();
+	$mysqli    = $db->getConnection();
+
+	$sqlQuery = "SELECT * FROM `pages` WHERE url = '" . $page . "'";
+
+	if ($result = $mysqli->query($sqlQuery)) {
+		echo mysqli_error($mysqli);
+		$row = $result->fetch_assoc();
+		return $row;
+	}
+}
 
 function _locale($word){
 	if($_GET['lang'] == 'en'){
@@ -52,7 +83,7 @@ $active_nav_name = $res;
 <!-- <html <?php //if( isset($_GET['lang']) &&  $_GET['lang'] == "ar" ) { echo ' dir="rtl" '; } ?>> -->
 <html>
 <head>
-	<title><?php echo $active_nav_name[_locale('Name')] ?></title>
+	<title><?php echo getPageID(get_current_route())[_locale('Name')] ?></title>
 	<?php $_GET['__level']=1; include('pages/links.php') ?>
 </head>
 <body id="example" class="layouts pushable" style="overflow-y: scroll;">
@@ -63,21 +94,15 @@ $active_nav_name = $res;
 				<div class="ui container large">
 					<div class="ui stackable grid segment topping" style="box-shadow: none;">
 						<?php 
-						if(get_current_route() == 'product_details'){	
-							include_once('pages/products/product_details.php');
-						}elseif(get_current_route() == 'products'){	
-							include_once('pages/products/products.php');
-						}elseif(get_current_route() == 'cart'){	
-							include_once('pages/cart/cart.php');
-						}elseif(get_current_route() == 'pay'){	
-							require_once('_pay.php');
-						}elseif(get_current_route() == 'Home'){	
-							require_once('pages/home/home.php');
+						switch (get_current_route()) {
+							case "product_details":include_once('pages/products/product_details.php'); break;
+							case "products":include_once('pages/products/products.php'); break;
+							case "cart":include_once('pages/cart/cart.php'); break;
+							case "pay":require_once('_pay.php'); break;
+							default: echo $active_nav_name; break;
 						}
-						else{
-							echo $active_nav_name['content'];
-						}
-						// echo get_current_route();
+							// case "Home":require_once('pages/home/home.php'); break;
+						
 						?>
 				</div>
 			</div>
