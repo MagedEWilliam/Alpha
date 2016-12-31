@@ -1,30 +1,38 @@
 function rowofcartitem(item, i, target){
-  $(target).append('<tr id="__'+item.code+'__">\
-  <input type="hidden" value="'+item.code+'" id="'+item.code+'" name="item_code['+i+']">\
-  <td class="collapsing">\
+  var view = '<tr id="__'+item.code+'__">\
+    <input type="hidden" value="'+item.code+'" id="'+item.code+'" name="item_code['+i+']">\
+    <td class="collapsing">\
     <img src="'+item.image+'" width="100"></td>\
-  <td>\
+    <td>\
     <h3>'+item[locale('Name')]+'</h3>\
     <p>'+item.code+'</p>\
-  </td>\
-  <td class="collapsing paddingLefttozero paddingRighttozero">\
-  $\
-  </td>\
-  <td class="collapsing paddingLefttozero">\
-  '+Number(item.price)+'\
-  <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
-  </td>\
-  <td class="collapsing">\
+    </td>\
+    <td class="collapsing paddingLefttozero paddingRighttozero">\
+    $\
+    </td>\
+    <td class="collapsing paddingLefttozero">\
+    '+Number(item.price)+'\
+    <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
+    </td>\
+    <td class="collapsing" id="'+item.ID+'" >'
+
+    if(!item.allowstock){
+      view +='<div class="ui red basic label" locale="outOfStock">@</div>';
+    }
+
+    view +='</td>\
+    <td class="collapsing">\
     \
     <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
-      <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
-      <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
-      <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
+    <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+    <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
+    <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
     </div>\
     \
     <a id="_'+item.code+'_" style="margin-left:10px;" class="ui icon button"><i class="ui icon trash"></i></a>\
-  </td>\
-</tr>');
+    </td>\
+    </tr>';
+    $(target).append(view);
   
   $('#_'+item.code+'_').on('click', function(){
     $('#__'+item.code+'__').remove();
@@ -45,19 +53,25 @@ function rowofcartitem(item, i, target){
     var current = $( $('#__'+item.code+'__ input')[2] ).val();
     if(current > 1){
       $( $('#__'+item.code+'__ input')[2] ).val(Number(current)-1);
-      qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
+      qunChanges(item, $('#__'+item.code+'__ input')[2] );
     }
   });
 
   $('#__'+item.code+'__ .addOne').on('click', function(){
     var current = $( $('#__'+item.code+'__ input')[2] ).val();
     $( $('#__'+item.code+'__ input')[2] ).val(Number(current)+1);
-    qunChanges(item.code, $('#__'+item.code+'__ input')[2] );
+    qunChanges(item, $('#__'+item.code+'__ input')[2] );
   });
 
 }
 function qunChanges (targ, source){
-  cart.updateQun( targ, $(source).val() );
+  cart.updateQun( targ.code, $(source).val() );
+  var isutstock = allowToDrawFromStock(targ.ID, $(source).val() );
+  if(isutstock){
+    $('#' + targ.ID).html('');
+  }else{
+    $('#' + targ.ID).html('<div class="ui red basic label">'+getFromLocale('outOfStock')+'</div>');
+  }
 }
 
 function echoCart(){
@@ -118,7 +132,7 @@ var cart = {
 
   add:    function add   (item, mode){
     $.when( iteminfo.get(item) )
-      .then(function( data ) {
+    .then(function( data ) {
 
       var data = JSON.parse(data);
       var isadded = cart.set('cart', data[0].item);
@@ -156,10 +170,13 @@ var cart = {
         item.qun = initqun;
       }
 
+      item.allowstock = allowToDrawFromStock(item.ID, item.qun);
+
       getting.push( item );
 
       var gettingformatted = JSON.stringify(getting);
       localStorage.setItem(key, gettingformatted);
+
       return true;
     }else{
       return false;
@@ -170,6 +187,18 @@ var cart = {
     var cart = localStorage.getItem(item);
     var fomatted = JSON.parse(cart);
     return fomatted;
+  },
+
+  getbycode:    function getbycode   (item, code){
+    var _cart = localStorage.getItem(item);
+    var fomatted = JSON.parse(_cart);
+    var ret = null;
+    $.each( fomatted, function(_key, _value){
+      if(_value.code == code){
+       ret = _value;
+      }
+    });
+    return ret;
   },
 
   remove: function remove(key){
@@ -206,4 +235,22 @@ function tothecart(item, e){
 }
 if($.query.get('success') == "true" && $.query.get('paymentId') !='' && $.query.get('token') !='' && $.query.get('PayerID') !=''){
   cart.clear();
+}
+
+function allowToDrawFromStock(itemID, qun){
+  var prams = "method=getQun&id=" + itemID + "&qun=" + qun;
+  var isallowed = false;
+  $.ajax({
+    dataType: "json",
+    url: "../classes/class_stock.php?"+ prams,
+    async: false,
+    success: function(data) {
+      if(data.allowstock == 1){
+        isallowed = true;
+      }else{
+        isallowed = false;
+      }
+    }
+  });
+  return isallowed;
 }

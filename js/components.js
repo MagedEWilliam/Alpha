@@ -1,7 +1,9 @@
 function card(target, ItemProp, classes){
 	var cartnaming = '';
 	if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
-	else{ cartnaming = getFromLocale('added')  + ' ✓';}
+	else if(classes == 'out'){ cartnaming = getFromLocale('outOfStock'); }
+	else { cartnaming = getFromLocale('added')  + ' ✓';}
+	if(classes == 'out'){ classes = 'disabled'}
 	var drawacard = '\
 	<div class="ui link card  longproduct">\
 	<div class="ui slide masked move up reveal image" >\
@@ -44,8 +46,6 @@ function card(target, ItemProp, classes){
 		<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
 		<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
 		</div>';
-	} else {
-
 	}
 
 	drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price)+'</label>';

@@ -35,7 +35,12 @@ $(document).ready(function(){
 				}else{
 					teclasses = 'disabled';
 				}
-				card( $('.miniproducts'), data[i], teclasses);
+				if(Number(data[i].item.qun) > 0){
+					card( $('.miniproducts'), data[i], teclasses);
+				}else{
+					card( $('.miniproducts'), data[i], 'out');
+				}
+				
 			}
 		});
 
@@ -73,59 +78,15 @@ $(document).ready(function(){
 				}else{
 					teclasses = 'disabled';
 				}
-				card( $('#products'), data[i], teclasses);
+				if(Number(data[i].item.qun) > 0){
+					card( $('#products'), data[i], teclasses);
+				}else{
+					card( $('#products'), data[i], 'out');
+				}
 			}
 			$('.searchresultcount').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );
 			resizeClasses();
 		});
-
-		if(pageName() == "product_details"){
-			if($.query.get('product_id') != ''){
-
-				var themrurl = '';
-				if($.query.get('compo') != '' ){
-					themrurl = "../../classes/class_getDetails.php?product_id=" + $.query.get('product_id');
-				}else{
-					themrurl ="../classes/class_getDetails.php?product_id=" + $.query.get('product_id');
-				}
-
-				$.ajax({
-					url: themrurl
-				}).done(function(data) {
-					data = jQuery.parseJSON(data);
-
-					$('.bragimg').attr('src', data[0].item['image']);
-					$('#product_details').append( trlSlpadrPad('tr_Name' , '') );
-					$('#tr_Name').append(rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Name')
-						+ rtlSlpadrPad('slpad content', '<h4>' + data[0].item[locale('Name')] + '</h4')
-						);
-					$('#product_details').append( trlSlpadrPad('tr_ID' , '') );
-					$('#tr_ID').append(
-
-						rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Code')
-						+ rtlSlpadrPad('slpad content', '<b>' + data[0].item['code'] + '</b>')
-						);
-
-					var i = 0;
-
-					$.each(data[0].Subcategory, function(x, value) {
-						$('#product_details').append( trlSlpadrPad('tr_'+x , '') );
-
-						$('#tr_'+x).append( rtlSlpadrPad('rtl Fixedtd slpad rpad', value[locale('Name')]) );
-						var sometext = '<td class="slpad">';
-						sometext += '<div class="ui label" style="float:left;">' +
-						value[locale('value')] + '</div>';
-						$.each(data[0].Subcategory[x].more, function(y, _value) {
-							sometext += '<div class="ui label" style="float:left;">' +
-							_value[locale('value')] + '</div>';
-						});
-
-						$('#tr_'+x).append(sometext );
-
-					});
-				});
-			}
-		}
 
 
 
@@ -186,6 +147,49 @@ $(document).ready(function(){
 			langdrop();
 		}
 	}
+
+	var themrurl = '';
+			if($.query.get('compo') != '' ){
+				themrurl = "../../classes/class_getDetails.php?product_id=" + $.query.get('product_id');
+			}else{
+				themrurl ="../classes/class_getDetails.php?product_id=" + $.query.get('product_id');
+			}
+
+			$.ajax({
+				url: themrurl
+			}).done(function(data) {
+				data = jQuery.parseJSON(data);
+
+				$('.bragimg').attr('src', data[0].item['image']);
+				$('#product_details').append( trlSlpadrPad('tr_Name' , '') );
+				$('#tr_Name').append(rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Name')
+					+ rtlSlpadrPad('slpad content', '<h4>' + data[0].item[locale('Name')] + '</h4')
+					);
+				$('#product_details').append( trlSlpadrPad('tr_ID' , '') );
+				$('#tr_ID').append(
+
+					rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Code')
+					+ rtlSlpadrPad('slpad content', '<b>' + data[0].item['code'] + '</b>')
+					);
+
+				var i = 0;
+
+				$.each(data[0].Subcategory, function(x, value) {
+					$('#product_details').append( trlSlpadrPad('tr_'+x , '') );
+
+					$('#tr_'+x).append( rtlSlpadrPad('rtl Fixedtd slpad rpad', value[locale('Name')]) );
+					var sometext = '<td class="slpad">';
+					sometext += '<div class="ui label" style="float:left;">' +
+					value[locale('value')] + '</div>';
+					$.each(data[0].Subcategory[x].more, function(y, _value) {
+						sometext += '<div class="ui label" style="float:left;">' +
+						_value[locale('value')] + '</div>';
+					});
+
+					$('#tr_'+x).append(sometext );
+
+				});
+			});
 
 	$(window).on('resize', resizeClasses);
 	if($.query.get('lang') == 'en'){

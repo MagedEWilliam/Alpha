@@ -107,5 +107,4 @@ include_once('classes/class_getLocale.php');
 			</div>
 		</div>
 	</div>
-	<img src="../assets/header-shadow.png" class="underimg">
 </div>

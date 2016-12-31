@@ -91,8 +91,5 @@ function _subcat($itemID){
 		
 		<div id="productfooter">
 		</div>
-		<div id="product_details" class="ui modal">
-			
-		</div>
 	</div>
 </div>

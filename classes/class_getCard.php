@@ -28,6 +28,7 @@ class Card
 		`subcategory`.`NameAr` ,
 		`subcategory`.`NameCh` ,
 		`subcategory`.`image` ,
+		`subcategory`.`qun` ,
 		`subcategory`.`price`  
 
 		FROM `catproperty` 

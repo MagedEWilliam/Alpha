@@ -110,5 +110,9 @@ $active_nav_name = $res;
 		</div>
 	</div>
 </div>
+<div id="product_details" class="ui modal">
+			
+</div>
+<script>langdrop();</script>
 </body>
 </html>

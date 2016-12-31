@@ -46,7 +46,7 @@ if( isset($_GET['compo']) ){
       <div class="ui segment">
 
 
-        <h4 class="floatleft notopmargin">Total:</h4>
+        <h4 class="floatleft notopmargin" locale="total">@:</h4>
         <h4 class="floatright notopmargin" id="subtotal">$0</h4>
 
         <br>
@@ -59,7 +59,7 @@ if( isset($_GET['compo']) ){
         </center>
       </div>
 
-      <div class="ui divider"></div>
+      <!-- <div class="ui divider"></div> -->
       <div class="ui top attached tabular menu">
         <a class="item active" data-tab="first">Track order</a>
           <!--
