@@ -39,6 +39,13 @@ Class Stock{
 		$row = $result->fetch_assoc();
 		return $row;
 	}
+	static public function updateQun ($id, $qun){
+		$db = Database::getInstance();
+		$mysqli = $db->getConnection();
+
+		$sqlQuery = 'UPDATE subcategory SET qun ='.$qun.' WHERE ID = '.$id;
+		$result = $mysqli->query($sqlQuery);
+	}
 
 }
 ?>

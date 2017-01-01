@@ -1,9 +1,6 @@
-<link rel="stylesheet" type="text/css" href="../../libs/semantic/semantic.min.css">
-<link rel="stylesheet" type="text/css" href="../../css/style.css">
-<script type="text/javascript" src="../../libs/jquery.min.js"></script>
-<script type="text/javascript" src="../../libs/semantic/semantic.min.js"></script>
+<?php include('links.html'); ?>
 
-<form method="post" action="#" class="ui form">
+<form method="post" action="#" class="ui form trackorder">
 	<div class="field">
 		<label>Email:</label>
 		<input type="text" name="uname">
@@ -11,11 +8,23 @@
 
 	<div class="field">
 		<label>Order Number:</label>
-		<input type="password" name="uname">
+		<input type="password" name="orderName">
 	</div>
 	
-	<button class="ui button">
+	<div class="ui error message"></div>
+	
+	<a class="ui submit button">
 		<i class="ui icon shipping"></i>
 		Track
 	</button>
 </form>
+
+<script>
+	$('.ui.form.trackorder').form({
+		message   : '.ui.error.message',
+		fields: {
+			uname     : 'email',
+			orderName : ['minLength[6]', 'empty']
+		}
+	});
+</script>

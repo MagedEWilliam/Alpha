@@ -1,4 +1,5 @@
-<form method="POST" action="#" class="ui segment form" style="width:400px; max-width: 400px;margin-top:0px;">
+<?php include('links.html'); ?>
+<form method="POST" action="#" class="ui form login">
 	<div class="field">
 		<label>Email:</label>
 		<input type="text" name="uname">
@@ -6,11 +7,22 @@
 
 	<div class="field">
 		<label>Password:</label>
-		<input type="password" name="uname">
+		<input type="password" name="pwd">
 	</div>
 	
-	<a class="ui button">
+	<div class="ui error message"></div>
+	
+	<a class="ui button submit">
 		<i class="ui icon unlock alternate"></i>
 		Login
 	</a>
 </form>
+<script>
+	$('.ui.form.login').form({
+		message   : '.ui.error.message',
+		fields: {
+			uname : 'email',
+			pwd   : ['minLength[4]', 'empty']
+		}
+	});
+</script>

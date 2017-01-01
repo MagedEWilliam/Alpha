@@ -19,7 +19,7 @@ if( isset($_GET['compo']) ){
      }
      ?>
      <script type="text/javascript">
-      var Glocale = <?php print_r(geLocale()) ?>;
+      $('#product_detail').remove();
     </script>
     
     <form class="row" method="POST" action="<?php 
@@ -61,26 +61,25 @@ if( isset($_GET['compo']) ){
 
       <!-- <div class="ui divider"></div> -->
       <div class="ui top attached tabular menu">
-        <a class="item active" data-tab="first">Track order</a>
-          <!--
-          <a class="item" data-tab="second">Login</a>
-          <a class="item" data-tab="third">Sign up</a>
-        -->
+
+        <a class="item" data-tab="first">Login</a>
+        <a class="item" data-tab="second">Sign up</a>
+        <a class="item active" data-tab="third">Track order</a>
+        
       </div>
 
-      <div class="ui bottom attached tab segment active" data-tab="first">
-        <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
+      <div class="ui bottom attached tab segment" data-tab="first">
+        <iframe style="width: 100%;" height="350" frameborder="0" src="../pages/parts/login_part.php"></iframe>
       </div>
-<!--
 
-        <div class="ui bottom attached tab segment" data-tab="second">
-          <iframe style="width: 100%;" height="200" frameborder="0" src="../pages/parts/login_part.php"></iframe>
-        </div>
+      <div class="ui bottom attached tab segment" data-tab="second">
+        <iframe style="width: 100%;" height="850" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
+      </div>
 
-        <div class="ui bottom attached tab segment" data-tab="third">
-          <iframe style="width: 100%;" height="500" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
-        </div>
-      -->
+      <div class="ui bottom attached tab segment active" data-tab="third">
+        <iframe style="width: 100%;" height="350" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
+      </div>
+
     </div>
 
   </form>

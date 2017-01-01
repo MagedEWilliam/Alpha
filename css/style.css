@@ -190,10 +190,10 @@ div#product.wide.column{
 .amazonmenu{
 	position: relative;
 }
-#product_details.modal{
+#product_detail.modal{
 	margin-top: -300px !important;
 }
-#product_details.modal{
+#product_detail.modal{
 	height: 80%;
 }
 
@@ -682,10 +682,10 @@ div.ui.image.longy{
 	.ui.very.compact.table td{
 		font-size: 14px;
 	}
-	#product_details.modal{
+	#product_detail.modal{
 		margin-top: auto !important;
 	}
-	#product_details{
+	#product_details, #product_detail{
 		height: 100%;
 	}
 	.mrdetail{

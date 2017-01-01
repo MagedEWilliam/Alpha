@@ -95,8 +95,8 @@ function modaltoopen(e){
 }
 
 function modaleinfo(item){
-	$('#product_details').html('');
-	$('#product_details').append('\
+	$('#product_detail').html('');
+	$('#product_detail').append('\
 		<div class="header"><a class="ui small button" onclick="$(\'.modal\').modal(\'hide\')">\
 		<i class="ui close icon"></i>\
 		Close</a></div>\
@@ -105,8 +105,8 @@ function modaleinfo(item){
 		</div>\
 		\
 		');
-	$('#product_details').modal({transition: 'fade up'});
-	$('#product_details').modal('show');
+	$('#product_detail').modal({transition: 'fade up'});
+	$('#product_detail').modal('show');
 }
 
 function getFromLocale(word){
@@ -245,7 +245,18 @@ function resizeClasses(){
 		$('head [name=viewport]').remove();
 		$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
 		the3dcard(false);
+
+
 	}
+}
+
+function mobilewidth(){
+	var potenWidth = 50;
+	$('.top-nav-sub-group a').each(function(i, current){
+		console.log($(current).css('width'));
+		potenWidth += Number( $(current).css('width').replace('px', '') );
+	});
+	$('.top-nav-sub-group center').css('width', potenWidth);
 }
 
 function the3dcard(i){
