@@ -46,7 +46,7 @@ function getNavItems($active_nav_name){
 	echo mysqli_error($mysqli);
 	return $res;
 }
-
+  if(!isset($_SESSION) ){session_start();}
 include_once('classes/class_getLocale.php');
 ?>
 <script type="text/javascript">
@@ -99,7 +99,7 @@ include_once('classes/class_getLocale.php');
 					<a class="ui  image label carticon" style="padding-left: 0!important;" locale="guest" href="cart?lang=<?php echo $_GET['lang']; ?>">
 						<div class="detail" style="margin-right: 0px;margin-left: 9px;border-radius:0;">0</div>
 						<i class="ui cart icon"></i>
-						@
+						<?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } else { echo '@'; }?>
 					</a>
 
 				</div>

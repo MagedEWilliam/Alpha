@@ -2,12 +2,12 @@
 <form method="POST" action="#" class="ui form login">
 	<div class="field">
 		<label>Email:</label>
-		<input type="text" name="uname">
+		<input type="text" name="Username">
 	</div>
 
 	<div class="field">
 		<label>Password:</label>
-		<input type="password" name="pwd">
+		<input type="password" name="Password">
 	</div>
 	
 	<div class="ui error message"></div>
@@ -21,8 +21,8 @@
 	$('.ui.form.login').form({
 		message   : '.ui.error.message',
 		fields: {
-			uname : 'email',
-			pwd   : ['minLength[4]', 'empty']
+			Username   : 'email',
+			Password   : ['minLength[4]', 'empty']
 		}
 	});
 </script>

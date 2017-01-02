@@ -24,7 +24,7 @@ function rowofcartitem(item, i, target){
     <td class="collapsing">\
     \
     <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
-    <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
+      <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
     <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
     <a class="ui icon button addOne"><i class="ui icon plus"></i></a>\
     </div>\
@@ -66,12 +66,7 @@ function rowofcartitem(item, i, target){
 }
 function qunChanges (targ, source){
   cart.updateQun( targ.code, $(source).val() );
-  var isutstock = allowToDrawFromStock(targ.ID, $(source).val() );
-  if(isutstock){
-    $('#' + targ.ID).html('');
-  }else{
-    $('#' + targ.ID).html('<div class="ui red basic label">'+getFromLocale('outOfStock')+'</div>');
-  }
+  outofstock(targ.ID);
 }
 
 function echoCart(){
@@ -83,6 +78,15 @@ function echoCart(){
   }
 }
 
+
+function outofstock(ID){
+  var isutstock = allowToDrawFromStock(ID, $(source).val() );
+  if(isutstock){
+    $('#' + ID).html('');
+  }else{
+    $('#' + ID).html('<div class="ui red basic label">'+getFromLocale('outOfStock')+'</div>');
+  }
+}
 
 function updateSubtotal(){
   var subtotal = 0;

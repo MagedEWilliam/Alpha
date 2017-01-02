@@ -1,5 +1,3 @@
-<?php include('links.html'); ?>
-
 <form method="post" action="#" class="ui form trackorder">
 	<div class="field">
 		<label>Email:</label>
@@ -16,15 +14,6 @@
 	<a class="ui submit button">
 		<i class="ui icon shipping"></i>
 		Track
-	</button>
+	</a>
 </form>
 
-<script>
-	$('.ui.form.trackorder').form({
-		message   : '.ui.error.message',
-		fields: {
-			uname     : 'email',
-			orderName : ['minLength[6]', 'empty']
-		}
-	});
-</script>
