@@ -18,6 +18,15 @@ require_once($level.'classes/class_database.php');
 include_once($level.'classes/class_getLocale.php');
 }
 ?>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.8&appId=113072815862749";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <script type="text/javascript">
 	var Glocale = <?php print_r(geLocale()) ?>;
 </script>
@@ -44,6 +53,10 @@ include_once($level.'classes/class_getLocale.php');
 
 			</tbody>
 		</table>
+	<div class="fb-comments" data-href="https://i-alfa.info" data-width="400" data-numposts="5"></div>
+<script>
+    $(".fb-comments").attr("data-href", "https://i-alfa.info?product_id=" + $.query.get('product_id'));
+</script>
 	</div>
 
 </div>
