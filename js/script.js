@@ -161,6 +161,7 @@ $(document).ready(function(){
 		data = jQuery.parseJSON(data);
 		
 		if(data.length != 0){
+			$('#dolla').text('$' + data[0].item['price']);
 			$('.bragimg').attr('src', data[0].item['image']);
 			$('#product_details').append( trlSlpadrPad('tr_Name' , '') );
 			$('#tr_Name').append(rtlSlpadrPad('rtl Fixedtd slpad rpad', 'Item Name')

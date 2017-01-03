@@ -4,7 +4,7 @@ function card(target, ItemProp, classes){
 	else if(classes == 'out'){ cartnaming = getFromLocale('outOfStock'); }
 	else { cartnaming = getFromLocale('added')  + ' ✓';}
 	if(classes == 'out'){ classes = 'disabled'}
-	var drawacard = '\
+		var drawacard = '\
 	<div class="ui link card  longproduct">\
 	<div class="ui slide masked move up reveal image" >\
 	<div class="content fillitcontent">\
@@ -76,18 +76,24 @@ function card(target, ItemProp, classes){
 
 	var imtcod = ItemProp.item.code;
 	$('#Qun_'+imtcod+' div.minusOne').on('click', function(){
-		var current = $( $('#Qun_'+imtcod+' input') ).val();
-		if(current > 1){
-			$( $('#Qun_'+imtcod+' input') ).val(Number(current)-1);
-			qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
-		}
+		P(true, imtcod);
 	});
 
 	$('#Qun_'+imtcod+' div.addOne').on('click', function(){
-		var current = $( $('#Qun_'+imtcod+' input') ).val();
-		$( $('#Qun_'+imtcod+' input') ).val(Number(current)+1);
-		qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
+		P(false, imtcod);
 	});
+}
+
+function P(isminuse, imtcod){
+	var current = $( $('#Qun_'+imtcod+' input') ).val();
+	if(isminuse){
+		if(current > 1){
+			$( $('#Qun_'+imtcod+' input') ).val(Number(current)-1);
+		}
+	}else{
+		$( $('#Qun_'+imtcod+' input') ).val(Number(current)+1);
+	}
+	qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
 }
 
 function modaltoopen(e){
