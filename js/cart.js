@@ -14,15 +14,16 @@ function rowofcartitem(item, i, target){
   '+Number(item.price)+'\
   <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
   </td>\
-  <td class="collapsing" id="'+item.ID+'" >'
+  <td class="collapsing">\
+'
 
   if(!item.allowstock){
     view +='<div class="ui red basic label" locale="outOfStock">@</div>';
   }
 
-  view +='</td>\
-  <td class="collapsing">\
+  view +='\
   \
+  <div id="'+item.ID+'" ></div>\
   <div class="ui tiny action right input" style="width:180px;margin-bottom:5px;">\
   <input style="width: 100px;" name="qun['+i+']" type="number" value="'+ item.qun +'" min="0">\
   <a class="ui icon button minusOne"><i class="ui icon minus"></i></a>\
@@ -50,30 +51,25 @@ function rowofcartitem(item, i, target){
   });
 
   $('#__'+item.code+'__ .minusOne').on('click', function(){
-      Q(true, item.code);
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
+    if(current > 1){
+      $( $('#__'+item.code+'__ input')[2] ).val(Number(current)-1);
+    }
+    qunChanges(item, $('#__'+item.code+'__ input')[2] );
   });
 
   $('#__'+item.code+'__ .addOne').on('click', function(){
-    Q(false, item.code);
+    var current = $( $('#__'+item.code+'__ input')[2] ).val();
+    $( $('#__'+item.code+'__ input')[2] ).val(Number(current)+1);
+    qunChanges(item, $('#__'+item.code+'__ input')[2] );
   });
 
 }
 
-function Q(isminuse, imtcod){
-  var current = $( $('#__'+imtcod+'__ input')[2] ).val();
-  if(isminuse){
-    if(current > 1){
-      $( $('#__'+imtcod+'__ input')[2] ).val(Number(current)-1);
-    }
-  }else{
-    $( $('#__'+imtcod+'__ input')[2] ).val(Number(current)+1);
-  }
-  qunChanges(item, $('#__'+imtcod+'__ input')[2] );
-}
 
 function qunChanges (targ, source){
   cart.updateQun( targ.code, $(source).val() );
-  outofstock(targ.ID);
+  outofstock(targ.ID, source);
 }
 
 function echoCart(){
@@ -87,7 +83,7 @@ function echoCart(){
 }
 
 
-function outofstock(ID){
+function outofstock(ID, source){
   var isutstock = allowToDrawFromStock(ID, $(source).val() );
   if(isutstock){
     $('#' + ID).html('');
@@ -114,7 +110,13 @@ $(window).on('click keydown', updateSubtotal);
 
 var iteminfo = {
   get: function(key){
-    theurl = '../classes/class_getCard.php?exactID=';
+    var lvl;
+    if( $.query.get('compo') == '1' ){
+      lvl = '../../';
+    }else{
+      lvl = '../';
+    }
+    theurl = lvl + 'classes/class_getCard.php?exactID=';
     return $.ajax({ url: theurl + key });
   },
   set: function(){},
@@ -252,9 +254,16 @@ if($.query.get('success') == "true" && $.query.get('paymentId') !='' && $.query.
 function allowToDrawFromStock(itemID, qun){
   var prams = "method=getQun&id=" + itemID + "&qun=" + qun;
   var isallowed = false;
+  var lvl;
+  if( $.query.get('compo') == '1' ){
+    lvl = '../../';
+  }else{
+    lvl = '../';
+  }
+
   $.ajax({
     dataType: "json",
-    url: "../classes/class_stock.php?"+ prams,
+    url: lvl + "classes/class_stock.php?"+ prams,
     async: false,
     success: function(data) {
       if(data.allowstock == 1){

@@ -205,7 +205,7 @@ function nfolders(target, text, link, i, cls){
 }
 
 function mnfolders(target, text, link, i, cls){
-	$(target).append( '<div style="width:24.9% !important" class="four wide column" id="sub_'+i+'">\
+	$(target).append( '<div class="four wide column catgor" id="sub_'+i+'">\
 		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
 		</div>');
 
@@ -238,21 +238,31 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
-	if (window.screen.width > 1200) {
+	var screenwid = Number( $('html').css('width').replace('px', '') );
+	if (screenwid > 1200) {
 		$('.move.up').addClass('.reveal');
 		the3dcard(true);
+		if(! $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').addClass('container');
+		}
 	}
-	if ( window.screen.width < 1000) {
+	if ( screenwid < 1000) {
 		$('.move.up').addClass('.reveal');
 		the3dcard(true);
+		if(! $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').addClass('container');
+		}
 	}
-	if ( window.screen.width < 565) {
+	if ( screenwid < 999 && screenwid > 565) {
+		if( $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').removeClass('container');
+		}
+	}
+	if ( screenwid < 565) {
 		$('.move.up').removeClass('.reveal');
 		$('head [name=viewport]').remove();
 		$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
 		the3dcard(false);
-
-
 	}
 }
 

@@ -46,7 +46,7 @@ function getNavItems($active_nav_name){
 	echo mysqli_error($mysqli);
 	return $res;
 }
-  if(!isset($_SESSION) ){session_start();}
+if(!isset($_SESSION) ){session_start();}
 include_once('classes/class_getLocale.php');
 ?>
 <script type="text/javascript">
@@ -96,15 +96,34 @@ include_once('classes/class_getLocale.php');
 					</div>
 
 
-					<a class="ui  image label carticon" style="padding-left: 0!important;" locale="guest" href="cart?lang=<?php echo $_GET['lang']; ?>">
-						<div class="detail" style="margin-right: 0px;margin-left: 9px;border-radius:0;">0</div>
-						<i class="ui cart icon"></i>
-						<?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } else { echo '@'; }?>
-					</a>
+					<a class="ui  image label carticon" style="padding-left: 0!important;padding-right: 0px;" href="cart?lang=<?php echo $_GET['lang']; ?>&active=cart">
+						<div class="detail" style="margin-right: 0px;margin-left: 9px;border-radius:0;padding-bottom: 7px;height: 30px;padding-left: 7px;padding-right: 7px;">
+							<p class="cnt" style="float:right;">0</p>
+							<i class="ui cart icon"></i>
+						</div>
 
-				</div>
-				<div id="line0"><p locale="lightUpYourLife">@</p></div>
+						<?php
+						if(false){
+							if (isset($_SESSION['username'])) {
+								echo'<div  class="detail floatright" style="margin-right: 0px;margin-left: 5px;border-radius:0;padding-bottom: 7px;height: 30px;padding-left: 7px;padding-right: 7px;">
+								<i class="ui alarm icon" style="margin-left: 0px;margin-right: 0px;"></i>
+								0
+							</div>';
+						}
+					}
+					?>
+
+					<p locale="guest" style="float:right;margin-right: 5px;margin-left: 5px;">
+						<?php if (isset($_SESSION['username'])) { echo $_SESSION['username']; } else { echo '@'; }?>
+					</p>
+
+					
+
+				</a>
+
 			</div>
+			<div id="line0"><p locale="lightUpYourLife">@</p></div>
 		</div>
 	</div>
+</div>
 </div>

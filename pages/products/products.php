@@ -43,14 +43,9 @@ function _subcat($itemID){
 	<div class="thirteen wide column " id="product">
 
 		<div class="ui grid">
-			<div class="row">
-				<div class="nine wide column" id="subcatmob">
-					<div class="mobilefil">
-						<a href="#" class="ui tiny button submenumob floatleft" locale="filters">≡@</a>
-						<select class="floatright shideme topspace" id="mobilesubmenu">
-							<option id="defuloptsub" locale="categories">@</option>
-						</select>
-					</div>
+			<div class="row optman">
+				<div class="sixteen wide column" id="">
+
 
 					<div class="ui breadcrumb">
 						<a class="section" id="Home-crumb">
@@ -77,19 +72,23 @@ function _subcat($itemID){
 
 					</div>
 
-				</div>
-				<div class="seven wide column rtl searchresultcount" id="srchres">
-					<p class="rtl">search result</p>
+
+					<div id="srchres" class="floatright">
+						<p class="rtl">search result</p>
+					</div>
+
+					<select class="floatright subcatmob shideme topspace mobilefil" id="mobilesubmenu">
+						<option id="defuloptsub" locale="categories">@</option>
+					</select>
 				</div>
 			</div>
-		</div>
-		<br>
-		<div id="products" class="ui cards">
+			<br>
+			<div id="products" class="ui cards">
 
-		</div>
-		<br>
-		
-		<div id="productfooter">
+			</div>
+			<br>
+
+			<div id="productfooter">
+			</div>
 		</div>
 	</div>
-</div>

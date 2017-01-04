@@ -91,7 +91,7 @@ $active_nav_name = $res;
 	<div class="pusher">
 		<div class="full height">
 			<div class="article">
-				<div class="ui container large">
+				<div class="bigboss ui container large">
 					<div class="ui stackable grid segment topping" style="box-shadow: none;">
 						<?php 
 						switch (get_current_route()) {
@@ -113,6 +113,17 @@ $active_nav_name = $res;
 <div id="product_detail" class="ui modal">
 			
 </div>
-<script>langdrop();</script>
+<script>
+langdrop();
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-89729804-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>
