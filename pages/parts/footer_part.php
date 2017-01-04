@@ -33,7 +33,7 @@
 				</pre>
 				<h5 class="goodtimes">Follow us:</h5>
 
-				<a href="http://facebook.com" class="ui circular facebook f icon button">
+				<a href="https://www.facebook.com/alphaeg" class="ui circular facebook f icon button">
 				  <i class="facebook f icon"></i>
 				</a>
 				<a href="http://twitter.com" class="ui circular twitter icon button">

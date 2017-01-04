@@ -18,83 +18,29 @@ if( isset($_GET['compo']) ){
        include_once($level.'classes/class_getLocale.php');
      }
      ?>
-     <script type="text/javascript">
-      $('#product_detail').remove();
-    </script>
-    
-    <form class="row" method="POST" action="<?php 
-    if($_SERVER['SERVER_NAME'] == 'localhost'){
-      echo "http://localhost/ALPHA/checkout.php?lang=" . $_GET['lang'];
-    }else{
-      echo "http://i-alfa.info/checkout.php?lang=" . $_GET['lang'];
-    }
-    ?>">
-    <div class="eleven wide column">
+     <div class="row">
+       <div class="column" style="padding-left: 0px;padding-right: 0px;">
+        <div class="ui pointing secondary blue menu">
+          <div>
+          <a class="item <?php if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}?> floatleft" data-tab="_first">Cart</a>
+            <a class="item <?php if(isset($_GET['active']) && $_GET['active'] == 'orders' ){echo 'active';}?> floatleft" data-tab="_second">Orders</a>
+          </div>
+        </div>
 
-      <h4 class="goodtimes " locale="itemsDetails">@</h4>
-      <table class="ui very compact striped  table" id="product_details">
-        <tbody>
-          <script>echoCart();</script>
-        </tbody>
-      </table>
+        <div class="ui tab <?php if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}?> stackable grid" data-tab="_first">
+         <?php include_once "thecart.php"; ?>
+       </div>
 
-      <br>
-
-    </div>
-    <div class="five wide column" style="position: relative;">
-
-      <div class="ui segment">
-
-
-        <h4 class="floatleft notopmargin" locale="total">@:</h4>
-        <h4 class="floatright notopmargin" id="subtotal">$0</h4>
-
-        <br>
-        <center>
-          <button type="submit" class="ui massive button blue" id="checkdisout" locale="checkoutwithpaypal">
-            <i class="ui icon paypal"></i>
-            @
-          </button>
-
-        </center>
-      </div>
-
-      <!-- <div class="ui divider"></div> -->
-      <div class="ui top attached tabular menu">
-
-        <a class="item" data-tab="first">Login</a>
-        <a class="item" data-tab="second">Sign up</a>
-        <a class="item active" data-tab="third">Track order</a>
-        
-      </div>
-
-      <div class="ui bottom attached tab segment" data-tab="first">
-        <iframe style="width: 100%;" height="350" frameborder="0" src="../pages/parts/login_part.php"></iframe>
-      </div>
-
-      <div class="ui bottom attached tab segment" data-tab="second">
-        <iframe style="width: 100%;" height="850" frameborder="0" src="../pages/parts/signup_part.php"></iframe>
-      </div>
-
-      <div class="ui bottom attached tab segment active" data-tab="third">
-        <iframe style="width: 100%;" height="350" frameborder="0" src="../pages/parts/trackorder_part.php"></iframe>
+       <div class="ui tab <?php if(isset($_GET['active']) && $_GET['active'] == 'orders' ){echo 'active';}?> stackable grid" data-tab="_second">
+        <p>_second</p>
       </div>
 
     </div>
+  </div>
 
-  </form>
-  <script type="text/javascript">
-    if( cart.get('cart') == null ) {
-      $('form').attr('action', '');
-      $('#checkdisout').remove();
-      $('[locale=itemsDetails]').remove();
-      $('h4').parent().remove();
-      $('.divider').remove();
-      $('table').remove();
-    }
-    $('.menu .item').tab();
-  </script> 
-
+  <script>
+    $('.secondary.menu .item').tab();
+  </script>
   <?php
   if( isset($_GET['compo']) ){
     echo '\

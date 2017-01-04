@@ -1,5 +1,4 @@
 <?php
-
 use PayPal\Api\Payer;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;

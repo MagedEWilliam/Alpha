@@ -4,7 +4,7 @@ function card(target, ItemProp, classes){
 	else if(classes == 'out'){ cartnaming = getFromLocale('outOfStock'); }
 	else { cartnaming = getFromLocale('added')  + ' ✓';}
 	if(classes == 'out'){ classes = 'disabled'}
-	var drawacard = '\
+		var drawacard = '\
 	<div class="ui link card  longproduct">\
 	<div class="ui slide masked move up reveal image" >\
 	<div class="content fillitcontent">\
@@ -76,18 +76,24 @@ function card(target, ItemProp, classes){
 
 	var imtcod = ItemProp.item.code;
 	$('#Qun_'+imtcod+' div.minusOne').on('click', function(){
-		var current = $( $('#Qun_'+imtcod+' input') ).val();
-		if(current > 1){
-			$( $('#Qun_'+imtcod+' input') ).val(Number(current)-1);
-			qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
-		}
+		P(true, imtcod);
 	});
 
 	$('#Qun_'+imtcod+' div.addOne').on('click', function(){
-		var current = $( $('#Qun_'+imtcod+' input') ).val();
-		$( $('#Qun_'+imtcod+' input') ).val(Number(current)+1);
-		qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
+		P(false, imtcod);
 	});
+}
+
+function P(isminuse, imtcod){
+	var current = $( $('#Qun_'+imtcod+' input') ).val();
+	if(isminuse){
+		if(current > 1){
+			$( $('#Qun_'+imtcod+' input') ).val(Number(current)-1);
+		}
+	}else{
+		$( $('#Qun_'+imtcod+' input') ).val(Number(current)+1);
+	}
+	qunChanges(imtcod, $('#Qun_'+imtcod+' input') );
 }
 
 function modaltoopen(e){
@@ -199,7 +205,7 @@ function nfolders(target, text, link, i, cls){
 }
 
 function mnfolders(target, text, link, i, cls){
-	$(target).append( '<div style="width:24.9% !important" class="four wide column" id="sub_'+i+'">\
+	$(target).append( '<div class="four wide column catgor" id="sub_'+i+'">\
 		<a class="'+cls+'" href="'+link+'">'+text+'</a>\
 		</div>');
 
@@ -232,21 +238,31 @@ function nativeSelect(cls, id){
 }
 
 function resizeClasses(){
-	if (window.screen.width > 1200) {
+	var screenwid = Number( $('html').css('width').replace('px', '') );
+	if (screenwid > 1200) {
 		$('.move.up').addClass('.reveal');
 		the3dcard(true);
+		if(! $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').addClass('container');
+		}
 	}
-	if ( window.screen.width < 1000) {
+	if ( screenwid < 1000) {
 		$('.move.up').addClass('.reveal');
 		the3dcard(true);
+		if(! $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').addClass('container');
+		}
 	}
-	if ( window.screen.width < 565) {
+	if ( screenwid < 999 && screenwid > 565) {
+		if( $('.bigboss').hasClass( "container" ) ){
+			$('.bigboss').removeClass('container');
+		}
+	}
+	if ( screenwid < 565) {
 		$('.move.up').removeClass('.reveal');
 		$('head [name=viewport]').remove();
 		$('head').prepend('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">');
 		the3dcard(false);
-
-
 	}
 }
 
