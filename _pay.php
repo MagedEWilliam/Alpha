@@ -19,6 +19,16 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $exec->setPayerId($payerId);
     $showmeta = false;
 
+echo '<pre>';
+// print_r( $payment );
+print_r( uniqid(rand(), false) );
+echo '<br>';
+print_r( password_hash('PAY-4G941073EH4918359LBWPLRQ', PASSWORD_DEFAULT) );
+echo '<br>';
+print_r( hash('sha512', $payment->id) );
+echo '<br>';
+print_r($_SESSION);
+echo '</pre>';
 
     if($showmeta){
         print_r( $payment->getState() );
@@ -72,6 +82,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     } catch (Exception $e) {
         $showmeta = false;
         $data = json_decode($e->getData());
+        print_r($e->getData());
         if( $_GET['order'] == 'new') {
             echo "<div class='ui toowide error message'>" . $data->message . "</div>";
         }elseif ( $_GET['order'] == 'check') {
@@ -106,7 +117,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
     } else {
         if ( ! session_id() ) @ session_start();
-        if(isset($_SESSION['userNAme']) ){
+        if(isset($_SESSION['username']) ){
             echo '<div class="field"><a class="ui blue button" href="' . $_SERVER['REQUEST_URI'] . '&order=new">Place Order</a></div></form>';
         }else{
             include"pages/parts/signup_part.php";

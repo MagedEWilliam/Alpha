@@ -66,11 +66,6 @@ $(document).ready(function(){
 	
 	setTimeout(function(){
 		resizeClasses();
-		if($('.imactive').length){
-			$('.top-nav-sub-group').scrollLeft($('.imactive').position().left);
-		}else{
-			$('.top-nav-sub-group').scrollLeft($('.top-nav-sub-group a').first().position().left);
-		}
 	},20);
 
 	setTimeout(function(){ resizeClasses(); }, 300);

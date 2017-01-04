@@ -41,12 +41,20 @@ function getContentOf(){
 	$sqlQuery = "SELECT * FROM `composepage`";
 	$sqlQuery .= " INNER JOIN `parts` on composepage.partid = parts.ID";
 	$sqlQuery .= " Where `composepage`.`pageid` = " . getPageID(get_current_route())['ID'];
-
+	
 	$res = '';
 	if ($result = $mysqli->query($sqlQuery)) {
 		echo mysqli_error($mysqli);
 		while ($row = $result->fetch_assoc()) {
-			$res .= $row['content'];
+
+			if( $_GET['lang'] == 'en' ){
+				$res .= $row['content'];
+			}else if( $_GET['lang'] == 'ar' ){
+				$res .= $row['contentAr'];
+			}else if( $_GET['lang'] == 'ch' ){
+				$res .= $row['contentCh'];
+			}
+
 		}
 	}
 	return $res;
@@ -104,26 +112,26 @@ $active_nav_name = $res;
 							// case "Home":require_once('pages/home/home.php'); break;
 						
 						?>
+					</div>
 				</div>
-			</div>
 				<?php include_once('pages/parts/footer_part.php'); ?>
+			</div>
 		</div>
 	</div>
-</div>
-<div id="product_detail" class="ui modal">
-			
-</div>
-<script>
-langdrop();
+	<div id="product_detail" class="ui modal">
 
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	</div>
+	<script>
+		langdrop();
 
-  ga('create', 'UA-89729804-1', 'auto');
-  ga('send', 'pageview');
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-</script>
+		ga('create', 'UA-89729804-1', 'auto');
+		ga('send', 'pageview');
+
+	</script>
 </body>
 </html>

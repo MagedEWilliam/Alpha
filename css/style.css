@@ -694,7 +694,7 @@ div.ui.image.longy{
 		width: 100% !important;
 	}
 	.top-nav-sub-group a.imactive{
-		padding-bottom: 5px;
+		padding-bottom: 9px;
 	}
 	.adv{
 		transform: translate(-50%, -50%);
@@ -734,7 +734,7 @@ div.ui.image.longy{
 	}
 	.logo img{
 		padding-top: 2px;
-		width: 49px;
+		width: 54px;
 	}
 	#Home-nav{
 		font-size: 15px;
@@ -766,12 +766,12 @@ div.ui.image.longy{
 	}
 	#line0{
 		margin-top: 0px;
-		margin-left: 35px;
+		margin-left: 40px;
 		
 	}
 	#line0 p{
 		color: #0061a5;
-		font-size: 1px;
+		font-size: 7px;
 		padding-left: 1px;
 	}
 	#line1{
@@ -878,22 +878,24 @@ div.ui.image.longy{
 	}
 	.unslider-horizontal ul li img{
 		height: 100%;
-		width: auto !important;
+		width: 100% !important;
 	}
 	.mrp{
 		width: 80%;
 	}
-
-
+	
 	.mobilefil{
 		display: block;
-		    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	.optman{
 		height: 70px;
+	}
+	.ui.input input{
+		padding: 2px;
 	}
 }

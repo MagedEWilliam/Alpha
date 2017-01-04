@@ -48,24 +48,24 @@ function _subcat($itemID){
 
 
 					<div class="ui breadcrumb">
-						<a class="section" id="Home-crumb">
+						<a class="section" id="Home-crumb" href="Home?lang=<?php echo $_GET['lang']; ?>">
 							<i class="ui home icon"></i>
 						</a>
 						<span class="divider">/</span>
-						<div class="section" locale="products">@</div>
+						<a class="section" locale="products" href="products?lang=<?php echo $_GET['lang']; ?>">@</a>
 						<?php 
 						if( isset($_GET['cat']) ){
 							if( $_GET['cat'] != '' ){
-								echo '<span class="divider">/</span><div class="section">';
+								echo '<span class="divider">/</span><a class="section" href="products?lang='.$_GET['lang'].'&cat='.$_GET['cat'].'">';
 								echo _cat($_GET['cat'])[locale('Name')];
-								echo '</div>';
+								echo '</a>';
 							}
 						}
 						if( isset($_GET['subcat']) ){
 							if( $_GET['subcat'] != '' ){
-								echo '<span class="divider">/</span><div class="section">';
+								echo '<span class="divider">/</span><a class="section" href="products?lang='.$_GET['lang'].'&cat='.$_GET['cat'].'&subcat='.$_GET['subcat'].'">';
 								echo _subcat($_GET['subcat'])[locale('value')];
-								echo '</div>';
+								echo '</a>';
 							}
 						}
 						?>
@@ -91,4 +91,5 @@ function _subcat($itemID){
 			<div id="productfooter">
 			</div>
 		</div>
+	</div>
 	</div>

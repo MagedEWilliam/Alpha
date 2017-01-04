@@ -19,7 +19,7 @@ if( isset($_GET['compo']) ){
      }
      ?>
      <div class="row">
-       <div class="column" style="padding-left: 0px;padding-right: 0px;">
+       <div class="column" style="padding-left: 0px;padding-right: 0px;width: 100%;">
         <div class="ui pointing secondary blue menu">
           <div>
           <a class="item <?php if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}?> floatleft" data-tab="_first">Cart</a>
