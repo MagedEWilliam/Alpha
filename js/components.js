@@ -445,7 +445,7 @@ function refreshLocale(){
 	var numbof = $('[locale]');
 	for (var i = 0; i <= numbof.length -1; i++) {
 		var current_Val = $(numbof[i]).html();
-		var key = $(numbof[i]).attr('locale')
+		var key = $(numbof[i]).attr('locale');
 		var newVal = current_Val.replace('@', getFromLocale(key));
 		$(numbof[i]).html( newVal );
 	}

@@ -72,8 +72,8 @@ function qunChanges (targ, source){
   outofstock(targ.ID, source);
 }
 
-function echoCart(){
-  var thecart = cart.get('cart');
+function echoCart(whichCart){
+  var thecart = cart.get(whichCart);
   if(thecart != null){
 
     for(var i=0; i<= thecart.length-1 ; i++){
@@ -149,11 +149,15 @@ var cart = {
     .then(function( data ) {
 
       var data = JSON.parse(data);
+      if( $('[name=username]').val() != 'guest' ){
+        uptRemoteCart( $('[name=username]').val(), data[0].item.code, data[0].item.qun, data[0].item.price );
+      }
+      
       var isadded = cart.set('cart', data[0].item);
 
       if(isadded){
         if(mode == 'fromProduct'){
-          $('.carticon .detail').text(cart.count());
+          $('.carticon .detail .cnt').text(cart.count());
           $('#cart_' + data[0].item.code + ' p').text( getFromLocale('added') + ' ✓' );
 
           $('#Qun_' + data[0].item.code ).hide();
@@ -223,7 +227,7 @@ var cart = {
       var gettingformatted = JSON.stringify( getting );
       localStorage.setItem('cart', gettingformatted );
     });
-    $('.carticon .detail').text( cart.count() );
+    $('.carticon .detail .cnt').text( cart.count() );
   },
 
   updateQun:   function updateQun(key, qun){
@@ -242,6 +246,15 @@ var cart = {
   }
 
 };
+
+function uptRemoteCart(username, itemCode, itemQun, itemPrice){
+  return $.ajax({
+        type: "POST",
+        url: "class_cart.php",
+        data: "username=" + username + "&itemCode=" + itemCode + "&itemQun=" + itemQun + "&itemPrice=" + itemPrice,
+        dataType: 'JSON',
+    });
+}
 
 function tothecart(item, e){
   $('.carticon').addClass('green');

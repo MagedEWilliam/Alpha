@@ -8,7 +8,7 @@
         <h4 class="goodtimes" locale="itemsDetails">@</h4>
         <table class="ui very compact stackable striped table" id="product_details">
           <tbody>
-            <script>echoCart();</script>
+            <script>echoCart('cart');</script>
           </tbody>
         </table>
 
@@ -230,8 +230,8 @@
           </div>\
           \
           <div class="field">\
-            <label>Order Number:</label>\
-            <input type="password" name="orderName">\
+            <label>Order Code:</label>\
+            <input type="text" name="orderName">\
           </div>\
           \
           <div id="message" style="margin-bottom: 10px;"></div>\

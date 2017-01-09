@@ -1,23 +1,24 @@
 <?php 
-header('Content-Type: application/json; charset=utf-8');
-require('class_database.php');
+// header('Content-Type: application/json; charset=utf-8');
+require_once('class_database.php');
 
 if( isset($_GET) ){
 	$stock = new Stock;
 	$goodtogo = false;
-	switch ($_GET['method']) {
-		case "getQun" : 
-		$stockval = $stock->getQun($_GET['id'])['qun'];
-		$qun = $_GET['qun'];
-		$goodtogo = $stock->combareQun($stockval, $qun);
-		if($goodtogo){
-			echo '{"allowstock":1}';
-		}else{
-			echo '{"allowstock":0}';
+	if(isset($_GET['method'])){
+		switch ($_GET['method']) {
+			case "getQun" : 
+			$stockval = $stock->getQun($_GET['id'])['qun'];
+			$qun = $_GET['qun'];
+			$goodtogo = $stock->combareQun($stockval, $qun);
+			if($goodtogo){
+				echo '{"allowstock":1}';
+			}else{
+				echo '{"allowstock":0}';
+			}
+			break;
 		}
-		break;
 	}
-
 }
 
 Class Stock{
@@ -43,9 +44,29 @@ Class Stock{
 		$db = Database::getInstance();
 		$mysqli = $db->getConnection();
 
-		$sqlQuery = 'UPDATE subcategory SET qun ='.$qun.' WHERE ID = '.$id;
+		$sqlQuery = 'UPDATE subcategory SET `qun` ='.$qun.' WHERE code = "'.$id.'"';
 		$result = $mysqli->query($sqlQuery);
 	}
+
+	static public function downUpdateQun ($id, $qun){
+		$db = Database::getInstance();
+		$mysqli = $db->getConnection();
+
+		$sqlQuery = 'UPDATE subcategory SET `qun` = `qun` - '.$qun.' WHERE code = "'.$id.'"';
+		$result = $mysqli->query($sqlQuery);
+		echo mysqli_error($mysqli);
+		echo $sqlQuery;
+	}
+
+	static public function upUpdateQun ($id, $qun){
+		$db = Database::getInstance();
+		$mysqli = $db->getConnection();
+
+		$sqlQuery = 'UPDATE subcategory SET `qun` = `qun` + '.$qun.' WHERE code = "'.$id.'"';
+		$result = $mysqli->query($sqlQuery);
+	}
+
+
 
 }
 ?>

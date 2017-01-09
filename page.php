@@ -88,9 +88,9 @@ global $active_nav_name;
 $active_nav_name = $res;
 ?>
 <!DOCTYPE html>
-<!-- <html <?php //if( isset($_GET['lang']) &&  $_GET['lang'] == "ar" ) { echo ' dir="rtl" '; } ?>> -->
 <html>
 <head>
+	<input type="hidden" name="username" value="<?php if(isset($_SESSION['username'])) { echo $_SESSION['username']; } else { echo 'guest'; } ?>">
 	<title><?php echo getPageID(get_current_route())[_locale('Name')] ?></title>
 	<?php $_GET['__level']=1; include('pages/links.php') ?>
 </head>

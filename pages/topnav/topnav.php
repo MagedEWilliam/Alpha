@@ -57,13 +57,13 @@ include_once('classes/class_getLocale.php');
 	<div class="ui internally celled grid nopad goodtimes" id="topnav">
 		<div class="row nopad">
 			<div class="sixteen wide column nopad nobox logo">
-				<div class="alpha">
+				<div class="alpha floatleft">
 					<a href="Home-nav" id="Home-nav" locale="alpha">@</a>
 					<img src="../assets/alpha2.png">
 				</div>
 				
 				
-				<div class="top-nav-sub-group">
+				<div class="top-nav-sub-group floatleft">
 					<center>
 						<?php echo getNavItems( getPageID(get_current_route()) ); ?>
 						<div id="activeNav"></div>
@@ -71,7 +71,7 @@ include_once('classes/class_getLocale.php');
 				</div>
 				
 				
-				<div class="top-tel-sub-group">
+				<div class="top-tel-sub-group floatright">
 					
 					<p class="mrspace"></p>
 

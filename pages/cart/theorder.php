@@ -8,7 +8,7 @@
         <h4 class="goodtimes" locale="itemsDetails">@</h4>
         <table class="ui very compact stackable striped table" id="product_details">
           <tbody>
-            <script>echoCart();</script>
+            <script>echoCart('cart');</script>
           </tbody>
         </table>
 

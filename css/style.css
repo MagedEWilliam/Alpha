@@ -154,6 +154,7 @@ div#product.wide.column{
 	margin-left: 0 !important;
 	margin-top: 15px !important;
 	float: left;
+	min-width: 100px;
 }
 .loginfo{
 	text-align:center;
@@ -419,7 +420,7 @@ div#product.wide.column{
 }
 .top-nav-sub-group a.imactive{
 	color: #0061a5;
-	padding-bottom: 15px;
+	padding-bottom: 16px;
 	border-bottom: 10px solid #f7da00;
 }
 .top-nav-sub-group a{
@@ -626,9 +627,10 @@ div.ui.image.longy{
 	}
 	.catgor{width: 24% !important}
 	.carticon{
+		min-width: 90px;
 		padding-left: 5px !important;
-		/*padding-right: 5px !important;*/
 	}
+	.top-nav-sub-group a{margin-left: 1%; font-size: small;}
 }
 
 @media only screen and (max-width: 999px){
@@ -636,6 +638,7 @@ div.ui.image.longy{
 		float: left;
 		margin-top: 0px !important; 
 		margin-right: 1px !important; 
+		min-width: 80px;
 	}
 	.lang {
 		margin-top: 5px !important;
@@ -702,6 +705,7 @@ div.ui.image.longy{
 	.carticon, .loginfo{
 		font-size: 8px !important;
 		margin-top: 0px !important;
+		min-width: 70px;
 	}
 	.carticon, .carticon div{
 		/*height: 20px;*/

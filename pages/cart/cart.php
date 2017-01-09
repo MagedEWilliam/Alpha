@@ -20,13 +20,26 @@ if( isset($_GET['compo']) ){
      ?>
      <div class="row">
        <div class="column" style="padding-left: 0px;padding-right: 0px;width: 100%;">
+
+       <?php
+      if( isset($_SESSION['username']) ) {
+      echo'
         <div class="ui pointing secondary blue menu">
           <div>
-          <a class="item <?php if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}?> floatleft" data-tab="_first">Cart</a>
-            <a class="item <?php if(isset($_GET['active']) && $_GET['active'] == 'orders' ){echo 'active';}?> floatleft" data-tab="_second">Orders</a>
-          </div>
-        </div>
+          <a class="item ';
 
+           if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}
+
+           echo' floatleft" data-tab="_first">Cart</a>
+            <a class="item ';
+
+             if(isset($_GET['active']) && $_GET['active'] == 'orders' ){echo 'active';}
+
+            echo ' floatleft" data-tab="_second">Orders</a>
+          </div>
+        </div>';
+      }
+      ?>
         <div class="ui tab <?php if(isset($_GET['active']) && $_GET['active'] == 'cart' ){echo 'active';}?> stackable grid" data-tab="_first">
          <?php include_once "thecart.php"; ?>
        </div>

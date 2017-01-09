@@ -10,22 +10,44 @@ require 'class_database.php';
 5 = Delivered
 */
 
-Class setOrder{
-
-	static public function setNewOrder ($order){
+if(isset($_POST) ){
+	if( 
+		isset($_POST['fullname']) 
+		|| isset($_POST['email']) 
+		|| isset($_POST['phone']) 
+		|| isset($_POST['address']) 
+		){
 		
+		if( 
+			trim($_POST['fullname'])     != '' 
+			|| trim($_POST['email'])     != '' 
+			|| trim($_POST['phone'])     != '' 
+			|| trim($_POST['address'])   != ''  
+			) {
+
+			$setorder = new setOrder;
+		$setorder->newGuestOrder($_POST);
+		//send EMail...
+		header("location: ../page/pay?success=true&lang=".$_GET['lang']."&paymentId=".$_GET['paymentId']."&token=".$_GET['token']."&PayerID=".$_GET['PayerID']."&order=new");
+	}else{
+		header("location: "  . $_SERVER['HTTP_REFERER']);
+	}
+
+}else{
+	header("location: "  . $_SERVER['HTTP_REFERER']);
+}
+}
+
+Class setOrder{
+	
+	static public function newGuestOrder ($order){
 		$db = Database::getInstance();
-		$mysql = $db->getConnection();
-
-		$sqlQuery = 'INSERT INTO order () VALUES ()';
+		$mysqli = $db->getConnection();
+		
+		$sqlQuery = "INSERT INTO guestorders (orderID, token, fullName, Email, Phone, Address, hashOrder)
+		 VALUES ('".$_GET['paymentId']."','".$_GET['token']."','".$order['fullname']."','".$order['email']."','".$order['phone']."','".$order['address']."','".$order['password']."') ";
+		
 		$result = $mysqli->query($sqlQuery);
-
-	}
-
-	static public function isOrderNew ($order){
-	}
-
-	static public function setDeepDetails ($order){
 	}
 
 }

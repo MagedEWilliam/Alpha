@@ -101,7 +101,9 @@ $(document).ready(function(){
 		}
 		if(subcat != ''){
 			getpropsurl += '&subcat=' + subcat;
+			$('.filterArea').hide();
 		}
+		console.log(getpropsurl);
 
 		if(cat != ''){
 			$.ajax({
