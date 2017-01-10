@@ -109,7 +109,6 @@ $active_nav_name = $res;
 							case "pay":require_once('_pay.php'); break;
 							default: echo $active_nav_name; break;
 						}
-							// case "Home":require_once('pages/home/home.php'); break;
 						
 						?>
 					</div>

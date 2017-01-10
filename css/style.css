@@ -634,6 +634,10 @@ div.ui.image.longy{
 }
 
 @media only screen and (max-width: 999px){
+
+	.amazonmenu ul li > div, .amazonmenu ul li > ul{
+		position: absolute; 
+	}
 	.carticon{
 		float: left;
 		margin-top: 0px !important; 

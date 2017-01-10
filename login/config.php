@@ -5,8 +5,11 @@ include 'globalcon.php';
 include 'dbconf.php';
 
 //Set this for global site use
-$site_name = 'ALPHA';
-
+if($_SERVER['SERVER_NAME'] == 'localhost'){
+	$site_name = 'ALPHA';
+}else{
+	$site_name = 'alphalightingtech';
+}
 //Maximum Login Attempts
 $max_attempts = 200;
 //Timeout (in seconds) after max attempts are reached
@@ -17,14 +20,14 @@ $admin_email = '';
 
 //EMAIL SETTINGS
 //SEND TEST EMAILS THROUGH FORM TO https://www.mail-tester.com GENERATED ADDRESS FOR SPAM SCORE
-$from_email = 'developer@i-alfa.info'; //Webmaster email
-$from_name = 'Developer'; //"From name" displayed on email
+$from_email = 'developer@alphalightingtech.com'; //Webmaster email
+$from_name = 'Alphas Developer'; //"From name" displayed on email
 
 //Find specific server settings at https://www.arclab.com/en/kb/email/list-of-smtp-and-pop3-servers-mailserver-list.html
 $mailServerType = 'smtp';
 //IF $mailServerType = 'smtp'
-$smtp_server = 'n3plcpnl0092.prod.ams3.secureserver.net';
-$smtp_user = 'developer@i-alfa.info';
+$smtp_server = 'n3plcpnl0073.prod.ams3.secureserver.net';
+$smtp_user = 'developer@alphalightingtech.com';
 $smtp_pw = '^dev!migo1029384756/';
 $smtp_port = 465; //465 for ssl, 587 for tls, 25 for other
 $smtp_security = 'ssl';//ssl, tls or ''
@@ -39,10 +42,10 @@ $activemsg = 'Your account has been verified! You may now login at <br><a href="
 //DO NOT TOUCH BELOW THIS LINE
 //Unsets $admin_email based on various conditions (left blank, not valid email, etc)
 if (trim($admin_email, ' ') == '') {
-    unset($admin_email);
+	unset($admin_email);
 } elseif (!filter_var($admin_email, FILTER_VALIDATE_EMAIL) == true) {
-    unset($admin_email);
-    echo $invalid_mod;
+	unset($admin_email);
+	echo $invalid_mod;
 };
 $invalid_mod = '$adminemail is not a valid email address';
 

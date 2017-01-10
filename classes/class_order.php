@@ -1,5 +1,5 @@
 <?php 
-require 'class_database.php';
+require_once 'class_database.php';
 
 /*
 0 = new
@@ -34,7 +34,9 @@ if(isset($_POST) ){
 	}
 
 }else{
-	header("location: "  . $_SERVER['HTTP_REFERER']);
+	if (!headers_sent()) {
+	 header("location: "  . $_SERVER['HTTP_REFERER']);
+	}
 }
 }
 
@@ -45,9 +47,23 @@ Class setOrder{
 		$mysqli = $db->getConnection();
 		
 		$sqlQuery = "INSERT INTO guestorders (orderID, token, fullName, Email, Phone, Address, hashOrder)
-		 VALUES ('".$_GET['paymentId']."','".$_GET['token']."','".$order['fullname']."','".$order['email']."','".$order['phone']."','".$order['address']."','".$order['password']."') ";
+		VALUES ('".$_GET['paymentId']."','".$_GET['token']."','".$order['fullname']."','".$order['email']."','".$order['phone']."','".$order['address']."','".$order['password']."') ";
 		
 		$result = $mysqli->query($sqlQuery);
+		echo mysqli_error($mysqli);
+		echo $sqlQuery;
+	}
+
+	static public function newUserOrder ($userID, $order){
+		$db = Database::getInstance();
+		$mysqli = $db->getConnection();
+		
+		$sqlQuery = "INSERT INTO userorders (userID, orderID, token)
+		VALUES ('".$userID."', '".$_GET['paymentId']."','".$_GET['token']."') ";
+		
+		$result = $mysqli->query($sqlQuery);
+		echo mysqli_error($mysqli);
+		echo $sqlQuery;
 	}
 
 }

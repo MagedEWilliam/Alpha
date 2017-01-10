@@ -36,9 +36,9 @@ $(document).ready(function(){
 					teclasses = 'disabled';
 				}
 				if(Number(data[i].item.qun) > 0){
-					card( $('.miniproducts .wrapproduct'), data[i], teclasses);
+					card( '.miniproducts .wrapproduct', data[i], teclasses);
 				}else{
-					card( $('.miniproducts .wrapproduct'), data[i], 'out');
+					card( '.miniproducts .wrapproduct', data[i], 'out');
 				}
 				
 			}
@@ -64,9 +64,7 @@ $(document).ready(function(){
 	$('.carticon .cnt').text(cart.count());
 
 	
-	setTimeout(function(){
-		resizeClasses();
-	},20);
+	setTimeout(function(){ resizeClasses(); },20);
 
 	setTimeout(function(){ resizeClasses(); }, 300);
 

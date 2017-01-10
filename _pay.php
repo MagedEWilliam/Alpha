@@ -7,6 +7,8 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 require 'classes/paypal_init.php';
 
+if ( ! session_id() ) @ session_start();
+
 if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
 
@@ -82,74 +84,74 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
             $result = $payment->execute($exec, $paypal);
             print_r($result);
 
+            require 'classes/class_stock.php';
+            $stock = new Stock;
             for ($i=0; $i < count($payment->transactions[0]->item_list->items); $i++) { 
                 $description = $payment->transactions[0]->item_list->items[$i]->description;
                 $itemcode = str_replace('Item code: ', '', $description);
-                 echo '<br>';
-                 echo $itemcode;
-                 echo '<br>';
-                print_r($payment->transactions[0]->item_list->items[$i]->price);
-                print_r($payment->transactions[0]->item_list->items[$i]->currency);
-                print_r($payment->transactions[0]->item_list->items[$i]->name);
-                $qun = $payment->transactions[0]->item_list->items[$i]->quantity;
 
+                $qun = $payment->transactions[0]->item_list->items[$i]->quantity;
                 $stock->downUpdateQun($itemcode, $qun);
             }
+
             
+
             echo "<div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
-            echo '<script>
-            $("#checkit").attr("href",  $.query.set("order", "check") );
-        </script>';
-    } catch (Exception $e) {
-        $showmeta = false;
-        $data = json_decode($e->getData());
-        print_r($e->getData());
-        require 'classes/class_stock.php';
-        $stock = new Stock;
-        
+            echo '<script>$("#checkit").attr("href",  $.query.set("order", "check") );</script>';
 
-        if( $_GET['order'] == 'new') {
-            echo "<div class='ui toowide error message'>" . $data->message . "</div>";
-        }elseif ( $_GET['order'] == 'check') {
+        } catch (Exception $e) {
+            $showmeta = false;
+            $data = json_decode($e->getData());
+        // print_r($e->getData());
 
-        echo "<div class='ui toowide success message'>Order id is: ".$payment->id."</div>";
+            require_once 'classes/class_order.php';
+            $setorder = new setOrder;
+            // $setorder->($_SESSION['id'], $_GET['token']);
+
+
+            if( $_GET['order'] == 'new') {
+
+                echo "<div class='ui toowide error message'>" . $data->message . "</div>";
+            }elseif ( $_GET['order'] == 'check') {
+
+                echo "<div class='ui toowide success message'>Order id is: ".$payment->id."</div>";
+            }
+
+        }
+        if($showmeta){
+            print_r( $payment->transactions[0]->related_resources[0]->sale->id);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->state);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->payment_mode);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->reason_code);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->protection_eligibility);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->transaction_fee->value);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->transaction_fee->currency);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->parent_payment);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->create_time);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->update_time);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->href);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->rel);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->method);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->href);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->rel);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->method);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->href);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->rel);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->method);
+            print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->method);
+
+            print_r( $payment->transactions[0]->create_time );
+            print_r( $payment->transactions[0]->links );
+        }
+
+    } else {
+
+        if(isset($_SESSION['username']) ){
+            echo '<div class="field"><a class="ui green big button" href="' . $_SERVER['REQUEST_URI'] . '&order=new"><i class="ui icon payment alternate"></i>Place Order</a></div></form>';
+        }else{
+            include"pages/parts/signup_part.php";
+        }
     }
-
-}
-if($showmeta){
-    print_r( $payment->transactions[0]->related_resources[0]->sale->id);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->state);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->payment_mode);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->reason_code);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->protection_eligibility);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->transaction_fee->value);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->transaction_fee->currency);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->parent_payment);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->create_time);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->update_time);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->href);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->rel);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[0]->method);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->href);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->rel);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[1]->method);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->href);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->rel);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->method);
-    print_r( $payment->transactions[0]->related_resources[0]->sale->links[2]->method);
-
-    print_r( $payment->transactions[0]->create_time );
-    print_r( $payment->transactions[0]->links );
-}
-
-} else {
-    if ( ! session_id() ) @ session_start();
-    if(isset($_SESSION['username']) ){
-        echo '<div class="field"><a class="ui blue button" href="' . $_SERVER['REQUEST_URI'] . '&order=new">Place Order</a></div></form>';
-    }else{
-        include"pages/parts/signup_part.php";
-    }
-}
 } else {
 
     echo "<div class='ui toowide warning message'>User Cancelled the Approval</div>";

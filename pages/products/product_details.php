@@ -63,9 +63,9 @@ if( isset($_GET['compo']) ){
 
 							</tbody>
 						</table>
-						<div class="fb-comments" data-href="https://i-alfa.info" data-width="100%" data-numposts="5"></div>
+						<div class="fb-comments" data-href="https://alphalightingtech.com" data-width="100%" data-numposts="5"></div>
 						<script>
-							$(".fb-comments").attr("data-href", "https://i-alfa.info?product_id=" + $.query.get('product_id'));
+							$(".fb-comments").attr("data-href", "https://alphalightingtech.com?product_id=" + $.query.get('product_id'));
 
 							$('#cart_' + $.query.get('product_id')).on("click", function(event){
 								tothecart($.query.get('product_id'), event);

@@ -12,11 +12,11 @@
 
 			if ($result = $mysqli->query($sqlQuery)) {
 				echo mysqli_error($mysqli);
-				return $row = $result->fetch_assoc()['content'];
+				return $row = $result->fetch_assoc()[_locale('content')];
 			}
 		}
 
-		echo getBaseContentOf('Footer');
+		echo getBaseContentOf( 'Footer' );
 
 		?>
 		<br>

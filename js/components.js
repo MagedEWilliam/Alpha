@@ -407,7 +407,12 @@ function populateSubmenu(data){
 function populateMiniCategory(data){
 	var local = $.query.get('lang');
 	for (var i = 0; i <= data.length-1; i++) {
-		var link = '?lang=' + local + '&cat=' + data[i]['ID'];
+		var link;
+		if(pageName() == 'Home'){
+			link = 'products?lang=' + local + '&cat=' + data[i]['ID'];
+		}else{
+			link = '?lang=' + local + '&cat=' + data[i]['ID'];
+		}
 		var nowfolder = mnfolders('.minicategory', data[i][locale('Name')], link, i, '');
 		
 		var subsub = data[i]['subcategory'][0];

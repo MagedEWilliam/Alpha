@@ -7,12 +7,12 @@ use PayPal\Auth\OAuthTokenCredential;
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	define('SITE_URL', 'http://localhost/ALPHA/');
 }else{
-	define('SITE_URL', 'http://i-alfa.info/');
+	define('SITE_URL', 'http://alphalightingtech.com/');
 }
 
 $paypal = new ApiContext(
 	new OAuthTokenCredential(
-		'AWLU6Q5LPjcBGKN1aG7Q0W_F1DIL8ylhmt9tatgehL59Uc3MoCncFa6-kG5p4uD8DjB8_U0U2gcRVOF_', 
-		'EHkMQmGFMM7-xgWfIzi1U00Zwq4pN2o5q4PYcJQ68vL3vARSoyUFPU7Xl0wNlaVML-W-sTElrTXamtKC'
+		'AcqhDIZyoyq349dm-dRUHTzxmldaUBMjQtzoNSNpdw4A4SmMYa22SWlZKt7CvkwlTaatN60uVzUBb3id', 
+		'ENpep2V58zQ_voylN24wVFbc7h7aC88rHnnJDlIDlPj63pon4sxm2icM9fpCL8dn6nrTYs2-NCVemFvo'
 		)
 	);
