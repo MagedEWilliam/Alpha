@@ -21,6 +21,7 @@ if (isset($admin_email)) {
     $newemail = $_POST['email'];
 
 }
+
 //Validation rules
 if ($pw1 != $pw2) {
 

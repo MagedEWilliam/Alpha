@@ -88,7 +88,7 @@
         </div>\
         <div class="field">\
           <label>Address:</label>\
-          <textarea name="address" id="address" class="form-control" placeholder="Address"></textarea>\
+          <textarea name="address" id="address" rows="4" class="form-control" placeholder="Address"></textarea>\
         </div>\
         <div id="message" style="margin-bottom: 10px;"></div>\
         <a name="Submit" id="submit" class="ui submit button">Sign up</a>\
@@ -128,7 +128,12 @@
               var response = text.substr(text.length - 4);
 
               if(response == "true"){
-
+                username = "";
+                password = "";
+                password2 = "";
+                email = "";
+                address = "";
+                phone = "";
                 $(".mrsign #message").html(html);
                 $('.mrsign .submit').hide();
               }

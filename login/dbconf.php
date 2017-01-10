@@ -4,12 +4,12 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 	$host = "localhost"; // Host name
 	$username = "root"; // Mysql username
 	$password = ""; // Mysql password
-$db_name = "oauthing"; // Database name
+	$db_name = "oauthing"; // Database name
 }else{
 	$host = "alphalightingtech.com"; // Host name
 	$username = "ialphalightingte"; // Mysql username
 	$password = "Alfa@1234"; // Mysql password
-$db_name = "authing"; // Database name
+	$db_name = "authing"; // Database name
 }
 
 //DO NOT CHANGE BELOW THIS LINE UNLESS YOU CHANGE THE NAMES OF THE MEMBERS AND LOGINATTEMPTS TABLES

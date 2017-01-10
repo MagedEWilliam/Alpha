@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        @-webkit-keyframes pop-in {
+            0% { opacity: 0; -webkit-transform: scale(0.5); }
+            100% { opacity: 1; -webkit-transform: scale(1); }
+        }
+        @-moz-keyframes pop-in {
+            0% { opacity: 0; -moz-transform: scale(0.5); }
+            100% { opacity: 1; -moz-transform: scale(1); }
+        }
+        @keyframes pop-in {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+    <div data-lazy-load-image="https://docs.google.com/uc?id=0B4r418jG6C2UdXZyQWc3dlg0MVk" data-image-classname="pop-in"></div>
+    <script>
+        $(function () {
+            if ($("[data-lazy-load-image]").length > 0) {
+                $("[data-lazy-load-image]").each(function (index, element) {
+                    var img = new Image();
+                    img.src = $(element).data("lazy-load-image");
+                    if (typeof $(element).data("image-classname" !== "undefined"))
+                        img.className = $(element).data("image-classname");
+                    $(element).append(img);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

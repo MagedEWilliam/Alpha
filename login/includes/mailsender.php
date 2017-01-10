@@ -17,7 +17,7 @@ class MailSender
         // ADD sendmail_path = "env -i /usr/sbin/sendmail -t -i" to php.ini on UNIX servers
         $mail = new PHPMailer;
         $mail->isHTML(true);
-        $mail->CharSet = "text/html; charset=UTF-8;";
+        $mail->CharSet = "Content-Type: text/html; charset=UTF-8;";
         $mail->WordWrap = 80;
         $mail->setFrom($from_email, $from_name);
         $mail->AddReplyTo($from_email, $from_name);
