@@ -35,10 +35,12 @@ if(isset($_POST) ){
 
 }else{
 	if (!headers_sent()) {
-	 header("location: "  . $_SERVER['HTTP_REFERER']);
+		header("location: "  . $_SERVER['HTTP_REFERER']);
 	}
 }
 }
+
+
 
 Class setOrder{
 	
@@ -59,11 +61,10 @@ Class setOrder{
 		$mysqli = $db->getConnection();
 		
 		$sqlQuery = "INSERT INTO userorders (userID, orderID, token)
-		VALUES ('".$userID."', '".$_GET['paymentId']."','".$_GET['token']."') ";
+		VALUES ('".$userID."', '".$order['paymentId']."','".$order['token']."') ";
 		
 		$result = $mysqli->query($sqlQuery);
 		echo mysqli_error($mysqli);
-		echo $sqlQuery;
 	}
 
 }

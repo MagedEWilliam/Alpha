@@ -82,11 +82,12 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
         try {
             $result = $payment->execute($exec, $paypal);
 
-            deduct_stock();
-            sendMailtoNotifyUserandbuyee();
-            
-            echo "<div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
-            echo '<script>$("#checkit").attr("href",  $.query.set("order", "check") );</script>';
+            deduct_stock( $payment->transactions[0]->item_list->items );
+            sendMailtoNotifyUserandbuyee($payment->id);
+            orderSuccessMessage($payment->id);
+
+            $pram = array("paymentId" => $paymentId, "token" => $_GET['token']);
+            storetransaction($pram);
 
         } catch (Exception $e) {
             $showmeta = false;
@@ -141,19 +142,19 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 }
 
 
-function deduct_stock (){
+function deduct_stock ($items ){
     require 'classes/class_stock.php';
     $stock = new Stock;
-    for ($i=0; $i < count($payment->transactions[0]->item_list->items); $i++) { 
-        $description = $payment->transactions[0]->item_list->items[$i]->description;
+    for ($i=0; $i < count($items); $i++) {
+        $description = $items[$i]->description;
         $itemcode = str_replace('Item code: ', '', $description);
 
-        $qun = $payment->transactions[0]->item_list->items[$i]->quantity;
+        $qun = $items[$i]->quantity;
         $stock->downUpdateQun($itemcode, $qun);
     }
 }
 
-function sendMailtoNotifyUserandbuyee(){
+function sendMailtoNotifyUserandbuyee($id){
     require 'classes/class_sendmail.php';
 
     $mailSender  = new MailSender;
@@ -162,9 +163,24 @@ function sendMailtoNotifyUserandbuyee(){
     .ui.success.message{background-color:#FCFFF5;color:#2C662D}.ui.attached.success.message,.ui.success.message{box-shadow:0 0 0 1px #A3C293 inset,0 0 0 0 transparent}.ui.success.message .header{color:#1A531B}
 
 </style>
-<div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
+<div class='ui toowide success message'>Success, Order id is: ".$id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
 
 $mailSender->sendMail('Maged.EWilliam@gmail.com', 'Alpha Cart update1', $htmlcontent);
 
-$mailSender->sendMail('retail@alphalightingtech.com', 'New_Order#'.$payment->id, 'check the cms for more info: <a href="cms.alphalightingtech.com/?reviewOrder='.$payment->id.'">Order #'.$payment->id.'</a>');
+$mailSender->sendMail('retail@alphalightingtech.com', 'New_Order#'.$id, 'check the cms for more info: <a href="cms.alphalightingtech.com/?reviewOrder='.$id.'">Order #'.$id.'</a>');
+}
+
+
+function orderSuccessMessage($id){
+    echo "<div class='ui toowide success message'>Success, Order id is: ".$id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
+    echo '<script>$("#checkit").attr("href",  $.query.set("order", "check") );</script>';
+}
+
+function storetransaction($pram){
+
+    require 'classes/class_order.php';
+
+    $setorder = new setOrder;
+    $setorder->newUserOrder($_SESSION['id'], $pram);
+
 }

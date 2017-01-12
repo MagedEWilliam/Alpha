@@ -41,8 +41,8 @@ function card(target, ItemProp, classes){
 	';
 
 	if(classes == 'blue'){
-		drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:155px;height:25px;margin-bottom:5px;">\
-		<input type="number" value="1" style="width:60px;" lass="ui tiny">\
+		drawacard += '<div class="ui tiny action input" id="Qun_'+ItemProp.item.code+'" style="float:right;width:145px;height:25px;margin-bottom:5px;">\
+		<input type="number" value="1" style="width:50px;" lass="ui tiny">\
 		<div type="submit" class="ui tiny icon button minusOne"><i class="ui icon minus"></i></div>\
 		<div type="submit" class="ui tiny icon button addOne"><i class="ui icon plus"></i></div>\
 		</div>';
@@ -50,7 +50,7 @@ function card(target, ItemProp, classes){
 
 	if(Number(ItemProp.item.onsale) == 1){
 		drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.priceafterdisc);
-		drawacard +='<label class="ui tag orange label" style="margin-left:20px;">-'+Number(ItemProp.item.discount)+'%</label>';
+		drawacard +='<label class="ui tag orange tiny label" style="margin-left:20px;">-'+Number(ItemProp.item.discount)+'%</label>';
 		drawacard +='</label>';
 	}else{
 		drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price);
