@@ -2,6 +2,13 @@ body.pushable>.pusher{
 	background-color: #f4f4f4;
 	border-collapse: collapse;
 }
+.slpad, .slpad b{
+	padding-top:3px !important;
+	padding-bottom:3px !important;
+}
+.popin a{
+	color: #f7da00 !important;
+}
 .wrapproduct{
 	padding-left: 0px !important;
 	padding-right: 0px !important;
@@ -56,7 +63,7 @@ body.pushable>.pusher{
 }
 .tailer div{
 	width: 50px;
-	height: 31%;
+	height: 34%;
 	background-color: #f4f4f4;
 	
 }
@@ -111,7 +118,7 @@ div#product.wide.column{
 	width:100% !important;
 	margin-bottom: 0px;
 }
-.ui.link.card{
+.ui.cards .card{
 	border-radius: 0;
 	box-shadow: none;
 }
@@ -342,7 +349,7 @@ div#product.wide.column{
 }
 
 .longproduct{
-	/*width: 315px !important;*/
+	width: 30% !important;
 }
 
 @font-face {
@@ -353,11 +360,6 @@ div#product.wide.column{
 @font-face {
 	font-family: 'Bahij';
 	src: url(../assets/Bahij_TheSansArabic-Bold.ttf);
-}
-
-@font-face {
-	font-family: 'NotoSansSC';
-	src: url(../assets/NotoSansSC-Bold.otf);
 }
 
 .norm{
@@ -532,7 +534,8 @@ div.ui.image.longy{
 
 }
 .advthumb{
-	background-image: url(https://docs.google.com/uc?id=0B4r418jG6C2USVlldUs5dWFlY0k);background-size:100% 100%;
+	background-image: url(../assets/backsite.jpg);background-size:100% 100%;
+	overflow: hidden;
 }
 .ui.stackable.page.grid{
 	margin-left: 0 !important;
@@ -568,7 +571,7 @@ div.ui.image.longy{
 	}
 }
 @media only screen and (max-width: 1280px){
-	.ui.link.card{
+	.ui.cards .card{
 		width: 250px;
 	}
 	.topping{
@@ -682,22 +685,29 @@ div.ui.image.longy{
 	.res-six{
 		width: 30% !important;
 	}
+	.longproduct{
+		width: 45% !important;
+	}
 }
 @media only screen and (max-width: 900px){
 	.lang {
 		margin-top: 5px;
 	}
-	.ui.link.card{
+	.ui.cards .card{
 		width: 260px;
 	}
-
+	.slpad, .slpad b{
+		padding-top:1px !important;
+		padding-bottom:2px !important;
+	}
 }
 
 @media only screen and (max-width: 565px){
+
 	.ui.reveal{
 		font-size: 1em !important;
 	}
-	.ui.link.card{
+	.ui.cards .card{
 		width: 100% !important;
 	}
 	.top-nav-sub-group a.imactive{

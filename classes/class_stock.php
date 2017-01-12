@@ -55,7 +55,6 @@ Class Stock{
 		$sqlQuery = 'UPDATE subcategory SET `qun` = `qun` - '.$qun.' WHERE code = "'.$id.'"';
 		$result = $mysqli->query($sqlQuery);
 		echo mysqli_error($mysqli);
-		echo $sqlQuery;
 	}
 
 	static public function upUpdateQun ($id, $qun){

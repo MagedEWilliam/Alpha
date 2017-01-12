@@ -23,7 +23,6 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
     if($showmeta){
         echo '<pre>';
-// print_r( $payment );
         print_r( $payment->id );
         echo '<br>';
         print_r( uniqid(rand(), false) );
@@ -82,44 +81,16 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     if (isset($_GET['order']) ) {
         try {
             $result = $payment->execute($exec, $paypal);
-            print_r($result);
 
-            require 'classes/class_stock.php';
-            $stock = new Stock;
-            for ($i=0; $i < count($payment->transactions[0]->item_list->items); $i++) { 
-                $description = $payment->transactions[0]->item_list->items[$i]->description;
-                $itemcode = str_replace('Item code: ', '', $description);
-
-                $qun = $payment->transactions[0]->item_list->items[$i]->quantity;
-                $stock->downUpdateQun($itemcode, $qun);
-            }
+            deduct_stock();
+            sendMailtoNotifyUserandbuyee();
             
-            require 'classes/class_sendmail.php';
-
-            $mailSender  = new MailSender;
-            $htmlcontent = "<style>
-            .ui.message{position:relative;min-height:1em;margin:1em 0;background:#F8F8F9;padding:1em 1.5em;line-height:1.4285em;color:rgba(0,0,0,.87);-webkit-transition:opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;transition:opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;border-radius:.28571429rem;box-shadow:0 0 0 1px rgba(34,36,38,.22) inset,0 0 0 0 transparent}.ui.message:first-child{margin-top:0}.ui.message:last-child{margin-bottom:0}
-            .ui.success.message{background-color:#FCFFF5;color:#2C662D}.ui.attached.success.message,.ui.success.message{box-shadow:0 0 0 1px #A3C293 inset,0 0 0 0 transparent}.ui.success.message .header{color:#1A531B}
-            
-            </style>
-            <div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
-
-            //$payment->payer->payer_info->email
-            $mailSender->sendMail('Maged.EWilliam@gmail.com', 'Alpha Cart update1', $htmlcontent);
-            
-
             echo "<div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
             echo '<script>$("#checkit").attr("href",  $.query.set("order", "check") );</script>';
 
         } catch (Exception $e) {
             $showmeta = false;
             $data = json_decode($e->getData());
-        // print_r($e->getData());
-
-            require_once 'classes/class_order.php';
-            $setorder = new setOrder;
-            // $setorder->($_SESSION['id'], $_GET['token']);
-
 
             if( $_GET['order'] == 'new') {
 
@@ -168,4 +139,32 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
     echo "<div class='ui toowide warning message'>User Cancelled the Approval</div>";
 }
-?>
+
+
+function deduct_stock (){
+    require 'classes/class_stock.php';
+    $stock = new Stock;
+    for ($i=0; $i < count($payment->transactions[0]->item_list->items); $i++) { 
+        $description = $payment->transactions[0]->item_list->items[$i]->description;
+        $itemcode = str_replace('Item code: ', '', $description);
+
+        $qun = $payment->transactions[0]->item_list->items[$i]->quantity;
+        $stock->downUpdateQun($itemcode, $qun);
+    }
+}
+
+function sendMailtoNotifyUserandbuyee(){
+    require 'classes/class_sendmail.php';
+
+    $mailSender  = new MailSender;
+    $htmlcontent = "<style>
+    .ui.message{position:relative;min-height:1em;margin:1em 0;background:#F8F8F9;padding:1em 1.5em;line-height:1.4285em;color:rgba(0,0,0,.87);-webkit-transition:opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;transition:opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;border-radius:.28571429rem;box-shadow:0 0 0 1px rgba(34,36,38,.22) inset,0 0 0 0 transparent}.ui.message:first-child{margin-top:0}.ui.message:last-child{margin-bottom:0}
+    .ui.success.message{background-color:#FCFFF5;color:#2C662D}.ui.attached.success.message,.ui.success.message{box-shadow:0 0 0 1px #A3C293 inset,0 0 0 0 transparent}.ui.success.message .header{color:#1A531B}
+
+</style>
+<div class='ui toowide success message'>Success, Order id is: ".$payment->id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
+
+$mailSender->sendMail('Maged.EWilliam@gmail.com', 'Alpha Cart update1', $htmlcontent);
+
+$mailSender->sendMail('retail@alphalightingtech.com', 'New_Order#'.$payment->id, 'check the cms for more info: <a href="cms.alphalightingtech.com/?reviewOrder='.$payment->id.'">Order #'.$payment->id.'</a>');
+}

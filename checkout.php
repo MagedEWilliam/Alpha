@@ -8,9 +8,9 @@ use PayPal\Api\Transaction;
 use PayPal\Api\RedirectUrls;
 use PayPal\Api\Payment;
 
-echo '<pre>';
+//echo '<pre>';
 //print_r($_POST);
-echo '</pre>';
+//echo '</pre>';
 
 require 'classes/paypal_init.php';
 require_once ('classes/class_database.php');
@@ -174,22 +174,42 @@ $payer->setPaymentMethod('paypal');
 $total = 0;
 $i =0;
 
+require('classes/class_getCard.php');
+
+$card = new Card;
+
 $cartitem = new CartItem;
 foreach ($_POST['item_code'] as $key => $value) {
+
+	$thisitem = $card->getCard( array('exactID' => $_POST['item_code'][$key],'toArray' => 'toArray') );
+
 	
 	$itemFromDB = $cartitem->getCards($_POST['item_code'][$key]);
 
 	$product = $itemFromDB[0]['item'][$cartitem->_locale('Name')];
 	$subcat = $itemFromDB[0]['item'][$cartitem->_locale('CatName')];
+
 	$qun     = $_POST['qun'][$key];
-	$price   = $_POST['price'][$key];
+
+	if($thisitem[0]['item']['onsale'] == 1){
+		$price   = $thisitem[0]['item']['priceafterdisc'];
+	}else{
+		$price   = $thisitem[0]['item']['price'];
+		
+	}
 	$total   += $price * $qun;
+
+	echo $price;
+	echo '*';
+	echo $qun;
+	echo ', ';
+
 	$discription = 'Item code: '.$_POST['item_code'][$key];
 	$url = SITE_URL.'page/product_details?lang='.$_GET['lang'].'&product_id='.$_POST['item_code'][$key];
 
-	echo '<pre>';
-	// var_dump('url',$url,$product,'product', $discription,'discription',$subcat,'subcat', $qun,'qun', $price,'price',  $price * $qun,'total');
-	echo '</pre>';
+		//// echo '<pre>';
+		// var_dump('url',$url,$product,'product', $discription,'discription',$subcat,'subcat', $qun,'qun', $price,'price',  $price * $qun,'total');
+		//// echo '</pre>';
 
 	$items[$i] = new Item();
 	$items[$i]->setName($product)
@@ -199,8 +219,9 @@ foreach ($_POST['item_code'] as $key => $value) {
 	->setQuantity($qun)
 	->setPrice($price);
 	$i++;
-
+	
 }
+echo '= ';
 echo $total;
 // die();
 
@@ -234,9 +255,9 @@ $payment->setIntent('sale')
 try{
 	$payment->create($paypal);
 } catch (Exception $e) {
-	echo '<pre>';
+	//echo '<pre>';
 	print_r($e);
-	echo '</pre>';
+	//echo '</pre>';
 	echo '<script>setTimeout(function(){ location.reload(); }, 50);</script>';
 	die($e);
 }

@@ -5,7 +5,7 @@ function card(target, ItemProp, classes){
 	else { cartnaming = getFromLocale('added')  + ' ✓';}
 	if(classes == 'out'){ classes = 'disabled'}
 		var drawacard = '\
-	<div class="ui link card  longproduct">\
+	<div class="ui card longproduct">\
 	<div class="ui slide masked move up reveal image" >\
 	<div class="content fillitcontent">\
 	<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
@@ -48,8 +48,14 @@ function card(target, ItemProp, classes){
 		</div>';
 	}
 
-	drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price)+'</label>';
-
+	if(Number(ItemProp.item.onsale) == 1){
+		drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.priceafterdisc);
+		drawacard +='<label class="ui tag orange label" style="margin-left:20px;">-'+Number(ItemProp.item.discount)+'%</label>';
+		drawacard +='</label>';
+	}else{
+		drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.price);
+		drawacard +='</label>';
+	}
 	drawacard += '\
 	<div class=" getdown">\
 	<div class="ui tiny buttons detailtable">\
@@ -149,7 +155,7 @@ function trlSlpadrPad(id, cls){
 }
 
 function rtlSlpadrPad(cls, val){
-	return '<td  style="padding-top:1px;padding-bottom:2px;" class="'+cls+'">'+val+'</td>';
+	return '<td  class="'+cls+'">'+val+'</td>';
 }
 
 function lblSlpadrPad(val){

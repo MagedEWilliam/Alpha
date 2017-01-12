@@ -1,11 +1,13 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-require('class_database.php');
+require_once('class_database.php');
 
-$card = new Card;
-// echo '<pre>';
-print_r($card->getCards());
-// echo '</pre>';
+if( isset($_GET) ){
+	$card = new Card;
+	// echo '<pre>';
+	print_r($card->getCards());
+	// echo '</pre>';
+}
 class Card
 {
 
@@ -29,7 +31,10 @@ class Card
 		`subcategory`.`NameCh` ,
 		`subcategory`.`image` ,
 		`subcategory`.`qun` ,
-		`subcategory`.`price`  
+		`subcategory`.`onsale` ,
+		`subcategory`.`discount` ,
+		(`subcategory`.`price` - (`subcategory`.`discount`/100) ) as priceafterdisc ,
+		`subcategory`.`price`
 
 		FROM `catproperty` 
 
@@ -43,13 +48,13 @@ class Card
 
 		foreach ($_GET as $key => $value) {
 			$getcurval = explode('_', $key);
-          
-          if( isset($_GET['exactID']) ){
-            if( $_GET['exactID'] != '' ){
-              $sqlQuery .= ' `subcategory`.`code` = "' . $_GET['exactID'] . '"';
-            }
-          }
-          
+
+			if( isset($_GET['exactID']) ){
+				if( $_GET['exactID'] != '' ){
+					$sqlQuery .= ' `subcategory`.`code` = "' . $_GET['exactID'] . '"';
+				}
+			}
+
 			if($getcurval[0] == 'filt' &&  $value != ''){
 				$explodevalu = explode(',', $value);
 				
@@ -81,104 +86,158 @@ class Card
 /* echo '<pre>';
  print_r($sqlQuery);
  echo '</pre>';*/
-$sqlQuery .= ' ORDER BY `subcategory`.`ordering` ';
-		$res = [];
-		if ($result = $mysqli->query($sqlQuery)) {
-			while ($row = $result->fetch_assoc()) {
-				$temp = [];
-				$sub = self::getProperty( $row['catID'], $row['categoryID'] );
-				
-				$temp['item'] = $row;
-				$temp['Subcategory'] = $sub;
-				if(self::isDistinct($res, $temp)){
-					array_push($res, $temp);
-				}
-			}
+ $sqlQuery .= ' ORDER BY `subcategory`.`ordering` ';
+ $res = [];
+ if ($result = $mysqli->query($sqlQuery)) {
+ 	while ($row = $result->fetch_assoc()) {
+ 		$temp = [];
+ 		$sub = self::getProperty( $row['catID'], $row['categoryID'] );
+
+ 		$temp['item'] = $row;
+ 		$temp['Subcategory'] = $sub;
+ 		if(self::isDistinct($res, $temp)){
+ 			array_push($res, $temp);
+ 		}
+ 	}
+ }
+
+ echo mysqli_error($mysqli);
+ return  json_encode( self::distinctIt($res) );
+ return  self::distinctIt($res);
+}
+
+static public function isDistinct($sub, $orgin){
+	foreach ($sub as $key => $value) {
+		if( $value['item']['categoryID']  == $orgin['item']['categoryID'] ){
+			return false;
 		}
-
-		echo mysqli_error($mysqli);
-		return  json_encode( self::distinctIt($res) );
-		return  self::distinctIt($res);
 	}
+	return true;
+}
 
-	static public function isDistinct($sub, $orgin){
-		foreach ($sub as $key => $value) {
-			if( $value['item']['categoryID']  == $orgin['item']['categoryID'] ){
-				return false;
-			}
-		}
-		return true;
-	}
+static public function distinctIt($data){
+	$filtered = $data;
+	$base = $data;
 
-	static public function distinctIt($data){
-		$filtered = $data;
-		$base = $data;
-
-		if( isset($data) ){
-			foreach ($filtered as $key => $value) {
+	if( isset($data) ){
+		foreach ($filtered as $key => $value) {
 
 				// print_r( $filtered[$key]['item']['catID'] );
-				foreach ($filtered[$key]['Subcategory'] as $_key => $_value) {
-					$isfirst = true;
+			foreach ($filtered[$key]['Subcategory'] as $_key => $_value) {
+				$isfirst = true;
 					// var_dump( 'Compare me', $_value['ID'] );
-					if(isset( $base[$key]['Subcategory'][$_key] )){
-						$base[$key]['Subcategory'][$_key]['more']  = [];
-					}
-					foreach ($base[$key]['Subcategory'] as $__key => $__value) {
-						if(isset( $__value['propertyID'] )){
-							if($_value['ID'] == $__value['propertyID']){
+				if(isset( $base[$key]['Subcategory'][$_key] )){
+					$base[$key]['Subcategory'][$_key]['more']  = [];
+				}
+				foreach ($base[$key]['Subcategory'] as $__key => $__value) {
+					if(isset( $__value['propertyID'] )){
+						if($_value['ID'] == $__value['propertyID']){
 								// var_dump( 'to', $__value['propertyID'] );
-								if(!$isfirst){
-									array_push($base[$key]['Subcategory'][$_key]['more'], $base[$key]['Subcategory'][$__key]);
-									unset($base[$key]['Subcategory'][$__key]);
-								}
-								$isfirst = false;
+							if(!$isfirst){
+								array_push($base[$key]['Subcategory'][$_key]['more'], $base[$key]['Subcategory'][$__key]);
+								unset($base[$key]['Subcategory'][$__key]);
 							}
+							$isfirst = false;
 						}
 					}
 				}
 			}
 		}
-
-		return $base;
 	}
 
-	static public function getProperty($id, $sub)
-	{
-		$db  = Database::getInstance();
-		$mysqli = $db->getConnection();
+	return $base;
+}
 
-		$sqlQuery = "SELECT 
-		`property`.ID, 
-		`property`.Name, 
-		`property`.NameAr, 
-		`property`.NameCh,
+static public function getProperty($id, $sub)
+{
+	$db  = Database::getInstance();
+	$mysqli = $db->getConnection();
 
-		`value`.ID AS valueID, 
-		`value`.propertyID, 
-		`value`.value, 
-		`value`.valueAr, 
-		`value`.valueCh
+	$sqlQuery = "SELECT 
+	`property`.ID, 
+	`property`.Name, 
+	`property`.NameAr, 
+	`property`.NameCh,
 
-		FROM `catproperty` 
+	`value`.ID AS valueID, 
+	`value`.propertyID, 
+	`value`.value, 
+	`value`.valueAr, 
+	`value`.valueCh
 
-		INNER JOIN property 
-		ON `catproperty`.propertyID = `property`.ID
+	FROM `catproperty` 
 
-		INNER JOIN `value` 
-		ON `catproperty`.valueID = `value`.ID
+	INNER JOIN property 
+	ON `catproperty`.propertyID = `property`.ID
 
-		WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub.") ";
-		
-		$res = [];
-		if ($result = $mysqli->query($sqlQuery)) {
-			while ($row = $result->fetch_assoc()) {
-				array_push($res, $row);
+	INNER JOIN `value` 
+	ON `catproperty`.valueID = `value`.ID
+
+	WHERE (`catproperty`.catID = ".$id." AND `catproperty`.categoryID = ".$sub.") ";
+
+	$res = [];
+	if ($result = $mysqli->query($sqlQuery)) {
+		while ($row = $result->fetch_assoc()) {
+			array_push($res, $row);
+		}
+	}
+
+	return $res;
+}
+
+static public function getCard($arr) {
+	$db  = Database::getInstance();
+	$mysqli = $db->getConnection();
+
+	$sqlQuery = "
+	SELECT 
+	`catproperty`.catID ,
+	`catproperty`.categoryID,
+	`catproperty`.propertyID,
+	`catproperty`.valueID,
+
+	`subcategory`.`ID`     ,
+	`subcategory`.`catID`  ,
+	`subcategory`.`code`   ,
+	`subcategory`.`Name`   ,
+	`subcategory`.`NameAr` ,
+	`subcategory`.`NameCh` ,
+	`subcategory`.`image` ,
+	`subcategory`.`qun` ,
+	`subcategory`.`onsale` ,
+	`subcategory`.`discount` ,
+	(`subcategory`.`price` - (`subcategory`.`discount`/100) ) as priceafterdisc ,
+	`subcategory`.`price`
+
+	FROM `catproperty` 
+
+	inner JOIN `subcategory`
+	ON `catproperty`.`categoryID` = `subcategory`.`catID`
+	";
+
+	if( isset($arr['exactID']) ){
+		if( $arr['exactID'] != '' ){
+			$sqlQuery .= ' WHERE ';
+			$sqlQuery .= ' `subcategory`.`code` = "' . $arr['exactID'] . '"';
+		}
+	}
+	
+	// echo $sqlQuery;
+
+	$res = [];
+	if ($result = $mysqli->query($sqlQuery)) {
+		while ($row = $result->fetch_assoc()) {
+			// $temp = [];
+
+			$temp['item'] = $row;
+
+			if(self::isDistinct($res, $temp)){
+				array_push($res, $temp);
 			}
 		}
-
-		return $res;
 	}
-
+// print_r($res);
+	return $res;
+}
 }
 ?>

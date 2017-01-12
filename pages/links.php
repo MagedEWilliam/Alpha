@@ -5,7 +5,8 @@ for ($i=0; $i < $_GET['__level'] ; $i++) {
 }
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<link rel="icon" href="<?php echo $level; ?>assets/alpha2.png">
+
+<link rel="icon" type="image/png" href="<?php echo $level; ?>favicon.png" />
 
 <script type="text/javascript" src="<?php echo $level; ?>libs/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $level; ?>libs/jquery.query-object.min.js"></script>
@@ -13,6 +14,11 @@ for ($i=0; $i < $_GET['__level'] ; $i++) {
 <script type="text/javascript" src="<?php echo $level; ?>libs/semantic/semantic.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>libs/semantic/semantic.min.css">
 
+<?php
+if(isset($_GET['lang']) && $_GET['lang'] == 'ch'){
+echo "<style>@font-face {font-family: 'NotoSansSC';src: url(../assets/NotoSansSC-Bold.otf);}</style>";
+}
+?>
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>css/style.css">
 
 <link rel="stylesheet" type="text/css" href="<?php echo $level; ?>libs/amazonmenu/amazonmenu.css">

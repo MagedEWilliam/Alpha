@@ -10,12 +10,16 @@ function rowofcartitem(item, i, target){
   <td class="collapsing paddingLefttozero paddingRighttozero">\
   $\
   </td>\
-  <td class="collapsing paddingLefttozero">\
-  '+Number(item.price)+'\
-  <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>\
-  </td>\
-  <td class="collapsing">\
-'
+  ';
+  if(Number(item.onsale) == 1){
+    view += '<td class="collapsing paddingLefttozero">'+Number(item.priceafterdisc)+'\
+    <input type="hidden" name="price['+i+']" value='+item.priceafterdisc+'>';
+  }else{
+    view += '<td class="collapsing paddingLefttozero">'+Number(item.price)+'\
+    <input type="hidden" name="price['+i+']" value='+Number(item.price)+'>';
+  }
+  view += '</td>\
+  <td class="collapsing">';
 
   if(!item.allowstock){
     view +='<div class="ui red basic label" locale="outOfStock">@</div>';
@@ -249,11 +253,11 @@ var cart = {
 
 function uptRemoteCart(username, itemCode, itemQun, itemPrice){
   return $.ajax({
-        type: "POST",
-        url: "class_cart.php",
-        data: "username=" + username + "&itemCode=" + itemCode + "&itemQun=" + itemQun + "&itemPrice=" + itemPrice,
-        dataType: 'JSON',
-    });
+    type: "POST",
+    url: "class_cart.php",
+    data: "username=" + username + "&itemCode=" + itemCode + "&itemQun=" + itemQun + "&itemPrice=" + itemPrice,
+    dataType: 'JSON',
+  });
 }
 
 function tothecart(item, e){
