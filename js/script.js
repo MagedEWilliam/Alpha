@@ -36,9 +36,9 @@ $(document).ready(function(){
 					teclasses = 'disabled';
 				}
 				if(Number(data[i].item.qun) > 0){
-					card( '.miniproducts .wrapproduct', data[i], teclasses);
+					card( '.miniproducts .wrapproduct', data[i], teclasses, 'notlongproduct');
 				}else{
-					card( '.miniproducts .wrapproduct', data[i], 'out');
+					card( '.miniproducts .wrapproduct', data[i], 'out', 'notlongproduct');
 				}
 				
 			}
@@ -82,9 +82,9 @@ $(document).ready(function(){
 					teclasses = 'disabled';
 				}
 				if(Number(data[i].item.qun) > 0){
-					card( $('#products'), data[i], teclasses);
+					card( $('#products'), data[i], teclasses, 'longproduct');
 				}else{
-					card( $('#products'), data[i], 'out');
+					card( $('#products'), data[i], 'out', 'longproduct');
 				}
 			}
 			$('#srchres .rtl').text( getFromLocale('showing') + ' ' + i + ' ' + getFromLocale('results') );

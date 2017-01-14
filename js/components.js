@@ -1,11 +1,11 @@
-function card(target, ItemProp, classes){
+function card(target, ItemProp, classes, isitlong){
 	var cartnaming = '';
 	if(classes == 'blue'){ cartnaming = getFromLocale('toCart');}
 	else if(classes == 'out'){ cartnaming = getFromLocale('outOfStock'); }
 	else { cartnaming = getFromLocale('added')  + ' ✓';}
 	if(classes == 'out'){ classes = 'disabled'}
 		var drawacard = '\
-	<div class="ui card longproduct">\
+	<div class="ui card '+isitlong+'">\
 	<div class="ui slide masked move up reveal image" >\
 	<div class="content fillitcontent">\
 	<img src="'+ItemProp.item.image+'" class="front visible content fillitup">\
@@ -49,7 +49,7 @@ function card(target, ItemProp, classes){
 	}
 
 	if(Number(ItemProp.item.onsale) == 1){
-		drawacard += '<label style="float:left;font-size: 17px;margin-bottom: 11px;">$'+Number(ItemProp.item.priceafterdisc);
+		drawacard += '<label style="float:left;font-size: 17px;">$'+Number(ItemProp.item.priceafterdisc);
 		drawacard +='<label class="ui tag orange tiny label" style="margin-left:20px;">-'+Number(ItemProp.item.discount)+'%</label>';
 		drawacard +='</label>';
 	}else{

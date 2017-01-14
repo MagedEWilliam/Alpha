@@ -13,6 +13,14 @@ body.pushable>.pusher{
 	padding-left: 0px !important;
 	padding-right: 0px !important;
 }
+.wrapproduct .parento{
+	height: auto;
+}
+.wrapproduct .notlongproduct{
+	width: 25%;
+	float: left;
+	margin-top: 0;
+}
 .mrp{
 	width: 50%;
 }

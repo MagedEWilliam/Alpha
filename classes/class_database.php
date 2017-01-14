@@ -26,7 +26,7 @@ class Database {
     if($_SERVER['SERVER_NAME'] == 'localhost'){
     $this->_connection = new mysqli('localhost', 'root', '', 'cms');
     }else{
-      $this->_connection = new mysqli('alphalightingtech.com', 'ialphalightingte', 'Alfa@1234', 'ialphalightingtech');
+      $this->_connection = new mysqli('i-alfa.com', 'ialphalightingte', 'Alfa@1234', 'ialphalightingtech');
     }
 
     mysqli_set_charset($this->_connection,"utf8");
