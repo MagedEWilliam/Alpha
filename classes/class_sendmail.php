@@ -16,9 +16,7 @@ class MailSender
         $mail->addAddress($email, $email);
 
         $mail->Subject = $subject;
-        // $mail->Body = $body;
-//7.34
-        // $mail->AltBody =  $body;
+
         $mail->MsgHTML($body);
 
         if ($initmail["mailServerType"] == 'smtp') {
@@ -59,7 +57,7 @@ class MailSender
             $password = "";
             $db_name = "oauthing";
         }else{
-            $host = "alphalightingtech.com";
+            $host = "i-alfa.com";
             $username = "ialphalightingte";
             $password = "Alfa@1234";
             $db_name = "authing";
@@ -77,7 +75,7 @@ class MailSender
         if($_SERVER['SERVER_NAME'] == 'localhost'){
             $site_name = 'ALPHA';
         }else{
-            $site_name = 'alphalightingtech';
+            $site_name = 'ALPHA';
         }
 
         $max_attempts = 200;
@@ -86,13 +84,13 @@ class MailSender
 
         $admin_email = '';
 
-        $from_email = 'developer@alphalightingtech.com';
+        $from_email = 'developer@i-alfa.com';
         $from_name = 'Alpha Developer';
 
         $mailServerType = 'smtp';
 
         $smtp_server = 'n3plcpnl0073.prod.ams3.secureserver.net';
-        $smtp_user = 'developer@alphalightingtech.com';
+        $smtp_user = 'developer@i-alfa.com';
         $smtp_pw = '^dev!migo1029384756/';
         $smtp_port = 465;
         $smtp_security = 'ssl';

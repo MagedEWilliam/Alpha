@@ -2,7 +2,7 @@
       $('#product_detail').remove();
     </script>
 
-    <form class="row" method="POST" action="<?php if($_SERVER['SERVER_NAME'] == 'localhost'){echo "http://localhost/ALPHA/checkout.php?lang=" . $_GET['lang'];}else{echo "http://alphalightingtech.com/checkout.php?lang=" . $_GET['lang'];}?>">
+    <form class="row" method="POST" action="<?php if($_SERVER['SERVER_NAME'] == 'localhost'){echo "http://localhost/ALPHA/checkout.php?lang=" . $_GET['lang'];}else{echo "http://www.i-alfa.com/checkout.php?lang=" . $_GET['lang'];}?>">
       <div class="eleven wide column">
 
         <h4 class="goodtimes" locale="itemsDetails">@</h4>

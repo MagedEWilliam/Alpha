@@ -8,7 +8,7 @@ include 'dbconf.php';
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	$site_name = 'ALPHA';
 }else{
-	$site_name = 'alphalightingtech';
+	$site_name = 'i-alfa';
 }
 //Maximum Login Attempts
 $max_attempts = 200;
@@ -20,14 +20,14 @@ $admin_email = '';
 
 //EMAIL SETTINGS
 //SEND TEST EMAILS THROUGH FORM TO https://www.mail-tester.com GENERATED ADDRESS FOR SPAM SCORE
-$from_email = 'developer@alphalightingtech.com'; //Webmaster email
+$from_email = 'developer@i-alfa.com'; //Webmaster email
 $from_name = 'Alphas Developer'; //"From name" displayed on email
 
 //Find specific server settings at https://www.arclab.com/en/kb/email/list-of-smtp-and-pop3-servers-mailserver-list.html
 $mailServerType = 'smtp';
 //IF $mailServerType = 'smtp'
 $smtp_server = 'n3plcpnl0073.prod.ams3.secureserver.net';
-$smtp_user = 'developer@alphalightingtech.com';
+$smtp_user = 'developer@i-alfa.com';
 $smtp_pw = '^dev!migo1029384756/';
 $smtp_port = 465; //465 for ssl, 587 for tls, 25 for other
 $smtp_security = 'ssl';//ssl, tls or ''

@@ -165,9 +165,9 @@ function sendMailtoNotifyUserandbuyee($id){
 </style>
 <div class='ui toowide success message'>Success, Order id is: ".$id." <a class='ui green button' id='checkit' href=''>Check order status</a></div>";
 
-$mailSender->sendMail('Maged.EWilliam@gmail.com', 'Alpha Cart update1', $htmlcontent);
+$mailSender->sendMail('Maged.EWilliam@gmail.com', 'Alpha Cart update', $htmlcontent);
 
-$mailSender->sendMail('retail@alphalightingtech.com', 'New_Order#'.$id, 'check the cms for more info: <a href="cms.alphalightingtech.com/?reviewOrder='.$id.'">Order #'.$id.'</a>');
+$mailSender->sendMail('retail@i-alfa.com', 'New_Order#'.$id, 'check the cms for more info: <a href="cms.i-alfa.com/?reviewOrder='.$id.'">Order #'.$id.'</a>');
 }
 
 

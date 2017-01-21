@@ -6,7 +6,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
 	$password = ""; // Mysql password
 	$db_name = "oauthing"; // Database name
 }else{
-	$host = "alphalightingtech.com"; // Host name
+	$host = "i-alfa.com"; // Host name
 	$username = "ialphalightingte"; // Mysql username
 	$password = "Alfa@1234"; // Mysql password
 	$db_name = "authing"; // Database name
